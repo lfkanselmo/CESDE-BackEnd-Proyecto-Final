@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba666707-7a23-4304-8f5a-b1220c8c3916" name="Changes" comment="" />
+    <list default="true" id="ba666707-7a23-4304-8f5a-b1220c8c3916" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Actor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Oferta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Oferta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Propietario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Propietario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Rol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Tipo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/TipoInmueble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/TipoInmueble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Ubicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Ubicacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Actor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Administrador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cita.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cita.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Contrato.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Contrato.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Informacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Informacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Inmueble.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Inmueble.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Oferta.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Oferta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Propietario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Propietario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Rol.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Rol.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Tipo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/TipoInmueble.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/TipoInmueble.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Ubicacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Ubicacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/test/ActorHerenciaTest.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +45,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -28,14 +59,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Inmobiliaria Java",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Inmobiliaria Java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ActorHerenciaTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="co.com.inmobiliariaapp.test.ActorHerenciaTest" />

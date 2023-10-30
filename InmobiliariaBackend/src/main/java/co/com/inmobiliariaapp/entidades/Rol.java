@@ -1,13 +1,23 @@
 package co.com.inmobiliariaapp.entidades;
 
-public class Rol extends Tipo {
+public class Rol {
 
-
-    public Rol(Long id, String nombre) {
-        super(id, nombre);
-    }
+    private Long id;
+    private String nombre;
 
     public Rol(String nombre) {
-        super(nombre);
+        this.nombre = nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
