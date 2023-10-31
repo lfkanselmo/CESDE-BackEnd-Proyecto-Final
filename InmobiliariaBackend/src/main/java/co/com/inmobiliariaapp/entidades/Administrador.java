@@ -1,8 +1,12 @@
 package co.com.inmobiliariaapp.entidades;
 
-public class Administrador {
+import jakarta.persistence.*;
 
-    private Long id;
+@Entity
+public class Administrador {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idAdministrador;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -18,8 +22,8 @@ public class Administrador {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdAdministrador() {
+        return idAdministrador;
     }
 
     public String getNombre() {

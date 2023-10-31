@@ -1,15 +1,24 @@
 package co.com.inmobiliariaapp.entidades;
 
-public class Inmueble {
+import jakarta.persistence.*;
 
+@Entity
+public class Inmueble {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long idInmueble;
     private String direccionInmueble;
     private double precioInmueble;
     private boolean disponibildad;
+    @ManyToOne
     private Ubicacion ubicacion;
+    @ManyToOne
     private Propietario propietario;
+    @ManyToOne
     private Oferta oferta;
+    @ManyToOne
     private TipoInmueble tipoInmueble;
+    @ManyToOne
     private Informacion informacion;
 
     public Long getIdInmueble() {

@@ -1,8 +1,15 @@
 package co.com.inmobiliariaapp.entidades;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Contrato {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idContrato;
+    @ManyToOne
     private Cliente cliente;
+    @ManyToOne
     private Inmueble inmueble;
 
     public Long getIdContrato() {

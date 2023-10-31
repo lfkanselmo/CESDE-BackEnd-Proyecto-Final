@@ -2,7 +2,7 @@ package co.com.inmobiliariaapp.entidades;
 
 public class Cliente {
 
-    private Long id;
+    private Long idCliente;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -17,8 +17,8 @@ public class Cliente {
         this.email = email;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
 
