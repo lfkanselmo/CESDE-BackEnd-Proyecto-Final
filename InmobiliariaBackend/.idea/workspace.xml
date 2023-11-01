@@ -5,31 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba666707-7a23-4304-8f5a-b1220c8c3916" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/dao/AdministradorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/dao/AdministradorDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/dao/DaoActores.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cita.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Contrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Contrato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Informacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Informacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Inmueble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Inmueble.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Oferta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Oferta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Propietario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Propietario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Rol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/TipoInmueble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/TipoInmueble.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Ubicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Ubicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/entidades/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/tests/AdministradorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/com/inmobiliariaapp/tests/AdministradorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/dao/AdministradorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/dao/AdministradorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/dao/DaoActores.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Administrador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cita.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cita.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Cliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Contrato.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Contrato.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Informacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Informacion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Inmueble.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Inmueble.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Oferta.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Oferta.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Propietario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Propietario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Rol.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Rol.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/TipoInmueble.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/TipoInmueble.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Ubicacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Ubicacion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/entidades/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/tests/AdministradorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/co/com/inmobiliariaapp/tests/AdministradorTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,15 +52,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Inmobiliaria Java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Inmobiliaria Java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="AdministradorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="co.com.inmobiliariaapp.tests.AdministradorTest" />
@@ -97,5 +94,15 @@
       <updated>1698144267831</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.hibernate.service.spi.ServiceException" package="org.hibernate.service.spi" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

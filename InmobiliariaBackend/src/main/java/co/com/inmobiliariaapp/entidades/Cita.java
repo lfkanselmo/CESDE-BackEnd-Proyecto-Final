@@ -1,16 +1,25 @@
 package co.com.inmobiliariaapp.entidades;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@Entity
 public class Cita {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCita;
+    @Temporal(TemporalType.TIME)
     private LocalTime horaInicio;
+    @Temporal(TemporalType.TIME)
     private LocalTime horaFinal;
+    @Temporal(TemporalType.DATE)
     private LocalDate fechaCita;
+    @ManyToOne
     private Inmueble inmueble;
+    @ManyToOne
     private Administrador administrador;
+    @ManyToOne
     private Cliente cliente;
 
     public Cita(Long idCita, LocalTime horaInicio, LocalTime horaFinal, LocalDate fechaCita, Inmueble inmueble, Administrador administrador, Cliente cliente) {

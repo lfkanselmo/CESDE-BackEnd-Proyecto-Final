@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Propietario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPropietario;
     private String nombre;
     private String apellido;

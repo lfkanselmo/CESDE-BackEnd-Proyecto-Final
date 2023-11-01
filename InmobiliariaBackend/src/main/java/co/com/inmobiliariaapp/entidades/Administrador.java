@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Administrador {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdministrador;
     private String nombre;
     private String apellido;

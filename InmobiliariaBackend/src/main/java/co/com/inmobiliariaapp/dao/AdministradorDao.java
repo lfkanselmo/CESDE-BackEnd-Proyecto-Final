@@ -5,19 +5,26 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-public class AdministradorDao extends DaoActores<Administrador>{
+public class AdministradorDao extends DaoAbstract<Administrador>{
 
-    public AdministradorDao(EntityManager em) {
-        super(em);
+    public AdministradorDao() {
+
     }
 
     @Override
     public List<Administrador> listarTodos() {
-        return null;  // TO-DO
+        jpql = "SELECT A FROM Administrador AS A";
+        abrir();
+        List<Administrador> administradores = this.em.createQuery(jpql).getResultList();
+        cerrar();
+        return administradores;
     }
 
     @Override
     public Administrador listarPorId(Long id) {
-        return this.em.find(Administrador.class, id);
+        abrir();
+        Administrador administrador = this.em.find(Administrador.class, id);
+        cerrar();
+        return administrador;
     }
 }
