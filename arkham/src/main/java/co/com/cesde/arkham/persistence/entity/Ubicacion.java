@@ -15,7 +15,13 @@ public class Ubicacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ubicacion")
     private Long idUbicacion;
-    private String calle;
+    @OneToOne
+    @JoinColumn(name = "id_inmueble",insertable = false, updatable = false)
+    private Inmueble inmueble;
+    @Column(name = "tipo_via")
+    private String tipoVia;
+    @Column(name = "numero_via")
+    private String numeroVia;
     private String numero;
     private String complemento;
     @ManyToOne

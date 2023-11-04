@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.domain.repository;
+package co.com.cesde.arkham.persistence;
 
 import co.com.cesde.arkham.persistence.crud.AdministradorJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Administrador;
@@ -10,19 +10,19 @@ import java.util.List;
 public class AdministradorRepository {
     private AdministradorJpaRepository administradorJpaRepository;
 
-    public void create(Administrador administrador){
+    void create(Administrador administrador){
         administradorJpaRepository.save(administrador);
     }
 
-    public void update(Administrador administrador){
+    void update(Administrador administrador){
         administradorJpaRepository.save(administrador);
     }
 
-    public void delete(Long id){
+    void delete(Long id){
         administradorJpaRepository.deleteById(id);
     }
 
-    public List<Administrador> getByNombreAdm(String nombre){
+    List<Administrador> getByNombre(String nombre){
         return administradorJpaRepository.findByNombreAdministrador(nombre);
     }
 }

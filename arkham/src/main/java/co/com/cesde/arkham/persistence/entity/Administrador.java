@@ -24,6 +24,7 @@ public class Administrador {
     private String telefonoAdministrador;
     @Column(name = "email")
     private String emailAdministrador;
+    private Boolean activo;
     @OneToMany(mappedBy = "administrador")
     private List<Cita> citas;
 

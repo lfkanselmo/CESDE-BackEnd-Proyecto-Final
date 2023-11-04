@@ -12,4 +12,6 @@ public class Usuario {
     private String contrasenha;
     @Enumerated(value = EnumType.STRING)
     private Rol rol;
+
+    private Boolean activo;
 }

@@ -16,6 +16,7 @@ public class Barrio {
     private Long idBarrio;
     @Column(name = "nombre")
     private String nombreBarrio;
+    private Boolean activo;
     @OneToMany(mappedBy = "barrio")
     private List<Ubicacion> ubicaciones;
 }

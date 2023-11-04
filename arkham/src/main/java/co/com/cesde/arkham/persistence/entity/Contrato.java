@@ -20,4 +20,6 @@ public class Contrato {
     @ManyToOne
     @JoinColumn(name = "id_inmueble", insertable = false, updatable = false)
     private Inmueble inmueble;
+
+    private Boolean activo;
 }

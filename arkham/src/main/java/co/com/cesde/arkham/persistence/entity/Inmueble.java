@@ -40,6 +40,7 @@ public class Inmueble {
     private Boolean gasNatural;
     @Column(name = "zona_de_ropas")
     private Boolean zonaRopa;
+    private Boolean activo;
     @OneToMany(mappedBy = "inmueble")
     private List<Contrato> contratos;
 

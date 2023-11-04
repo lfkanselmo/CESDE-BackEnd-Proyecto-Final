@@ -24,6 +24,7 @@ public class Propietario {
     private String telefonoPropietario;
     @Column(name = "email")
     private String emailPropietario;
+    private Boolean activo;
     @OneToMany(mappedBy = "propietario")
     private List<Inmueble> inmuebles;
 }
