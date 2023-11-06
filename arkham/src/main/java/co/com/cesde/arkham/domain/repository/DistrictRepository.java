@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DistrictRepository {
-    void create(District district);
+    District create(District district);
 
     void delete(Long districtId);
 
@@ -14,5 +14,5 @@ public interface DistrictRepository {
 
     List<District> getAll();
 
-    List<District> getByDistrictName(String districtName);
+    Optional<List<District>> getByDistrictName(String districtName);
 }

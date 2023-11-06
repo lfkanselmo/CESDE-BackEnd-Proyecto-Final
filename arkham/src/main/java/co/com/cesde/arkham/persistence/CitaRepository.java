@@ -1,37 +1,54 @@
 package co.com.cesde.arkham.persistence;
 
+import co.com.cesde.arkham.domain.Appointment;
+import co.com.cesde.arkham.domain.repository.AppointmentRepository;
 import co.com.cesde.arkham.persistence.crud.CitaJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Cita;
+import co.com.cesde.arkham.persistence.mapper.AppointmentMapper;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class CitaRepository {
+public class CitaRepository implements AppointmentRepository {
     private CitaJpaRepository citaJpaRepository;
+    private AppointmentMapper mapper;
 
-    void create(Cita cita){
+
+    @Override
+    public Appointment create(Appointment appointment) {
+        Cita cita = mapper.toCita(appointment);
         citaJpaRepository.save(cita);
+        return appointment;
     }
 
-    void update(Cita cita){
+    @Override
+    public Appointment update(Appointment appointment) {
+        Cita cita = mapper.toCita(appointment);
         citaJpaRepository.save(cita);
+        return appointment;
     }
 
-    Optional<Cita> getById(Long id){
-        return citaJpaRepository.findById(id);
+    @Override
+    public Optional<Appointment> getById(Long appointmentId) {
+        Optional<Cita> cita = citaJpaRepository.findById(appointmentId);
+        return cita.map(c -> mapper.toAppointment(c));
     }
 
-    void delete(Long id){
-        citaJpaRepository.deleteById(id);
+    @Override
+    public void delete(Long appointmentId) {
+        citaJpaRepository.deleteById(appointmentId);
     }
 
-    Optional<List<Cita>> getByInmuebleAndFecha(Long idInmueble){
-        return citaJpaRepository.findByIdInmueble(idInmueble);
+    @Override
+    public Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate) {
+        List<Cita> citas = citaJpaRepository.findByAppointmentDate(appointmentDate);
+        if(!citas.isEmpty()){
+            return Optional.of(citas
+                    .stream()
+                    .map(c -> mapper.toAppointment(c))
+                    .toList()) ;
+        }
+        return Optional.empty();
     }
-
-    public Optional<List<Cita>> getByFecha(LocalDate fecha){
-        return citaJpaRepository.findByFecha(fecha);
-    }
-
 }

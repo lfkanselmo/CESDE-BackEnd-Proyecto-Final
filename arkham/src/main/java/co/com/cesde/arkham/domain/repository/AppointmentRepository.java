@@ -8,15 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepository {
-    void create(Appointment appointment);
+    Appointment create(Appointment appointment);
 
-    void update(Appointment appointment);
+    Appointment update(Appointment appointment);
 
     Optional<Appointment> getById(Long appointmentId);
 
     void delete(Long appointmentId);
-
-    Optional<List<Appointment>> getByPropertyAndAppointmentDate(Long propertyId);
 
     Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate);
 }

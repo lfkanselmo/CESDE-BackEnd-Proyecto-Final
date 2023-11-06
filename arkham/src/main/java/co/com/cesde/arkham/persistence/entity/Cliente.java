@@ -25,6 +25,4 @@ public class Cliente {
     @Column(name = "email")
     private String emailCliente;
     private Boolean activo;
-    @OneToMany(mappedBy = "cliente")
-    private List<Contrato> contratos;
 }

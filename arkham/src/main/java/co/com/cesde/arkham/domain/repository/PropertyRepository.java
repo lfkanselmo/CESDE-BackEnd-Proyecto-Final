@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PropertyRepository {
-    void create(Property property);
+    Property create(Property property);
 
-    void update(Property property);
+    Property update(Property property);
 
     void delete(Long propertyId);
 
