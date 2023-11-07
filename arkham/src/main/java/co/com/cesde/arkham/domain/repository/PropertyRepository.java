@@ -1,5 +1,8 @@
 package co.com.cesde.arkham.domain.repository;
 
+import co.com.cesde.arkham.domain.District;
+import co.com.cesde.arkham.domain.Location;
+import co.com.cesde.arkham.domain.Owner;
 import co.com.cesde.arkham.domain.Property;
 
 import java.util.List;
@@ -12,9 +15,9 @@ public interface PropertyRepository {
 
     void delete(Long propertyId);
 
-    Optional<List<Property>> getByDistrict(String districtName);
+    Optional<List<Property>> getByDistrict(List<Location> locations);
 
-    Optional<List<Property>> getByOwner(Long ownerId);
+    Optional<List<Property>> getByOwner(Owner owner);
 
     List<Property> getAll();
 

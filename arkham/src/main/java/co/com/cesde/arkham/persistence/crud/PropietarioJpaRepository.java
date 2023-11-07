@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface PropietarioJpaRepository extends JpaRepository<Propietario,Long> {
 
-    Optional<List<Propietario>> findByNombrePropietario(String nombre);
+    Optional<List<Propietario>> findByNombrePropietario(String nombrePropietario);
 }

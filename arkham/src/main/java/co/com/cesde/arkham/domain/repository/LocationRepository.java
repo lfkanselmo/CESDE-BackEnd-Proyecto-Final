@@ -9,4 +9,6 @@ public interface LocationRepository {
     Location update(Location location);
 
     void delete(Long locationId);
+
+    Location findByLocationId(Long locationId);
 }

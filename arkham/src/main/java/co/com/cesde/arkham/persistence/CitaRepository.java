@@ -42,7 +42,7 @@ public class CitaRepository implements AppointmentRepository {
 
     @Override
     public Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate) {
-        List<Cita> citas = citaJpaRepository.findByAppointmentDate(appointmentDate);
+        List<Cita> citas = citaJpaRepository.findByFechaCita(appointmentDate);
         if(!citas.isEmpty()){
             return Optional.of(citas
                     .stream()

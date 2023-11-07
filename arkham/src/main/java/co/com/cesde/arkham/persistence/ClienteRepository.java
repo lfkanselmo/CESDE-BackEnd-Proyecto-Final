@@ -1,27 +1,43 @@
 package co.com.cesde.arkham.persistence;
 
+import co.com.cesde.arkham.domain.Client;
+import co.com.cesde.arkham.domain.repository.ClientRepository;
 import co.com.cesde.arkham.persistence.crud.ClienteJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Cliente;
+import co.com.cesde.arkham.persistence.mapper.ClientMapper;
 
 import java.util.List;
 import java.util.Optional;
 
-public class ClienteRepository {
+public class ClienteRepository implements ClientRepository {
     private ClienteJpaRepository clienteJpaRepository;
+    private ClientMapper mapper;
 
-    void create(Cliente cliente){
+    @Override
+    public Client create(Client client) {
+        Cliente cliente = mapper.toCliente(client);
         clienteJpaRepository.save(cliente);
+        return client;
     }
 
-    void update(Cliente cliente){
+    @Override
+    public Client update(Client client) {
+        Cliente cliente = mapper.toCliente(client);
         clienteJpaRepository.save(cliente);
+        return client;
     }
 
-    void delete(Long id){
-        clienteJpaRepository.deleteById(id);
+    @Override
+    public void delete(Long clientId) {
+        clienteJpaRepository.deleteById(clientId);
     }
 
-    Optional<List<Cliente>> getByNombre(String nombre){
-        return clienteJpaRepository.findByNombreCliente(nombre);
+    @Override
+    public Optional<List<Client>> getByClientFirstName(String clientFirstName) {
+        List<Cliente> clientes = clienteJpaRepository.findByNombreCliente(clientFirstName);
+        return Optional.of(clientes
+                .stream()
+                .map(c -> mapper.toclient(c))
+                .toList());
     }
 }
