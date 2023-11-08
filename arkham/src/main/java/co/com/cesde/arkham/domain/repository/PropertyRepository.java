@@ -9,13 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PropertyRepository {
-    Property create(Property property);
-
-    Property update(Property property);
+    Property save(Property property);
 
     void delete(Long propertyId);
 
-    Optional<List<Property>> getByDistrict(List<Location> locations);
+    Optional<Property> getByDistrict(Location location);
 
     Optional<List<Property>> getByOwner(Owner owner);
 

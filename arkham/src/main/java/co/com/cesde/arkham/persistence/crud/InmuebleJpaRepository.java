@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InmuebleJpaRepository extends JpaRepository<Inmueble,Long> {
-    List<Inmueble> findByUbicacion(List<Ubicacion> ubicaciones);
+    Inmueble findByUbicacion(Ubicacion ubicacion);
 
     List<Inmueble> findByPropietario(Propietario propietario);
 

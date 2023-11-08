@@ -5,6 +5,7 @@ import co.com.cesde.arkham.domain.repository.DistrictRepository;
 import co.com.cesde.arkham.persistence.crud.BarrioJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Barrio;
 import co.com.cesde.arkham.persistence.mapper.DistrictMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.Optional;
 
 @Repository
 public class BarrioRepository implements DistrictRepository {
+    @Autowired
     private BarrioJpaRepository barrioJpaRepository;
+    @Autowired
     private DistrictMapper mapper;
 
     @Override
-    public District create(District district) {
+    public District save(District district) {
         Barrio barrio = mapper.toBarrio(district);
         barrioJpaRepository.save(barrio);
         return district;
@@ -30,7 +33,7 @@ public class BarrioRepository implements DistrictRepository {
     @Override
     public Optional<District> getById(Long districtId) {
         Optional<Barrio> barrio = barrioJpaRepository.findById(districtId);
-        return barrio.map(b -> mapper.toDistrict(b));
+        return barrio.map(barrioOpcional -> mapper.toDistrict(barrioOpcional));
     }
 
     @Override

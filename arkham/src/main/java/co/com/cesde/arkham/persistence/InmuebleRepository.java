@@ -11,25 +11,24 @@ import co.com.cesde.arkham.persistence.entity.Ubicacion;
 import co.com.cesde.arkham.persistence.mapper.LocationMapper;
 import co.com.cesde.arkham.persistence.mapper.OwnerMapper;
 import co.com.cesde.arkham.persistence.mapper.PropertyMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class InmuebleRepository implements PropertyRepository {
+    @Autowired
     private InmuebleJpaRepository inmuebleJpaRepository;
+    @Autowired
     private PropertyMapper mapperProperty;
+    @Autowired
     private OwnerMapper mapperOwner;
+    @Autowired
     private LocationMapper mapperLocation;
 
     @Override
-    public Property create(Property property) {
-        Inmueble inmueble = mapperProperty.toInmueble(property);
-        inmuebleJpaRepository.save(inmueble);
-        return property;
-    }
-
-    @Override
-    public Property update(Property property) {
+    public Property save(Property property) {
         Inmueble inmueble = mapperProperty.toInmueble(property);
         inmuebleJpaRepository.save(inmueble);
         return property;
@@ -41,18 +40,10 @@ public class InmuebleRepository implements PropertyRepository {
     }
 
     @Override
-    public Optional<List<Property>> getByDistrict(List<Location> locations) {
-        List<Ubicacion> ubicaciones = locations
-                .stream()
-                .map(l -> mapperLocation.toUbicacion(l))
-                .toList();
-
-        List<Inmueble> inmuebles = inmuebleJpaRepository.findByUbicacion(ubicaciones);
-
-        return Optional.of(inmuebles
-                .stream()
-                .map(i -> mapperProperty.toProperty(i))
-                .toList());
+    public Optional<Property> getByDistrict(Location location) {
+        Ubicacion ubicacion = mapperLocation.toUbicacion(location);
+        Inmueble inmueble = inmuebleJpaRepository.findByUbicacion(ubicacion);
+        return Optional.of(mapperProperty.toProperty(inmueble));
     }
 
     @Override
@@ -64,17 +55,19 @@ public class InmuebleRepository implements PropertyRepository {
 
         return Optional.of(inmuebles
                 .stream()
-                .map(i -> mapperProperty.toProperty(i))
+                .map(inmueble -> mapperProperty.toProperty(inmueble))
                 .toList());
     }
 
     @Override
     public List<Property> getAll() {
-        return null;
+        List<Inmueble> inmuebles = inmuebleJpaRepository.findAll();
+        return mapperProperty.toProperties(inmuebles);
     }
 
     @Override
     public Optional<List<Property>> getByFree() {
-        return Optional.empty();
+        List<Inmueble> inmuebles = inmuebleJpaRepository.findByDisponibilidad(true);
+        return Optional.of(mapperProperty.toProperties(inmuebles));
     }
 }

@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepository {
-    Appointment create(Appointment appointment);
-
-    Appointment update(Appointment appointment);
+    Appointment save(Appointment appointment);
 
     Optional<Appointment> getById(Long appointmentId);
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DistrictRepository {
-    District create(District district);
+    District save(District district);
 
     void delete(Long districtId);
 

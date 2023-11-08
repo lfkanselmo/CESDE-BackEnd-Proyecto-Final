@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring", uses = {LocationMapper.class, OwnerMapper.class})
 public interface PropertyMapper {
     @Mappings({
@@ -27,7 +29,9 @@ public interface PropertyMapper {
             @Mapping(source = "activo", target = "active")
     })
     Property toProperty(Inmueble inmueble);
+    List<Property> toProperties(List<Inmueble> inmuebles);
 
     @InheritInverseConfiguration
     Inmueble toInmueble(Property property);
+
 }

@@ -5,9 +5,7 @@ import co.com.cesde.arkham.domain.User;
 import java.util.Optional;
 
 public interface UserRepository {
-    User create(User user);
-
-    User update(User user);
+    User save(User user);
 
     void delete(Long userId);
 

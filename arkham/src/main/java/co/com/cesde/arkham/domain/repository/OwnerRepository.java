@@ -7,13 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OwnerRepository {
-    Owner create(Owner owner);
-
-    Owner update(Owner owner);
+    Owner save(Owner owner);
 
     void delete(Long ownerId);
 
     Optional<Owner> getById(Long id);
 
-    Optional<List<Owner>> getByOwnerFirstName(String OwnerFirstName);
+    Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName);
 }

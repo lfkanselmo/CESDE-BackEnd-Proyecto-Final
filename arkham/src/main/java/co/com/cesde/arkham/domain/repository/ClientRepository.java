@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClientRepository {
-    Client create(Client client);
-
-    Client update(Client client);
+    Client save(Client client);
 
     void delete(Long clientId);
 

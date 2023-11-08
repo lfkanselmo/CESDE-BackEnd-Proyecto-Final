@@ -1,26 +1,36 @@
 package co.com.cesde.arkham.persistence;
 
+import co.com.cesde.arkham.domain.User;
+import co.com.cesde.arkham.domain.repository.UserRepository;
 import co.com.cesde.arkham.persistence.crud.UsuarioJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Usuario;
+import co.com.cesde.arkham.persistence.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
-public class UsuarioRepository {
+@Repository
+public class UsuarioRepository implements UserRepository {
+    @Autowired
     private UsuarioJpaRepository usuarioJpaRepository;
+    @Autowired
+    private UserMapper mapper;
 
-    void create(Usuario usuario){
+    @Override
+    public User save(User user) {
+        Usuario usuario = mapper.toUsuario(user);
         usuarioJpaRepository.save(usuario);
+        return user;
     }
 
-    void update(Usuario usuario){
-        usuarioJpaRepository.save(usuario);
+    @Override
+    public void delete(Long userId) {
+        usuarioJpaRepository.deleteById(userId);
     }
 
-    void delete(Long id){
-        usuarioJpaRepository.deleteById(id);
-    }
-
-    Optional<Usuario> getByUsuario(String usuario){
-        return usuarioJpaRepository.findByUsuario(usuario);
+    @Override
+    public Optional<User> getByUser(String user) {
+        Optional<Usuario> usuario = usuarioJpaRepository.findByUsuario(user);
+        return usuario.map(usuarioOpcional -> mapper.toUser(usuarioOpcional));
     }
 }

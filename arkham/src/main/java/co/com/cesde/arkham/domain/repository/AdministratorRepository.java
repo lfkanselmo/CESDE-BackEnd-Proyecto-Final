@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdministratorRepository {
-    Administrator create(Administrator administrator);
-
-    Administrator update(Administrator administrator);
+    Administrator save(Administrator administrator);
 
     void delete(Long administratorId);
 
     Optional<List<Administrator>> getByAdministratorFirstName(String administratorFirstName);
+
+    Optional<Administrator> getById(Long id);
 }

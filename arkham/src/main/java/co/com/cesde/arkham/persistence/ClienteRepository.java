@@ -5,23 +5,20 @@ import co.com.cesde.arkham.domain.repository.ClientRepository;
 import co.com.cesde.arkham.persistence.crud.ClienteJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Cliente;
 import co.com.cesde.arkham.persistence.mapper.ClientMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public class ClienteRepository implements ClientRepository {
+    @Autowired
     private ClienteJpaRepository clienteJpaRepository;
+    @Autowired
     private ClientMapper mapper;
 
     @Override
-    public Client create(Client client) {
-        Cliente cliente = mapper.toCliente(client);
-        clienteJpaRepository.save(cliente);
-        return client;
-    }
-
-    @Override
-    public Client update(Client client) {
+    public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
         clienteJpaRepository.save(cliente);
         return client;
@@ -37,7 +34,7 @@ public class ClienteRepository implements ClientRepository {
         List<Cliente> clientes = clienteJpaRepository.findByNombreCliente(clientFirstName);
         return Optional.of(clientes
                 .stream()
-                .map(c -> mapper.toclient(c))
+                .map(cliente -> mapper.toclient(cliente))
                 .toList());
     }
 }
