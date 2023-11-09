@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface OwnerRepository {
     Owner save(Owner owner);
 
-    void delete(Long ownerId);
+    void delete(Integer ownerId);
 
-    Optional<Owner> getById(Long id);
+    Optional<Owner> getById(Integer id);
 
     Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName);
 }

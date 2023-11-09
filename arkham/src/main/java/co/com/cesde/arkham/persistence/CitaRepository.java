@@ -23,18 +23,17 @@ public class CitaRepository implements AppointmentRepository {
     @Override
     public Appointment save(Appointment appointment) {
         Cita cita = mapper.toCita(appointment);
-        citaJpaRepository.save(cita);
-        return appointment;
+        return mapper.toAppointment(citaJpaRepository.save(cita));
     }
 
     @Override
-    public Optional<Appointment> getById(Long appointmentId) {
+    public Optional<Appointment> getById(Integer appointmentId) {
         Optional<Cita> cita = citaJpaRepository.findById(appointmentId);
         return cita.map(citaOpcional -> mapper.toAppointment(citaOpcional));
     }
 
     @Override
-    public void delete(Long appointmentId) {
+    public void delete(Integer appointmentId) {
         citaJpaRepository.deleteById(appointmentId);
     }
 

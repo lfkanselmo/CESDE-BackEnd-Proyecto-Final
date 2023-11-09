@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Owner {
-    private Long ownerId;
+    private Integer ownerId;
     private String ownerFirstName;
     private String ownerLastName;
     private String ownerPhone;

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Property {
-    private Long propertyId;
+    private Integer propertyId;
     private Location location;
     private Double price;
     private Boolean free;

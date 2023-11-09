@@ -17,11 +17,11 @@ public class AdministratorService {
         return administratorRepository.save(administrator);
     }
 
-    public Optional<Administrator> getById(Long id) {
+    public Optional<Administrator> getById(Integer id) {
         return administratorRepository.getById(id);
     }
 
-    public boolean delete(Long id) {
+    public Boolean delete(Integer id) {
         return getById(id).map(administrator -> {
             administratorRepository.delete(id);
             return true;

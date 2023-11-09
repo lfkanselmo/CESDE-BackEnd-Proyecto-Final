@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AdministratorMapper {
     @Mappings({
-            @Mapping(source = "idAdministrador", target = "adminitratorId"),
+            @Mapping(source = "idAdministrador", target = "administratorId"),
             @Mapping(source = "nombreAdministrador", target = "administratorFirstName"),
             @Mapping(source = "apellidoAdministrador", target = "administratorLastName"),
             @Mapping(source = "telefonoAdministrador", target = "administratorPhone"),

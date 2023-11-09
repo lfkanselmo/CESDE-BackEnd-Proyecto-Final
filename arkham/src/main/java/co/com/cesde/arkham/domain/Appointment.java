@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class Appointment {
-    private Long appointmentId;
+    private Integer appointmentId;
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate appointmentDate;

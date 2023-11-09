@@ -23,6 +23,7 @@ public interface AppointmentMapper {
     Appointment toAppointment(Cita cita);
 
     List<Appointment> toAppointments(List<Cita> citas);
+
     @InheritInverseConfiguration
     Cita toCita(Appointment appointment);
 }

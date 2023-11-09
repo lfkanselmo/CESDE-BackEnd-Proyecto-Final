@@ -15,7 +15,7 @@ public class Propietario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_propietario")
-    private Long idPropietario;
+    private Integer idPropietario;
     @Column(name = "nombre")
     private String nombrePropietario;
     @Column(name = "apellido")

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface CitaJpaRepository extends JpaRepository<Cita,Long> {
+public interface CitaJpaRepository extends JpaRepository<Cita,Integer> {
 
     List<Cita> findByFechaCita(LocalDate CitaFecha);
 }

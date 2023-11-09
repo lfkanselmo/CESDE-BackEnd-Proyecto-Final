@@ -15,7 +15,7 @@ public class Inmueble {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inmueble")
-    private Long idInmueble;
+    private Integer idInmueble;
     @OneToOne
     @JoinColumn(name = "id_ubicacion",insertable = false, updatable = false)
     private Ubicacion ubicacion;

@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface AppointmentRepository {
     Appointment save(Appointment appointment);
 
-    Optional<Appointment> getById(Long appointmentId);
+    Optional<Appointment> getById(Integer appointmentId);
 
-    void delete(Long appointmentId);
+    void delete(Integer appointmentId);
 
     Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate);
 }

@@ -30,17 +30,22 @@ public class InmuebleRepository implements PropertyRepository {
     @Override
     public Property save(Property property) {
         Inmueble inmueble = mapperProperty.toInmueble(property);
-        inmuebleJpaRepository.save(inmueble);
-        return property;
+        return mapperProperty.toProperty(inmuebleJpaRepository.save(inmueble));
     }
 
     @Override
-    public void delete(Long propertyId) {
+    public void delete(Integer propertyId) {
         inmuebleJpaRepository.deleteById(propertyId);
     }
 
     @Override
-    public Optional<Property> getByDistrict(Location location) {
+    public Optional<Property> getById(Integer propertyId) {
+        Inmueble inmueble = inmuebleJpaRepository.getById(propertyId);
+        return Optional.of(mapperProperty.toProperty(inmueble));
+    }
+
+    @Override
+    public Optional<Property> getByLocation(Location location) {
         Ubicacion ubicacion = mapperLocation.toUbicacion(location);
         Inmueble inmueble = inmuebleJpaRepository.findByUbicacion(ubicacion);
         return Optional.of(mapperProperty.toProperty(inmueble));

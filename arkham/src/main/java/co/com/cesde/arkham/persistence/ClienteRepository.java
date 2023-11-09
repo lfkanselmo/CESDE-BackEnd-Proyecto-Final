@@ -20,12 +20,11 @@ public class ClienteRepository implements ClientRepository {
     @Override
     public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
-        clienteJpaRepository.save(cliente);
-        return client;
+        return mapper.toclient(clienteJpaRepository.save(cliente));
     }
 
     @Override
-    public void delete(Long clientId) {
+    public void delete(Integer clientId) {
         clienteJpaRepository.deleteById(clientId);
     }
 
@@ -36,5 +35,11 @@ public class ClienteRepository implements ClientRepository {
                 .stream()
                 .map(cliente -> mapper.toclient(cliente))
                 .toList());
+    }
+
+    @Override
+    public Optional<Client> getById(Integer id) {
+        Cliente cliente = clienteJpaRepository.getById(id);
+        return Optional.of(mapper.toclient(cliente));
     }
 }

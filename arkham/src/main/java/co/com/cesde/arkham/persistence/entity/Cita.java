@@ -16,7 +16,7 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cita")
-    private Long idCita;
+    private Integer idCita;
     @Temporal(TemporalType.TIME)
     @Column(name = "hora_inicio")
     private LocalTime horaInicio;

@@ -22,12 +22,11 @@ public class AdministradorRepository implements AdministratorRepository {
     @Override
     public Administrator save(Administrator administrator) {
         Administrador administrador = mapper.toAdministrador(administrator);
-        administradorJpaRepository.save(administrador);
-        return administrator;
+        return mapper.toAdministrator(administradorJpaRepository.save(administrador));
     }
 
     @Override
-    public void delete(Long administratorId) {
+    public void delete(Integer administratorId) {
         administradorJpaRepository.deleteById(administratorId);
     }
 
@@ -38,8 +37,8 @@ public class AdministradorRepository implements AdministratorRepository {
     }
 
     @Override
-    public Optional<Administrator> getById(Long id) {
+    public Optional<Administrator> getById(Integer id) {
         Optional<Administrador> administrador = administradorJpaRepository.findById(id);
-        return administrador.map(administradorOpcional -> mapper.toAdministrator(administradorOpcional));
+        return administrador.map(administradorOptional -> mapper.toAdministrator(administradorOptional));
     }
 }

@@ -20,17 +20,16 @@ public class PropietarioRepository implements OwnerRepository {
     @Override
     public Owner save(Owner owner) {
         Propietario propietario = mapper.toPropietario(owner);
-        propietarioJpaRepository.save(propietario);
-        return owner;
+        return mapper.toOwner(propietarioJpaRepository.save(propietario));
     }
 
     @Override
-    public void delete(Long ownerId) {
+    public void delete(Integer ownerId) {
         propietarioJpaRepository.deleteById(ownerId);
     }
 
     @Override
-    public Optional<Owner> getById(Long id) {
+    public Optional<Owner> getById(Integer id) {
         Optional<Propietario> propietario = propietarioJpaRepository.findById(id);
         return propietario.map(propietarioOpcional -> mapper.toOwner(propietarioOpcional));
     }

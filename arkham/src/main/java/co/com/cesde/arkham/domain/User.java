@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
-    private Long userId;
+    private Integer userId;
     private String user;
     private String password;
     private Rol rol;

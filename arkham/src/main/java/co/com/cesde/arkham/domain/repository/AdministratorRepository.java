@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface AdministratorRepository {
     Administrator save(Administrator administrator);
 
-    void delete(Long administratorId);
+    void delete(Integer administratorId);
 
     Optional<List<Administrator>> getByAdministratorFirstName(String administratorFirstName);
 
-    Optional<Administrator> getById(Long id);
+    Optional<Administrator> getById(Integer id);
 }

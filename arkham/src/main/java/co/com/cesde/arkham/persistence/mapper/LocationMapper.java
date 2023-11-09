@@ -7,16 +7,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = {DistrictMapper.class})
+@Mapper(componentModel = "spring")
 public interface LocationMapper {
     @Mappings({
             @Mapping(source = "idUbicacion", target = "locationId"),
             @Mapping(source = "inmueble", target = "property"),
-            @Mapping(source = "tipoVia", target = "streetType"),
-            @Mapping(source = "numeroVia", target = "streetNumber"),
-            @Mapping(source = "numero", target = "number"),
-            @Mapping(source = "complemento", target = "complement"),
-            @Mapping(source = "barrio", target = "district")
+            @Mapping(source = "direccion", target = "address"),
+            @Mapping(source = "barrio", target = "district"),
+            @Mapping(source = "ciudad", target = "city")
     })
     Location toLocation(Ubicacion ubicacion);
 

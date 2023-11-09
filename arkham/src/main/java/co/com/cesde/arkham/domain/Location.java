@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Location {
-    private Long locationId;
+    private Integer locationId;
     private Property property;
-    private String streetType;
-    private String streetNumber;
-    private String number;
-    private String complement;
-    private District district;
+    private String address;
+    private String district;
+    private String city;
+
 }
