@@ -14,12 +14,12 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public Appointment save(Appointment appointment){
+    public Optional<Appointment> save(Appointment appointment){
         return appointmentRepository.save(appointment);
     }
 
     public Optional<Appointment> getById(Integer id){
-        return appointmentRepository.getById(id);
+        return appointmentRepository.getByAppointmentId(id);
     }
 
     public Boolean delete(Integer id){

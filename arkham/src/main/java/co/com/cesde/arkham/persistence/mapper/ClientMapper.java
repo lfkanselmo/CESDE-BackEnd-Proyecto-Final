@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
     @Mappings({
@@ -18,6 +20,7 @@ public interface ClientMapper {
             @Mapping(source = "activo", target = "active")
     })
     Client toclient(Cliente cliente);
+    List<Client> toclients(List<Cliente> clientes);
 
     @InheritInverseConfiguration
     Cliente toCliente(Client client);

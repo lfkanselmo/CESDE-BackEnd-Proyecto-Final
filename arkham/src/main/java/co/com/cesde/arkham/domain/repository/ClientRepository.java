@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClientRepository {
-    Client save(Client client);
+    Optional<Client> save(Client client);
 
     void delete(Integer clientId);
 
     Optional<List<Client>> getByClientFirstName(String clientFirstName);
 
-    Optional<Client> getById(Integer id);
+    Optional<Client> getByClientId(Integer id);
 }

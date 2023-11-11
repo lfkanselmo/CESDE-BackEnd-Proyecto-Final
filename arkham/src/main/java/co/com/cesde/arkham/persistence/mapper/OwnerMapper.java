@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface OwnerMapper {
     @Mappings({
@@ -18,8 +20,11 @@ public interface OwnerMapper {
             @Mapping(source = "activo", target = "active")
     })
     Owner toOwner(Propietario propietario);
+    List<Owner> toOwners(List<Propietario> propietarios);
 
     @InheritInverseConfiguration
     @Mapping(target = "inmuebles", ignore = true)
     Propietario toPropietario(Owner owner);
+
+
 }

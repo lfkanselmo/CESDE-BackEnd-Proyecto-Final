@@ -1,5 +1,6 @@
 package co.com.cesde.arkham.domain;
 
+import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class Property {
     private Integer propertyId;
-    private Location location;
     private Double price;
     private Boolean free;
-    private Owner owner;
-    private Offer offer;
-    private PropertyType propertyType;
+    private Integer ownerId;
+    private String offer;
+    private String propertyType;
     private Integer room;
     private Integer bathroom;
     private Boolean courtyard;
@@ -22,6 +22,9 @@ public class Property {
     private Double area;
     private Boolean naturalGas;
     private Boolean laundryArea;
+    private String address;
+    private String district;
+    private String city;
     private Boolean active;
-
+    private Owner owner;
 }

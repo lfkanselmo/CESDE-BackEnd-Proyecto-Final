@@ -12,12 +12,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User user){
+    public Optional<User> save(User user){
         return userRepository.save(user);
     }
 
     public Optional<User> getById(Integer id){
-        return userRepository.getById(id);
+        return userRepository.getByUserId(id);
     }
 
     public Boolean delete(Integer id){

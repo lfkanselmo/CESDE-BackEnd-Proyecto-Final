@@ -17,15 +17,15 @@ public class UsuarioRepository implements UserRepository {
     private UserMapper mapper;
 
     @Override
-    public User save(User user) {
+    public Optional<User> save(User user) {
         Usuario usuario = mapper.toUsuario(user);
-        return mapper.toUser(usuarioJpaRepository.save(usuario));
+        return Optional.of(mapper.toUser(usuarioJpaRepository.save(usuario)));
     }
 
     @Override
-    public Optional<User> getById(Integer id) {
-        Usuario usuario = usuarioJpaRepository.getById(id);
-        return Optional.of(mapper.toUser(usuario));
+    public Optional<User> getByUserId(Integer id) {
+        Optional<Usuario> usuarioOptional = usuarioJpaRepository.getByIdUsuario(id);
+        return usuarioOptional.map(usuario -> mapper.toUser(usuario));
     }
 
     @Override

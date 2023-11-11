@@ -16,14 +16,10 @@ public class Inmueble {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inmueble")
     private Integer idInmueble;
-    @OneToOne
-    @JoinColumn(name = "id_ubicacion",insertable = false, updatable = false)
-    private Ubicacion ubicacion;
     private Double precio;
     private Boolean disponibilidad;
-    @ManyToOne
-    @JoinColumn(name = "id_propietario",insertable = false, updatable = false)
-    private Propietario propietario;
+    @Column(name = "id_propietario")
+    private Integer idPropietario;
     @Enumerated(EnumType.STRING)
     private Oferta oferta;
     @Enumerated(value = EnumType.STRING)
@@ -40,7 +36,14 @@ public class Inmueble {
     private Boolean gasNatural;
     @Column(name = "zona_de_ropas")
     private Boolean zonaRopa;
+    private String direccion;
+    private String barrio;
+    private String ciudad;
     private Boolean activo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_propietario",insertable = false, updatable = false)
+    private Propietario propietario;
 
 }
 

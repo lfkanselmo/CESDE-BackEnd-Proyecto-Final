@@ -9,5 +9,7 @@ import java.util.Optional;
 
 public interface CitaJpaRepository extends JpaRepository<Cita,Integer> {
 
-    List<Cita> findByFechaCita(LocalDate CitaFecha);
+    Optional<List<Cita>> findByFechaCita(LocalDate CitaFecha);
+
+    Optional<Cita> findByIdCita(Integer appointmentId);
 }

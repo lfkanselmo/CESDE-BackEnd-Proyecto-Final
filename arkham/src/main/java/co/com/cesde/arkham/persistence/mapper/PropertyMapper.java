@@ -9,13 +9,13 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "Spring", uses = {LocationMapper.class, OwnerMapper.class})
+@Mapper(componentModel = "Spring", uses = {OwnerMapper.class})
 public interface PropertyMapper {
     @Mappings({
             @Mapping(source = "idInmueble", target = "propertyId"),
-            @Mapping(source = "ubicacion", target = "location"),
             @Mapping(source = "precio", target = "price"),
             @Mapping(source = "disponibilidad", target = "free"),
+            @Mapping(source = "idPropietario", target = "ownerId"),
             @Mapping(source = "propietario", target = "owner"),
             @Mapping(source = "oferta", target = "offer"),
             @Mapping(source = "tipoInmueble", target = "propertyType"),
@@ -26,6 +26,9 @@ public interface PropertyMapper {
             @Mapping(source = "area", target = "area"),
             @Mapping(source = "gasNatural", target = "naturalGas"),
             @Mapping(source = "zonaRopa", target = "laundryArea"),
+            @Mapping(source = "direccion", target = "address"),
+            @Mapping(source = "barrio", target = "district"),
+            @Mapping(source = "ciudad", target = "city"),
             @Mapping(source = "activo", target = "active")
     })
     Property toProperty(Inmueble inmueble);

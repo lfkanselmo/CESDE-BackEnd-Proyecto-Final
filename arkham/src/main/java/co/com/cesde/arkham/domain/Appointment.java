@@ -12,10 +12,13 @@ import java.time.LocalTime;
 @Data
 public class Appointment {
     private Integer appointmentId;
+    private Integer propertyId;
+    private Integer userId;
+    private Integer clientId;
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate appointmentDate;
     private Property property;
-    private Administrator administrator;
+    private User user;
     private Client client;
 }

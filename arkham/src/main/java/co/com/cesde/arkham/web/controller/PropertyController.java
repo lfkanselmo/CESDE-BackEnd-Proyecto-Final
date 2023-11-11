@@ -11,14 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/properties")
+@RequestMapping("/property")
 public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
     @PostMapping("/save")
     public ResponseEntity<Property> save(@RequestBody Property property) {
-        return new ResponseEntity<>(propertyService.save(property), HttpStatus.CREATED);
+        return propertyService.save(property).map(propertyOptional -> new ResponseEntity<>(propertyOptional,HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
@@ -38,10 +39,9 @@ public class PropertyController {
     }
 
     @GetMapping("/location/{districtName}")
-    public ResponseEntity<List<Property>> getByLocation(@PathVariable("districtName") String districtName) {
-        Optional<List<Property>> properties = propertyService.getByLocation(districtName);
-        return properties
-                .map(propertiesList -> new ResponseEntity<>(propertiesList, HttpStatus.OK))
+    public ResponseEntity<List<Property>> getByDistrict(@PathVariable("districtName") String districtName) {
+        return propertyService.getByDistrict(districtName)
+                .map(properties -> new ResponseEntity<>(properties,HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

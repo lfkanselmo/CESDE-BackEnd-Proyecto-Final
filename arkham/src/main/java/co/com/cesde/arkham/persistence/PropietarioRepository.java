@@ -18,9 +18,9 @@ public class PropietarioRepository implements OwnerRepository {
     private OwnerMapper mapper;
 
     @Override
-    public Owner save(Owner owner) {
+    public Optional<Owner> save(Owner owner) {
         Propietario propietario = mapper.toPropietario(owner);
-        return mapper.toOwner(propietarioJpaRepository.save(propietario));
+        return Optional.of(mapper.toOwner(propietarioJpaRepository.save(propietario)));
     }
 
     @Override
@@ -29,17 +29,14 @@ public class PropietarioRepository implements OwnerRepository {
     }
 
     @Override
-    public Optional<Owner> getById(Integer id) {
+    public Optional<Owner> getByOwnerId(Integer id) {
         Optional<Propietario> propietario = propietarioJpaRepository.findById(id);
         return propietario.map(propietarioOpcional -> mapper.toOwner(propietarioOpcional));
     }
 
     @Override
     public Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName) {
-        List<Propietario> propietarios = propietarioJpaRepository.findByNombrePropietario(ownerFirstName);
-        return Optional.of(propietarios
-                .stream()
-                .map(propietario -> mapper.toOwner(propietario))
-                .toList());
+        Optional<List<Propietario>> propietariosOptional = propietarioJpaRepository.findByNombrePropietario(ownerFirstName);
+        return propietariosOptional.map(propietarios -> mapper.toOwners(propietarios));
     }
 }

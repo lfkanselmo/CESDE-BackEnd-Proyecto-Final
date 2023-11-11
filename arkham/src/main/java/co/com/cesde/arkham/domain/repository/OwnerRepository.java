@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OwnerRepository {
-    Owner save(Owner owner);
+    Optional<Owner> save(Owner owner);
 
     void delete(Integer ownerId);
 
-    Optional<Owner> getById(Integer id);
+    Optional<Owner> getByOwnerId(Integer id);
 
     Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName);
 }

@@ -1,6 +1,5 @@
 package co.com.cesde.arkham.domain.repository;
 
-import co.com.cesde.arkham.domain.Location;
 import co.com.cesde.arkham.domain.Owner;
 import co.com.cesde.arkham.domain.Property;
 
@@ -8,15 +7,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PropertyRepository {
-    Property save(Property property);
+    Optional<Property> save(Property property);
 
     void delete(Integer propertyId);
 
-    Optional<Property> getById(Integer propertyId);
+    Optional<Property> getByPropertyId(Integer propertyId);
 
-    Optional<Property> getByLocation(Location location);
+    Optional<List<Property>> getByDistrict(String propertyDistrict);
 
-    Optional<List<Property>> getByOwner(Owner owner);
+    Optional<List<Property>> getByOwner(Integer ownerId);
 
     List<Property> getAll();
 

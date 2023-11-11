@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/client")
 public class ClientController {
 
     @Autowired
@@ -16,7 +16,9 @@ public class ClientController {
 
     @PostMapping("/save")
     private ResponseEntity<Client> save(@RequestBody Client client) {
-        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
+        return clientService.save(client)
+                .map(clientOptional -> new ResponseEntity<>(clientOptional,HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")

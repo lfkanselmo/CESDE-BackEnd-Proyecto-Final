@@ -12,12 +12,12 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public Client save(Client client) {
+    public Optional<Client> save(Client client) {
         return clientRepository.save(client);
     }
 
     public Optional<Client> getById(Integer id) {
-        return clientRepository.getById(id);
+        return clientRepository.getByClientId(id);
     }
 
     public Boolean delete(Integer id) {

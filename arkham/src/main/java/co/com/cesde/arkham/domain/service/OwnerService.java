@@ -13,12 +13,12 @@ public class OwnerService {
     @Autowired
     private OwnerRepository ownerRepository;
 
-    public Owner save(Owner owner){
+    public Optional<Owner> save(Owner owner){
         return ownerRepository.save(owner);
     }
 
     public Optional<Owner> getById(Integer id){
-        return ownerRepository.getById(id);
+        return ownerRepository.getByOwnerId(id);
     }
 
     public Boolean delete(Integer id){

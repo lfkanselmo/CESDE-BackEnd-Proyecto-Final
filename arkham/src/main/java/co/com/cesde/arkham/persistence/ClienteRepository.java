@@ -18,9 +18,9 @@ public class ClienteRepository implements ClientRepository {
     private ClientMapper mapper;
 
     @Override
-    public Client save(Client client) {
+    public Optional<Client> save(Client client) {
         Cliente cliente = mapper.toCliente(client);
-        return mapper.toclient(clienteJpaRepository.save(cliente));
+        return Optional.of(mapper.toclient(clienteJpaRepository.save(cliente)));
     }
 
     @Override
@@ -30,16 +30,14 @@ public class ClienteRepository implements ClientRepository {
 
     @Override
     public Optional<List<Client>> getByClientFirstName(String clientFirstName) {
-        List<Cliente> clientes = clienteJpaRepository.findByNombreCliente(clientFirstName);
-        return Optional.of(clientes
-                .stream()
-                .map(cliente -> mapper.toclient(cliente))
-                .toList());
+        Optional<List<Cliente>> clientesOptional = clienteJpaRepository.findByNombreCliente(clientFirstName);
+        return clientesOptional
+                .map(clientes -> mapper.toclients(clientes));
     }
 
     @Override
-    public Optional<Client> getById(Integer id) {
-        Cliente cliente = clienteJpaRepository.getById(id);
-        return Optional.of(mapper.toclient(cliente));
+    public Optional<Client> getByClientId(Integer id) {
+        Optional<Cliente> clienteOptional = clienteJpaRepository.getByIdCliente(id);
+        return clienteOptional.map(cliente -> mapper.toclient(cliente));
     }
 }

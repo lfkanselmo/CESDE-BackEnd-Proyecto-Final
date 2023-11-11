@@ -21,14 +21,14 @@ public class CitaRepository implements AppointmentRepository {
 
 
     @Override
-    public Appointment save(Appointment appointment) {
+    public Optional<Appointment> save(Appointment appointment) {
         Cita cita = mapper.toCita(appointment);
-        return mapper.toAppointment(citaJpaRepository.save(cita));
+        return Optional.of(mapper.toAppointment(citaJpaRepository.save(cita)));
     }
 
     @Override
-    public Optional<Appointment> getById(Integer appointmentId) {
-        Optional<Cita> cita = citaJpaRepository.findById(appointmentId);
+    public Optional<Appointment> getByAppointmentId(Integer appointmentId) {
+        Optional<Cita> cita = citaJpaRepository.findByIdCita(appointmentId);
         return cita.map(citaOpcional -> mapper.toAppointment(citaOpcional));
     }
 
@@ -39,13 +39,7 @@ public class CitaRepository implements AppointmentRepository {
 
     @Override
     public Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate) {
-        List<Cita> citas = citaJpaRepository.findByFechaCita(appointmentDate);
-        if(!citas.isEmpty()){
-            return Optional.of(citas
-                    .stream()
-                    .map(cita -> mapper.toAppointment(cita))
-                    .toList()) ;
-        }
-        return Optional.empty();
+        Optional<List<Cita>> citasOptional = citaJpaRepository.findByFechaCita(appointmentDate);
+        return citasOptional.map(citas -> mapper.toAppointments(citas));
     }
 }

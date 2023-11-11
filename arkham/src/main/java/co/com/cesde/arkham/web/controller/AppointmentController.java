@@ -11,14 +11,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/appointment")
 public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
     @PostMapping("/save")
     public ResponseEntity<Appointment> save (@RequestBody Appointment appointment){
-        return new ResponseEntity<>(appointmentService.save(appointment), HttpStatus.CREATED);
+        return appointmentService.save(appointment)
+                .map(appointmentOptional -> new ResponseEntity<>(appointmentOptional, HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")

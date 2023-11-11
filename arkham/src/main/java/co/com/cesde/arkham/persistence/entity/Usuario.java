@@ -18,6 +18,8 @@ public class Usuario {
     private String contrasenha;
     @Enumerated(value = EnumType.STRING)
     private Rol rol;
-
+    private String nombre;
+    private String apellido;
+    private String telefono;
     private Boolean activo;
 }

@@ -17,6 +17,12 @@ public class Cita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cita")
     private Integer idCita;
+    @Column(name = "id_inmueble")
+    private Integer idInmueble;
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
+    @Column(name = "id_cliente")
+    private Integer idCliente;
     @Temporal(TemporalType.TIME)
     @Column(name = "hora_inicio")
     private LocalTime horaInicio;
@@ -30,8 +36,8 @@ public class Cita {
     @JoinColumn(name = "id_inmueble", insertable = false, updatable = false)
     private Inmueble inmueble;
     @ManyToOne
-    @JoinColumn(name = "id_administrador", insertable = false, updatable = false)
-    private Administrador administrador;
+    @JoinColumn(name = "id_usuario", insertable = false, updatable = false)
+    private Usuario usuario;
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;

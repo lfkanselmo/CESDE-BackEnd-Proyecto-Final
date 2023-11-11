@@ -14,6 +14,9 @@ public interface UserMapper {
             @Mapping(source = "usuario", target = "user"),
             @Mapping(source = "contrasenha", target = "password"),
             @Mapping(source = "rol", target = "rol"),
+            @Mapping(source = "nombre", target = "firstName"),
+            @Mapping(source = "apellido", target = "lastName"),
+            @Mapping(source = "telefono", target = "phone"),
             @Mapping(source = "activo", target = "active")
     })
     User toUser(Usuario usuario);

@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/owners")
+@RequestMapping("/owner")
 public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
     @PostMapping("/save")
     public ResponseEntity<Owner> save(@RequestBody Owner owner){
-        return new ResponseEntity<>(ownerService.save(owner), HttpStatus.CREATED);
+        return ownerService.save(owner).map(ownerOptional -> new ResponseEntity<>(ownerOptional,HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
