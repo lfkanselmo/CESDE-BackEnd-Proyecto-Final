@@ -16,7 +16,7 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    Optional<Client> getById(Integer id) {
+    public Optional<Client> getById(Integer id) {
         return clientRepository.getById(id);
     }
 

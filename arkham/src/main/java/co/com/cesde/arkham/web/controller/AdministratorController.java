@@ -36,7 +36,7 @@ public class AdministratorController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/firstName/{name}")
+    @GetMapping("/first_name/{name}")
     public ResponseEntity<List<Administrator>> getByFirstName(@PathVariable("name") String name) {
         return administratorService.getByAdministratorFirstName(name)
                 .map(administrator -> new ResponseEntity<>(administrator, HttpStatus.OK))
