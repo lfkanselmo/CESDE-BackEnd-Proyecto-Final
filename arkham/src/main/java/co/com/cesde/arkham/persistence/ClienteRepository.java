@@ -6,6 +6,8 @@ import co.com.cesde.arkham.persistence.crud.ClienteJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Cliente;
 import co.com.cesde.arkham.persistence.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,6 +40,14 @@ public class ClienteRepository implements ClientRepository {
     @Override
     public Optional<Client> getByClientId(Integer id) {
         Optional<Cliente> clienteOptional = clienteJpaRepository.getByIdCliente(id);
-        return clienteOptional.map(cliente -> mapper.toclient(cliente));
+        return clienteOptional
+                .map(cliente -> mapper.toclient(cliente));
+    }
+
+    @Override
+    public Optional<Page<Client>> getAll(Pageable pagination) {
+        Page<Cliente> clientes = clienteJpaRepository.findAll(pagination);
+        return Optional.of(clientes
+                .map(cliente -> mapper.toclient(cliente)));
     }
 }

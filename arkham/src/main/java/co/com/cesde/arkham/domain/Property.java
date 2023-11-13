@@ -1,6 +1,6 @@
 package co.com.cesde.arkham.domain;
 
-import jakarta.persistence.Embedded;
+import co.com.cesde.arkham.domain.dto.property.PropertyRegisterRecord;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +15,8 @@ public class Property {
     private Integer ownerId;
     private String offer;
     private String propertyType;
-    private Integer room;
-    private Integer bathroom;
+    private Integer rooms;
+    private Integer bathrooms;
     private Boolean courtyard;
     private Integer level;
     private Double area;
@@ -27,4 +27,23 @@ public class Property {
     private String city;
     private Boolean active;
     private Owner owner;
+
+    public Property(PropertyRegisterRecord propertyRegisterRecord) {
+        this.price = propertyRegisterRecord.price();
+        this.free = propertyRegisterRecord.free();
+        this.ownerId = propertyRegisterRecord.ownerId();
+        this.offer = propertyRegisterRecord.offer();
+        this.propertyType = propertyRegisterRecord.propertyType();
+        this.rooms = propertyRegisterRecord.rooms();
+        this.bathrooms = propertyRegisterRecord.bathrooms();
+        this.courtyard = propertyRegisterRecord.courtyard();
+        this.level = propertyRegisterRecord.level();
+        this.area = propertyRegisterRecord.area();
+        this.naturalGas = propertyRegisterRecord.naturalGas();
+        this.laundryArea = propertyRegisterRecord.laundryArea();
+        this.address = propertyRegisterRecord.address();
+        this.district = propertyRegisterRecord.district();
+        this.city = propertyRegisterRecord.city();
+        this.active = true;
+    }
 }

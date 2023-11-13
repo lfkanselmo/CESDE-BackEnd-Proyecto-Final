@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 public class Propietario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_propietario")
     private Integer idPropietario;
     @Column(name = "nombre")

@@ -6,6 +6,8 @@ import co.com.cesde.arkham.persistence.crud.InmuebleJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Inmueble;
 import co.com.cesde.arkham.persistence.mapper.PropertyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,10 +48,11 @@ public class InmuebleRepository implements PropertyRepository {
         return inmueblesOptional.map(inmuebles -> mapper.toProperties(inmuebles));
     }
 
+
     @Override
-    public List<Property> getAll() {
-        List<Inmueble> inmuebles = inmuebleJpaRepository.findAll();
-        return mapper.toProperties(inmuebles);
+    public Optional<Page<Property>> getAll(Pageable pagination) {
+        Page<Inmueble> inmuebles = inmuebleJpaRepository.findAll(pagination);
+        return Optional.of(inmuebles.map(inmueble -> mapper.toProperty(inmueble)));
     }
 
     @Override

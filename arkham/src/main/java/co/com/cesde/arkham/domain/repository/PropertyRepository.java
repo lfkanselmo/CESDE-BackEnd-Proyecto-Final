@@ -1,7 +1,9 @@
 package co.com.cesde.arkham.domain.repository;
 
-import co.com.cesde.arkham.domain.Owner;
 import co.com.cesde.arkham.domain.Property;
+import co.com.cesde.arkham.persistence.entity.Inmueble;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,7 @@ public interface PropertyRepository {
 
     Optional<List<Property>> getByOwner(Integer ownerId);
 
-    List<Property> getAll();
+    Optional<Page<Property>> getAll(Pageable pagination);
 
     Optional<List<Property>> getByFree();
 }

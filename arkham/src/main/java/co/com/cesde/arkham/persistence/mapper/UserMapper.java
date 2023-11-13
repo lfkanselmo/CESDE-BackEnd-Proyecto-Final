@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 public interface UserMapper {
     @Mappings({
             @Mapping(source = "idUsuario", target = "userId"),
-            @Mapping(source = "usuario", target = "user"),
+            @Mapping(source = "usuario", target = "userEmail"),
             @Mapping(source = "contrasenha", target = "password"),
             @Mapping(source = "rol", target = "rol"),
             @Mapping(source = "nombre", target = "firstName"),

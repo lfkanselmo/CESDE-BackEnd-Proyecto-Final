@@ -6,6 +6,8 @@ import co.com.cesde.arkham.persistence.crud.PropietarioJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Propietario;
 import co.com.cesde.arkham.persistence.mapper.OwnerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,5 +40,12 @@ public class PropietarioRepository implements OwnerRepository {
     public Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName) {
         Optional<List<Propietario>> propietariosOptional = propietarioJpaRepository.findByNombrePropietario(ownerFirstName);
         return propietariosOptional.map(propietarios -> mapper.toOwners(propietarios));
+    }
+
+    @Override
+    public Optional<Page<Owner>> getAll(Pageable pagination) {
+        Page<Propietario> propietarios = propietarioJpaRepository.findAll(pagination);
+        return Optional.of(propietarios
+                .map(propietario -> mapper.toOwner(propietario)));
     }
 }

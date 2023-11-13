@@ -6,6 +6,9 @@ import co.com.cesde.arkham.persistence.crud.CitaJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Cita;
 import co.com.cesde.arkham.persistence.mapper.AppointmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -41,5 +44,17 @@ public class CitaRepository implements AppointmentRepository {
     public Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate) {
         Optional<List<Cita>> citasOptional = citaJpaRepository.findByFechaCita(appointmentDate);
         return citasOptional.map(citas -> mapper.toAppointments(citas));
+    }
+
+    @Override
+    public Optional<List<Appointment>> getByPropertyId(Integer propertyId) {
+        Optional<List<Cita>> citasOptional = citaJpaRepository.findByIdInmueble(propertyId);
+        return citasOptional.map(citas -> mapper.toCitas(citas));
+    }
+
+    @Override
+    public Optional<Page<Appointment>> getAll(Pageable pagination) {
+        Page<Cita> citas = citaJpaRepository.findAll(pagination);
+        return Optional.of(citas.map(cita -> mapper.toAppointment(cita)));
     }
 }

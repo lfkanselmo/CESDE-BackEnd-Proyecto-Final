@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {ClientMapper.class,UserMapper.class,PropertyMapper.class})
+@Mapper(componentModel = "spring", uses = {ClientMapper.class, UserMapper.class, PropertyMapper.class})
 public interface AppointmentMapper {
     @Mappings({
             @Mapping(source = "idCita", target = "appointmentId"),
@@ -29,4 +29,6 @@ public interface AppointmentMapper {
 
     @InheritInverseConfiguration
     Cita toCita(Appointment appointment);
+
+    List<Appointment> toCitas(List<Cita> citas);
 }

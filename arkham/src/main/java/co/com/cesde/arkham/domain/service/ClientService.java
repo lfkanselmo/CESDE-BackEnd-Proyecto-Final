@@ -3,6 +3,8 @@ package co.com.cesde.arkham.domain.service;
 import co.com.cesde.arkham.domain.Client;
 import co.com.cesde.arkham.domain.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,5 +27,13 @@ public class ClientService {
             clientRepository.delete(id);
             return true;
         }).orElse(false);
+    }
+
+    public Optional<Page<Client>> getAll(Pageable pagination) {
+        return clientRepository.getAll(pagination);
+    }
+
+    public Optional<Client> update(Client client) {
+        return clientRepository.save(client);
     }
 }

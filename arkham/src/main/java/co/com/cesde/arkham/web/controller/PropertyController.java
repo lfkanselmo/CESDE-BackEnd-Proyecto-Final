@@ -1,8 +1,14 @@
 package co.com.cesde.arkham.web.controller;
 
 import co.com.cesde.arkham.domain.Property;
+import co.com.cesde.arkham.domain.dto.property.PropertyListRecord;
+import co.com.cesde.arkham.domain.dto.property.PropertyRegisterRecord;
 import co.com.cesde.arkham.domain.service.PropertyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +23,26 @@ public class PropertyController {
     private PropertyService propertyService;
 
     @PostMapping("/save")
-    public ResponseEntity<Property> save(@RequestBody Property property) {
-        return propertyService.save(property).map(propertyOptional -> new ResponseEntity<>(propertyOptional,HttpStatus.CREATED))
+    public ResponseEntity save(@RequestBody @Valid PropertyRegisterRecord propertyRegisterRecord) {
+        if(propertyService.save(new Property(propertyRegisterRecord)).isPresent()){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Property>> getAll(@PageableDefault(size = 10) Pageable pagination){
+        return propertyService.getAll(pagination)
+                .map(properties -> new ResponseEntity<>(properties,HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Property> getById(@PathVariable("id") Integer id) {
+    public ResponseEntity<PropertyListRecord> getById(@PathVariable("id") Integer id) {
         return propertyService.getById(id)
-                .map(property -> new ResponseEntity(property, HttpStatus.OK))
-                .orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
+                .map(property -> new ResponseEntity<>(new PropertyListRecord(property), HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -39,18 +55,31 @@ public class PropertyController {
     }
 
     @GetMapping("/location/{districtName}")
-    public ResponseEntity<List<Property>> getByDistrict(@PathVariable("districtName") String districtName) {
-        return propertyService.getByDistrict(districtName)
-                .map(properties -> new ResponseEntity<>(properties,HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<List<PropertyListRecord>> getByDistrict(@PathVariable("districtName") String districtName) {
+        Optional<List<Property>> propertiesOptional = propertyService.getByDistrict(districtName);
+        return getReturnsToListRecord(propertiesOptional);
     }
 
     @GetMapping("/owner/{id}")
-    public ResponseEntity<List<Property>> getByOwner(@PathVariable("id") Integer ownerId) {
-        Optional<List<Property>> properties = propertyService.getByOwner(ownerId);
-        return properties
-                .map(propertiesList -> new ResponseEntity<>(propertiesList, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<List<PropertyListRecord>> getByOwner(@PathVariable("id") Integer ownerId) {
+        Optional<List<Property>> propertiesOptional = propertyService.getByOwner(ownerId);
+        return getReturnsToListRecord(propertiesOptional);
+    }
+
+
+
+    private ResponseEntity<List<PropertyListRecord>> getReturnsToListRecord(Optional<List<Property>> propertiesOptional){
+        if (propertiesOptional.isPresent()){
+            List<Property> propertyList = propertiesOptional.get();
+            List<PropertyListRecord> listPropertyRecord = propertyList
+                    .stream()
+                    .map(PropertyListRecord::new)
+                    .toList();
+
+            return new ResponseEntity<>(listPropertyRecord,HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

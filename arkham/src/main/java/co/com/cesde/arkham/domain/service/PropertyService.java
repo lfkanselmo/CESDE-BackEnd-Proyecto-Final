@@ -3,6 +3,8 @@ package co.com.cesde.arkham.domain.service;
 import co.com.cesde.arkham.domain.Property;
 import co.com.cesde.arkham.domain.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +38,8 @@ public class PropertyService {
        return propertyRepository.getByOwner(ownerId);
     }
 
-    public List<Property> getAll() {
-        return propertyRepository.getAll();
+    public Optional<Page<Property>> getAll(Pageable pagination) {
+        return propertyRepository.getAll(pagination);
     }
 
     Optional<List<Property>> getByFree() {

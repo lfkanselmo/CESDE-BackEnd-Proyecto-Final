@@ -1,5 +1,6 @@
 package co.com.cesde.arkham.domain;
 
+import co.com.cesde.arkham.domain.dto.appointment.AppointmentRegisterRecord;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,12 @@ public class Appointment {
     private Property property;
     private User user;
     private Client client;
+
+    public Appointment(AppointmentRegisterRecord appointmentRegisterRecord) {
+        this.userId = appointmentRegisterRecord.userId();
+        this.clientId = appointmentRegisterRecord.clientId();
+        this.startTime = appointmentRegisterRecord.startTime();
+        this.endTime = appointmentRegisterRecord.startTime().plusHours(1);
+        this.appointmentDate = appointmentRegisterRecord.appointmentDate();
+    }
 }
