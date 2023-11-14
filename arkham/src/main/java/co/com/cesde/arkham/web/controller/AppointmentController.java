@@ -31,12 +31,11 @@ public class AppointmentController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @PutMapping("/update")
     public ResponseEntity update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
-        Optional<Appointment> appointmentOptional = appointmentService.getById(appointmentUpdateRecord.clientId());
+        Optional<Appointment> appointmentOptional = appointmentService.getById(appointmentUpdateRecord.appointmentId());
         if (appointmentOptional.isPresent()) {
             Appointment appointment = appointmentOptional.get();
             if (appointmentUpdateRecord.appointmentDate() != null) {

@@ -1,8 +1,10 @@
 package co.com.cesde.arkham.web.controller;
 
 import co.com.cesde.arkham.domain.Owner;
+import co.com.cesde.arkham.domain.dto.client.ClientUpdateRecord;
 import co.com.cesde.arkham.domain.dto.owner.OwnerListRecord;
 import co.com.cesde.arkham.domain.dto.owner.OwnerRegisterRecord;
+import co.com.cesde.arkham.domain.dto.owner.OwnerUpdateRecord;
 import co.com.cesde.arkham.domain.service.OwnerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,25 @@ public class OwnerController {
 
     @PostMapping("/save")
     public ResponseEntity save(@RequestBody @Valid OwnerRegisterRecord ownerRegisterRecord) {
-        if(ownerService.save(new Owner(ownerRegisterRecord)).isPresent()){
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }else{
+        if(ownerService.getById(ownerRegisterRecord.ownerId()).isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            if(ownerService.save(new Owner(ownerRegisterRecord)).isPresent()){
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
 
+    }
+
+    @PutMapping
+    public ResponseEntity update(@RequestBody @Valid OwnerUpdateRecord ownerUpdateRecord){
+        Optional<Owner> ownerOptional = ownerService.getById(ownerUpdateRecord.ownerId());
+        if(ownerOptional.isPresent()){
+            Owner owner = ownerOptional.get();
+            
+        }
     }
 
     @GetMapping

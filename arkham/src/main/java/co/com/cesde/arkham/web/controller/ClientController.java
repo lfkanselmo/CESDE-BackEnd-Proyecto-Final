@@ -25,11 +25,18 @@ public class ClientController {
 
     @PostMapping("/save")
     private ResponseEntity save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord) {
-        if(clientService.save(new Client(clientRegisterRecord)).isPresent()){
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }else {
+
+        if (clientService.getById(clientRegisterRecord.clientId()).isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else{
+            if(clientService.save(new Client(clientRegisterRecord)).isPresent()){
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
+
+
     }
 
     @PutMapping("/update")
