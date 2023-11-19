@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Property {
-    private Integer propertyId;
+    private Long propertyId;
     private Double price;
     private Boolean free;
-    private Integer ownerId;
+    private Long ownerId;
     private String offer;
     private String propertyType;
     private Integer rooms;

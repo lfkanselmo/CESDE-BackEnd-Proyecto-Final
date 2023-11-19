@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClientRepository {
-    Optional<Client> save(Client client);
+    Client save(Client client);
 
-    void delete(Integer clientId);
+    void delete(Long clientId);
 
-    Optional<List<Client>> getByClientFirstName(String clientFirstName);
+    List<Client> getByClientFirstName(String clientFirstName);
 
-    Optional<Client> getByClientId(Integer id);
+    Optional<Client> getByClientId(Long clientId);
 
-    Optional<Page<Client>> getAll(Pageable pagination);
+    Page<Client> getAll(Pageable pagination);
+
+    Boolean existsById(Long clientId);
 }

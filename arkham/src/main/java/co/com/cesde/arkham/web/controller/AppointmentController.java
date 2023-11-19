@@ -13,7 +13,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -25,16 +27,15 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord) {
-        if (appointmentService.save(new Appointment(appointmentRegisterRecord)).isPresent()) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
+                                                      UriComponentsBuilder uriComponentsBuilder) {
+        Appointment saved = appointmentService.save(new Appointment(appointmentRegisterRecord));
+        URI url = uriComponentsBuilder.path("/appointment/{id}").buildAndExpand(saved.getAppointmentId()).toUri();
+        return ResponseEntity.created(url).body(new AppointmentListRecord(saved));
     }
 
     @PutMapping("/update")
-    public ResponseEntity update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
+    public ResponseEntity<AppointmentListRecord> update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
         Optional<Appointment> appointmentOptional = appointmentService.getById(appointmentUpdateRecord.appointmentId());
         if (appointmentOptional.isPresent()) {
             Appointment appointment = appointmentOptional.get();
@@ -47,62 +48,59 @@ public class AppointmentController {
                 appointment.setEndTime(appointmentUpdateRecord.startTime().plusHours(1));
             }
 
-            if (appointmentService.update(appointment).isPresent()) {
-                return new ResponseEntity(HttpStatus.OK);
-            } else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
+            Appointment updated = appointmentService.update(appointment);
+
+            return ResponseEntity.ok(new AppointmentListRecord(updated));
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
-    public ResponseEntity<Page<Appointment>> getAll(@PageableDefault(size = 10) Pageable pagination) {
-        return appointmentService.getAll(pagination)
-                .map(appointments -> new ResponseEntity<>(appointments, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Page<AppointmentListRecord>> getAll(@PageableDefault() Pageable pagination) {
+        Page<Appointment> all = appointmentService.getAll(pagination);
+        Page<AppointmentListRecord> allPage = all.map(AppointmentListRecord::new);
+        return ResponseEntity.ok(allPage);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AppointmentListRecord> getById(@PathVariable("id") Integer id) {
-        return appointmentService.getById(id)
-                .map(appointment -> new ResponseEntity<>(new AppointmentListRecord(appointment), HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<AppointmentListRecord> getById(@PathVariable("id") Long appointmentId) {
+        return appointmentService.getById(appointmentId)
+                .map(appointment -> ResponseEntity.ok(new AppointmentListRecord(appointment)))
+                .orElse(ResponseEntity.noContent().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Integer id) {
+    public ResponseEntity<AppointmentListRecord> delete(@PathVariable("id") Long id) {
         if (appointmentService.delete(id)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().build();
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/date")
     public ResponseEntity<List<AppointmentListRecord>> getByDate(@PathVariable("date") LocalDate date) {
-        Optional<List<Appointment>> appointmentsOptional = appointmentService.getByAppointmentDate(date);
-        return getReturnsToListRecord(appointmentsOptional);
+        List<Appointment> appointments = appointmentService.getByAppointmentDate(date);
+        return getReturnsToListRecord(appointments);
     }
 
     @GetMapping("/property/{id}")
-    public ResponseEntity<List<AppointmentListRecord>> getByProperty(@PathVariable("id") Integer propertyId) {
-        Optional<List<Appointment>> appointmentsOptional = appointmentService.getByPropertyId(propertyId);
-        return getReturnsToListRecord(appointmentsOptional);
+    public ResponseEntity<List<AppointmentListRecord>> getByProperty(@PathVariable("id") Long propertyId) {
+        List<Appointment> appointments = appointmentService.getByPropertyId(propertyId);
+        return getReturnsToListRecord(appointments);
     }
 
 
-    private ResponseEntity<List<AppointmentListRecord>> getReturnsToListRecord(Optional<List<Appointment>> appointmentsOptional) {
-        if (appointmentsOptional.isPresent()) {
-            List<Appointment> appointmentList = appointmentsOptional.get();
-            List<AppointmentListRecord> appointmentRecordList = appointmentList
+    private ResponseEntity<List<AppointmentListRecord>> getReturnsToListRecord(List<Appointment> appointments) {
+        if (!appointments.isEmpty()) {
+            List<AppointmentListRecord> appointmentRecordList = appointments
                     .stream()
                     .map(AppointmentListRecord::new)
                     .toList();
-            return new ResponseEntity<>(appointmentRecordList, HttpStatus.OK);
+            return ResponseEntity.ok(appointmentRecordList);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.noContent().build();
         }
     }
 }

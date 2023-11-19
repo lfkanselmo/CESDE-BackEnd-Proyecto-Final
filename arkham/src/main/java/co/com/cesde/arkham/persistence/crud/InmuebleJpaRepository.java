@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface InmuebleJpaRepository extends JpaRepository<Inmueble,Integer> {
+public interface InmuebleJpaRepository extends JpaRepository<Inmueble,Long> {
 
-    Optional<List<Inmueble>> findByDisponibilidad(Boolean b);
+    List<Inmueble> findByDisponibilidadAndActivoTrue(Boolean b);
 
-    Optional<List<Inmueble>> findByBarrio(String barrio);
+    List<Inmueble> findByBarrioAndActivoTrue(String barrio);
 
-    Optional<Inmueble> getByIdInmueble(Integer propertyId);
+    Optional<Inmueble> getByIdInmuebleAndActivoTrue(Long inmuebleId);
 
-    Optional<List<Inmueble>> getByIdPropietario(Integer ownerId);
+    List<Inmueble> getByIdPropietarioAndActivoTrue(Long propietarioId);
 }

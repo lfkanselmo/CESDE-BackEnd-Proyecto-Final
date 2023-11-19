@@ -15,11 +15,11 @@ public class Inmueble {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_inmueble")
-    private Integer idInmueble;
+    private Long idInmueble;
     private Double precio;
     private Boolean disponibilidad;
     @Column(name = "id_propietario")
-    private Integer idPropietario;
+    private Long idPropietario;
     @Enumerated(EnumType.STRING)
     private Oferta oferta;
     @Enumerated(value = EnumType.STRING)

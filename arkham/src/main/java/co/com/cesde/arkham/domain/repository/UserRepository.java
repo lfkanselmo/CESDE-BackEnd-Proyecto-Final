@@ -1,15 +1,19 @@
 package co.com.cesde.arkham.domain.repository;
 
 import co.com.cesde.arkham.domain.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
 public interface UserRepository {
-    Optional<User> save(User user);
+    User save(User user);
 
-    Optional<User> getByUserId(Integer id);
+    Optional<User> getByUserId(Long userId);
 
-    void delete(Integer userId);
+    void delete(Long userId);
 
-    Optional<User> getByUser(String user);
+    Optional<User> getByUser(String userEmail);
+
+    Boolean existsById(Long userId);
+    UserDetails findByUserEmail(String username);
 }

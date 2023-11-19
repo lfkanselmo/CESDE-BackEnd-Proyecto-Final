@@ -9,7 +9,7 @@ public record PropertyRegisterRecord(
         @NotNull
         Boolean free,
         @NotNull
-        Integer ownerId,
+        Long ownerId,
         @NotBlank
         String offer,
         @NotBlank

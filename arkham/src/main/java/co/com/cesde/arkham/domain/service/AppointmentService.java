@@ -2,6 +2,7 @@ package co.com.cesde.arkham.domain.service;
 
 import co.com.cesde.arkham.domain.Appointment;
 import co.com.cesde.arkham.domain.repository.AppointmentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,34 +18,37 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    public Optional<Appointment> save(Appointment appointment){
+    @Transactional
+    public Appointment save(Appointment appointment){
         return appointmentRepository.save(appointment);
     }
 
-    public Optional<Appointment> getById(Integer id){
-        return appointmentRepository.getByAppointmentId(id);
+    public Optional<Appointment> getById(Long appointmentId){
+        return appointmentRepository.getByAppointmentId(appointmentId);
     }
 
-    public Boolean delete(Integer id){
-        return getById(id).map(appointment -> {
-            appointmentRepository.delete(id);
+    @Transactional
+    public Boolean delete(Long appointmentId){
+        return getById(appointmentId).map(appointment -> {
+            appointmentRepository.delete(appointmentId);
             return true;
         }).orElse(false);
     }
 
-    public Optional<List<Appointment>> getByAppointmentDate(LocalDate date){
+    public List<Appointment> getByAppointmentDate(LocalDate date){
         return appointmentRepository.getByAppointmentDate(date);
     }
 
-    public Optional<List<Appointment>> getByPropertyId(Integer propertyId) {
+    public List<Appointment> getByPropertyId(Long propertyId) {
         return appointmentRepository.getByPropertyId(propertyId);
     }
 
-    public Optional<Page<Appointment>> getAll(Pageable pagination) {
+    public Page<Appointment> getAll(Pageable pagination) {
         return appointmentRepository.getAll(pagination);
     }
 
-    public Optional<Appointment> update(Appointment appointment) {
+    @Transactional
+    public Appointment update(Appointment appointment) {
         return appointmentRepository.save(appointment);
     }
 }

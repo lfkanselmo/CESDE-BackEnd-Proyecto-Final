@@ -24,37 +24,42 @@ public class CitaRepository implements AppointmentRepository {
 
 
     @Override
-    public Optional<Appointment> save(Appointment appointment) {
+    public Appointment save(Appointment appointment) {
         Cita cita = mapper.toCita(appointment);
-        return Optional.of(mapper.toAppointment(citaJpaRepository.save(cita)));
+        return mapper.toAppointment(citaJpaRepository.save(cita));
     }
 
     @Override
-    public Optional<Appointment> getByAppointmentId(Integer appointmentId) {
+    public Optional<Appointment> getByAppointmentId(Long appointmentId) {
         Optional<Cita> cita = citaJpaRepository.findByIdCita(appointmentId);
         return cita.map(citaOpcional -> mapper.toAppointment(citaOpcional));
     }
 
     @Override
-    public void delete(Integer appointmentId) {
+    public void delete(Long appointmentId) {
         citaJpaRepository.deleteById(appointmentId);
     }
 
     @Override
-    public Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate) {
-        Optional<List<Cita>> citasOptional = citaJpaRepository.findByFechaCita(appointmentDate);
-        return citasOptional.map(citas -> mapper.toAppointments(citas));
+    public List<Appointment> getByAppointmentDate(LocalDate appointmentDate) {
+        List<Cita> citas = citaJpaRepository.findByFechaCita(appointmentDate);
+        return mapper.toAppointments(citas);
     }
 
     @Override
-    public Optional<List<Appointment>> getByPropertyId(Integer propertyId) {
-        Optional<List<Cita>> citasOptional = citaJpaRepository.findByIdInmueble(propertyId);
-        return citasOptional.map(citas -> mapper.toCitas(citas));
+    public List<Appointment> getByPropertyId(Long propertyId) {
+        List<Cita> citas = citaJpaRepository.findByIdInmueble(propertyId);
+        return mapper.toAppointments(citas);
     }
 
     @Override
-    public Optional<Page<Appointment>> getAll(Pageable pagination) {
+    public Page<Appointment> getAll(Pageable pagination) {
         Page<Cita> citas = citaJpaRepository.findAll(pagination);
-        return Optional.of(citas.map(cita -> mapper.toAppointment(cita)));
+        return citas.map(cita -> mapper.toAppointment(cita));
+    }
+
+    @Override
+    public Boolean existsById(Long appointmentId) {
+        return citaJpaRepository.existsById(appointmentId);
     }
 }

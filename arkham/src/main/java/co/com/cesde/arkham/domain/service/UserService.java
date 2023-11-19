@@ -2,6 +2,7 @@ package co.com.cesde.arkham.domain.service;
 
 import co.com.cesde.arkham.domain.User;
 import co.com.cesde.arkham.domain.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +13,35 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> save(User user){
+    @Transactional
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-    public Optional<User> getById(Integer id){
-        return userRepository.getByUserId(id);
+    public Optional<User> getById(Long userId){
+        return userRepository.getByUserId(userId);
     }
 
-    public Boolean delete(Integer id){
-        return getById(id).map(user -> {
-            userRepository.delete(id);
-            return true;
-        }).orElse(false);
+    @Transactional
+    public void delete(Long userId){
+        Optional<User> userOptional = userRepository.getByUserId(userId);
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            user.setActive(false);
+            userRepository.save(user);
+        }
     }
 
-    public Optional<User> getByUser(String user){
-        return userRepository.getByUser(user);
+    public Optional<User> getByUser(String userEmail){
+        return userRepository.getByUser(userEmail);
     }
 
+    @Transactional
+    public User update(User user) {
+        return userRepository.save(user);
+    }
+
+    public boolean existsById(Long userId) {
+        return userRepository.existsById(userId);
+    }
 }

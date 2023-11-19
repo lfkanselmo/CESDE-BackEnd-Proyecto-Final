@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface CitaJpaRepository extends JpaRepository<Cita,Integer> {
+public interface CitaJpaRepository extends JpaRepository<Cita,Long> {
 
-    Optional<List<Cita>> findByFechaCita(LocalDate CitaFecha);
+    List<Cita> findByFechaCita(LocalDate CitaFecha);
 
-    Optional<Cita> findByIdCita(Integer appointmentId);
+    Optional<Cita> findByIdCita(Long appointmentId);
 
-    Optional<List<Cita>> findByIdInmueble(Integer propertyId);
+    List<Cita> findByIdInmueble(Long propertyId);
 }

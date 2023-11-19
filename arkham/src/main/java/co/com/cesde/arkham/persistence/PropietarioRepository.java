@@ -20,32 +20,37 @@ public class PropietarioRepository implements OwnerRepository {
     private OwnerMapper mapper;
 
     @Override
-    public Optional<Owner> save(Owner owner) {
+    public Owner save(Owner owner) {
         Propietario propietario = mapper.toPropietario(owner);
-        return Optional.of(mapper.toOwner(propietarioJpaRepository.save(propietario)));
+        return mapper.toOwner(propietarioJpaRepository.save(propietario));
     }
 
     @Override
-    public void delete(Integer ownerId) {
+    public void delete(Long ownerId) {
         propietarioJpaRepository.deleteById(ownerId);
     }
 
     @Override
-    public Optional<Owner> getByOwnerId(Integer id) {
-        Optional<Propietario> propietario = propietarioJpaRepository.findById(id);
+    public Optional<Owner> getByOwnerId(Long ownerId) {
+        Optional<Propietario> propietario = propietarioJpaRepository.findById(ownerId);
         return propietario.map(propietarioOpcional -> mapper.toOwner(propietarioOpcional));
     }
 
     @Override
-    public Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName) {
-        Optional<List<Propietario>> propietariosOptional = propietarioJpaRepository.findByNombrePropietario(ownerFirstName);
-        return propietariosOptional.map(propietarios -> mapper.toOwners(propietarios));
+    public List<Owner> getByOwnerFirstName(String ownerFirstName) {
+        List<Propietario> propietarios = propietarioJpaRepository.findByNombrePropietarioAndActivoTrue(ownerFirstName);
+        return mapper.toOwners(propietarios);
     }
 
     @Override
-    public Optional<Page<Owner>> getAll(Pageable pagination) {
+    public Page<Owner> getAll(Pageable pagination) {
         Page<Propietario> propietarios = propietarioJpaRepository.findAll(pagination);
-        return Optional.of(propietarios
-                .map(propietario -> mapper.toOwner(propietario)));
+        return propietarios
+                .map(propietario -> mapper.toOwner(propietario));
+    }
+
+    @Override
+    public Boolean existsById(Long ownerId){
+        return propietarioJpaRepository.existsById(ownerId);
     }
 }

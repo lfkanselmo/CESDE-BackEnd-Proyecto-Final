@@ -16,7 +16,6 @@ public interface PropertyMapper {
             @Mapping(source = "precio", target = "price"),
             @Mapping(source = "disponibilidad", target = "free"),
             @Mapping(source = "idPropietario", target = "ownerId"),
-            @Mapping(source = "propietario", target = "owner"),
             @Mapping(source = "oferta", target = "offer"),
             @Mapping(source = "tipoInmueble", target = "propertyType"),
             @Mapping(source = "habitaciones", target = "rooms"),
@@ -29,7 +28,8 @@ public interface PropertyMapper {
             @Mapping(source = "direccion", target = "address"),
             @Mapping(source = "barrio", target = "district"),
             @Mapping(source = "ciudad", target = "city"),
-            @Mapping(source = "activo", target = "active")
+            @Mapping(source = "activo", target = "active"),
+            @Mapping(source = "propietario", target = "owner")
     })
     Property toProperty(Inmueble inmueble);
     List<Property> toProperties(List<Inmueble> inmuebles);

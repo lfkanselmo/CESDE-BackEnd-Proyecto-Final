@@ -20,44 +20,49 @@ public class InmuebleRepository implements PropertyRepository {
     private PropertyMapper mapper;
 
     @Override
-    public Optional<Property> save(Property property) {
+    public Property save(Property property) {
         Inmueble inmueble = mapper.toInmueble(property);
-        return Optional.of(mapper.toProperty(inmuebleJpaRepository.save(inmueble)));
+        return mapper.toProperty(inmuebleJpaRepository.save(inmueble));
     }
 
     @Override
-    public void delete(Integer propertyId) {
+    public void delete(Long propertyId) {
         inmuebleJpaRepository.deleteById(propertyId);
     }
 
     @Override
-    public Optional<Property> getByPropertyId(Integer propertyId) {
-        Optional<Inmueble> inmuebleOptional = inmuebleJpaRepository.getByIdInmueble(propertyId);
+    public Optional<Property> getByPropertyId(Long propertyId) {
+        Optional<Inmueble> inmuebleOptional = inmuebleJpaRepository.getByIdInmuebleAndActivoTrue(propertyId);
         return inmuebleOptional.map(inmueble -> mapper.toProperty(inmueble));
     }
 
     @Override
-    public Optional<List<Property>> getByDistrict(String district) {
-        Optional<List<Inmueble>> inmueblesOptional = inmuebleJpaRepository.findByBarrio(district);
-        return inmueblesOptional.map(inmuebles -> mapper.toProperties(inmuebles));
+    public List<Property> getByDistrict(String district) {
+        List<Inmueble> inmuebles = inmuebleJpaRepository.findByBarrioAndActivoTrue(district);
+        return mapper.toProperties(inmuebles);
     }
 
     @Override
-    public Optional<List<Property>> getByOwner(Integer ownerId) {
-        Optional<List<Inmueble>> inmueblesOptional = inmuebleJpaRepository.getByIdPropietario(ownerId);
-        return inmueblesOptional.map(inmuebles -> mapper.toProperties(inmuebles));
+    public List<Property> getByOwner(Long ownerId) {
+        List<Inmueble> inmuebles = inmuebleJpaRepository.getByIdPropietarioAndActivoTrue(ownerId);
+        return mapper.toProperties(inmuebles);
     }
 
 
     @Override
-    public Optional<Page<Property>> getAll(Pageable pagination) {
+    public Page<Property> getAll(Pageable pagination) {
         Page<Inmueble> inmuebles = inmuebleJpaRepository.findAll(pagination);
-        return Optional.of(inmuebles.map(inmueble -> mapper.toProperty(inmueble)));
+        return inmuebles.map(inmueble -> mapper.toProperty(inmueble));
     }
 
     @Override
-    public Optional<List<Property>> getByFree() {
-        Optional<List<Inmueble>> inmueblesOptional = inmuebleJpaRepository.findByDisponibilidad(true);
-        return inmueblesOptional.map(inmuebles -> mapper.toProperties(inmuebles));
+    public List<Property> getByFree() {
+        List<Inmueble> inmuebles = inmuebleJpaRepository.findByDisponibilidadAndActivoTrue(true);
+        return mapper.toProperties(inmuebles);
+    }
+
+    @Override
+    public Boolean existsById(Long ownerId) {
+        return inmuebleJpaRepository.existsById(ownerId);
     }
 }

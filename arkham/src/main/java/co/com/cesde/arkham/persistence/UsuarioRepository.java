@@ -6,6 +6,7 @@ import co.com.cesde.arkham.persistence.crud.UsuarioJpaRepository;
 import co.com.cesde.arkham.persistence.entity.Usuario;
 import co.com.cesde.arkham.persistence.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -17,25 +18,36 @@ public class UsuarioRepository implements UserRepository {
     private UserMapper mapper;
 
     @Override
-    public Optional<User> save(User user) {
+    public User save(User user) {
         Usuario usuario = mapper.toUsuario(user);
-        return Optional.of(mapper.toUser(usuarioJpaRepository.save(usuario)));
+        return mapper.toUser(usuarioJpaRepository.save(usuario));
     }
 
     @Override
-    public Optional<User> getByUserId(Integer id) {
-        Optional<Usuario> usuarioOptional = usuarioJpaRepository.getByIdUsuario(id);
+    public Optional<User> getByUserId(Long userId) {
+        Optional<Usuario> usuarioOptional = usuarioJpaRepository.getByIdUsuarioAndActivoTrue(userId);
         return usuarioOptional.map(usuario -> mapper.toUser(usuario));
     }
 
     @Override
-    public void delete(Integer userId) {
+    public void delete(Long userId) {
         usuarioJpaRepository.deleteById(userId);
     }
 
     @Override
     public Optional<User> getByUser(String userEmail) {
-        Optional<Usuario> usuario = usuarioJpaRepository.findByUsuario(userEmail);
+        Optional<Usuario> usuario = usuarioJpaRepository.findByUsuarioAndActivoTrue(userEmail);
         return usuario.map(usuarioOpcional -> mapper.toUser(usuarioOpcional));
     }
+
+    @Override
+    public Boolean existsById(Long userId) {
+        return usuarioJpaRepository.existsById(userId);
+    }
+
+    @Override
+    public UserDetails findByUserEmail(String username) {
+        return null;
+    }
+
 }

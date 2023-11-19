@@ -11,15 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepository {
-    Optional<Appointment> save(Appointment appointment);
+    Appointment save(Appointment appointment);
 
-    Optional<Appointment> getByAppointmentId(Integer appointmentId);
+    Optional<Appointment> getByAppointmentId(Long appointmentId);
 
-    void delete(Integer appointmentId);
+    void delete(Long appointmentId);
 
-    Optional<List<Appointment>> getByAppointmentDate(LocalDate appointmentDate);
+    List<Appointment> getByAppointmentDate(LocalDate appointmentDate);
 
-    Optional<List<Appointment>> getByPropertyId(Integer propertyId);
+    List<Appointment> getByPropertyId(Long propertyId);
 
-    Optional<Page<Appointment>> getAll(Pageable pagination);
+    Page<Appointment> getAll(Pageable pagination);
+
+    Boolean existsById(Long appointmentId);
 }

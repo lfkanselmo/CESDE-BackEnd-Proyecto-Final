@@ -2,6 +2,7 @@ package co.com.cesde.arkham.domain.service;
 
 import co.com.cesde.arkham.domain.Property;
 import co.com.cesde.arkham.domain.repository.PropertyRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,34 +16,47 @@ public class PropertyService {
     @Autowired
     private PropertyRepository propertyRepository;
 
-    public Optional<Property> save(Property property) {
+    @Transactional
+    public Property save(Property property) {
         return propertyRepository.save(property);
     }
 
-    public Optional<Property> getById(Integer id) {
-        return propertyRepository.getByPropertyId(id);
+    public Optional<Property> getById(Long propertyId) {
+        return propertyRepository.getByPropertyId(propertyId);
     }
 
-    public Boolean delete(Integer id) {
-        return getById(id).map(property -> {
-            propertyRepository.delete(id);
-            return true;
-        }).orElse(false);
+    @Transactional
+    public void delete(Long propertyId) {
+        Optional<Property> propertyOptional = propertyRepository.getByPropertyId(propertyId);
+        if(propertyOptional.isPresent()){
+            Property property = propertyOptional.get();
+            property.setActive(false);
+            propertyRepository.save(property);
+        }
     }
 
-    public Optional<List<Property>> getByDistrict(String districtName) {
+    public List<Property> getByDistrict(String districtName) {
         return propertyRepository.getByDistrict(districtName);
     }
 
-    public Optional<List<Property>> getByOwner(Integer ownerId) {
+    public List<Property> getByOwner(Long ownerId) {
        return propertyRepository.getByOwner(ownerId);
     }
 
-    public Optional<Page<Property>> getAll(Pageable pagination) {
+    public Page<Property> getAll(Pageable pagination) {
         return propertyRepository.getAll(pagination);
     }
 
-    Optional<List<Property>> getByFree() {
+    List<Property> getByFree() {
         return propertyRepository.getByFree();
+    }
+
+    @Transactional
+    public Property update(Property property) {
+        return propertyRepository.save(property);
+    }
+
+    public boolean existsById(Long propertyId) {
+        return propertyRepository.existsById(propertyId);
     }
 }

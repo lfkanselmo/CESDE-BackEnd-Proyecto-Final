@@ -10,14 +10,15 @@ import java.time.LocalTime;
 
 public record AppointmentRegisterRecord(
         @NotNull
-        @Email
-        Integer userId,
+        Long userId,
         @NotNull
-        Integer clientId,
-        @NotBlank
-        @DateTimeFormat(pattern = "hh:mm:ss")
+        Long clientId,
+        @NotNull
+        Long propertyId,
+        @NotNull
+        @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
         LocalTime startTime,
-        @NotBlank
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        @NotNull
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         LocalDate appointmentDate) {
 }

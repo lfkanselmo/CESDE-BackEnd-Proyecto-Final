@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 
 public record OwnerRegisterRecord(
         @NotNull
-        Integer ownerId,
+        Long ownerId,
         @NotBlank
         String ownerFirstName,
         @NotBlank

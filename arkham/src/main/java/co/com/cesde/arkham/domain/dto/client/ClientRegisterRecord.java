@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 
 public record ClientRegisterRecord(
         @NotNull
-        Integer clientId,
+        Long clientId,
         @NotBlank
         String clientFirstName,
         @NotBlank

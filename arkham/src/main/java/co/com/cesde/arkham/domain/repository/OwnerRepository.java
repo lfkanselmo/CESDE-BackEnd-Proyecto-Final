@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OwnerRepository {
-    Optional<Owner> save(Owner owner);
+    Owner save(Owner owner);
 
-    void delete(Integer ownerId);
+    void delete(Long ownerId);
 
-    Optional<Owner> getByOwnerId(Integer id);
+    Optional<Owner> getByOwnerId(Long ownerId);
 
-    Optional<List<Owner>> getByOwnerFirstName(String ownerFirstName);
+    List<Owner> getByOwnerFirstName(String ownerFirstName);
 
-    Optional<Page<Owner>> getAll(Pageable pagination);
+    Page<Owner> getAll(Pageable pagination);
+
+    Boolean existsById(Long ownerId);
 }

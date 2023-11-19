@@ -20,34 +20,38 @@ public class ClienteRepository implements ClientRepository {
     private ClientMapper mapper;
 
     @Override
-    public Optional<Client> save(Client client) {
+    public Client save(Client client) {
         Cliente cliente = mapper.toCliente(client);
-        return Optional.of(mapper.toclient(clienteJpaRepository.save(cliente)));
+        return mapper.toclient(clienteJpaRepository.save(cliente));
     }
 
     @Override
-    public void delete(Integer clientId) {
+    public void delete(Long clientId) {
         clienteJpaRepository.deleteById(clientId);
     }
 
     @Override
-    public Optional<List<Client>> getByClientFirstName(String clientFirstName) {
-        Optional<List<Cliente>> clientesOptional = clienteJpaRepository.findByNombreCliente(clientFirstName);
-        return clientesOptional
-                .map(clientes -> mapper.toclients(clientes));
+    public List<Client> getByClientFirstName(String clientFirstName) {
+        List<Cliente> clientes = clienteJpaRepository.findByNombreClienteAndActivoTrue(clientFirstName);
+        return mapper.toclients(clientes);
     }
 
     @Override
-    public Optional<Client> getByClientId(Integer id) {
-        Optional<Cliente> clienteOptional = clienteJpaRepository.getByIdCliente(id);
+    public Optional<Client> getByClientId(Long id) {
+        Optional<Cliente> clienteOptional = clienteJpaRepository.getByIdClienteAndActivoTrue(id);
         return clienteOptional
                 .map(cliente -> mapper.toclient(cliente));
     }
 
     @Override
-    public Optional<Page<Client>> getAll(Pageable pagination) {
-        Page<Cliente> clientes = clienteJpaRepository.findAll(pagination);
-        return Optional.of(clientes
-                .map(cliente -> mapper.toclient(cliente)));
+    public Page<Client> getAll(Pageable pagination) {
+        Page<Cliente> clientes = clienteJpaRepository.findByActivoTrue(pagination);
+        return clientes
+                .map(cliente -> mapper.toclient(cliente));
+    }
+
+    @Override
+    public Boolean existsById(Long clientId) {
+        return clienteJpaRepository.existsById(clientId);
     }
 }

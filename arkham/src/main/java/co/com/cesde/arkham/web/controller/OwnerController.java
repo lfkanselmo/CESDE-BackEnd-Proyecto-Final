@@ -14,7 +14,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,63 +27,78 @@ public class OwnerController {
     private OwnerService ownerService;
 
     @PostMapping("/save")
-    public ResponseEntity save(@RequestBody @Valid OwnerRegisterRecord ownerRegisterRecord) {
-        if(ownerService.getById(ownerRegisterRecord.ownerId()).isPresent()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else{
-            if(ownerService.save(new Owner(ownerRegisterRecord)).isPresent()){
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-
+    public ResponseEntity<OwnerListRecord> save(@RequestBody @Valid OwnerRegisterRecord ownerRegisterRecord,
+                                                UriComponentsBuilder uriComponentsBuilder) {
+        Owner saved = ownerService.save(new Owner(ownerRegisterRecord));
+        URI url = uriComponentsBuilder.path("/owner/{id}").buildAndExpand(saved.getOwnerId()).toUri();
+        return ResponseEntity.created(url).body(new OwnerListRecord(saved));
     }
 
+
     @PutMapping
-    public ResponseEntity update(@RequestBody @Valid OwnerUpdateRecord ownerUpdateRecord){
+    public ResponseEntity<OwnerListRecord> update(@RequestBody @Valid OwnerUpdateRecord ownerUpdateRecord) {
         Optional<Owner> ownerOptional = ownerService.getById(ownerUpdateRecord.ownerId());
-        if(ownerOptional.isPresent()){
+        if (ownerOptional.isPresent()) {
             Owner owner = ownerOptional.get();
-            
+            if (ownerUpdateRecord.ownerFirstName() != null && !ownerUpdateRecord.ownerFirstName().isBlank()) {
+                owner.setOwnerFirstName(ownerUpdateRecord.ownerFirstName());
+            }
+
+            if (ownerUpdateRecord.ownerLastName() != null && !ownerUpdateRecord.ownerLastName().isBlank()) {
+                owner.setOwnerLastName(ownerUpdateRecord.ownerLastName());
+            }
+
+            if (ownerUpdateRecord.ownerPhone() != null && !ownerUpdateRecord.ownerPhone().isBlank()) {
+                owner.setOwnerPhone(ownerUpdateRecord.ownerPhone());
+            }
+
+            if (ownerUpdateRecord.ownerEmail() != null && !ownerUpdateRecord.ownerEmail().isBlank()) {
+                owner.setOwnerEmail(ownerUpdateRecord.ownerEmail());
+            }
+
+            Owner updated = ownerService.update(owner);
+
+            return ResponseEntity.ok(new OwnerListRecord(updated));
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping
-    public ResponseEntity<Page<Owner>> getAll(@PageableDefault(size = 10) Pageable pagination){
-        return ownerService.getAll(pagination)
-                .map(owners -> new ResponseEntity<>(owners,HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Page<OwnerListRecord>> getAll(@PageableDefault() Pageable pagination) {
+        Page<Owner> all = ownerService.getAll(pagination);
+        Page<OwnerListRecord> allPage = all.map(OwnerListRecord::new);
+        return ResponseEntity.ok(allPage);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OwnerListRecord> getById(@PathVariable("id") Integer id) {
-        return ownerService.getById(id)
-                .map(owner -> new ResponseEntity<>(new OwnerListRecord(owner), HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<OwnerListRecord> getById(@PathVariable("id") Long ownerId) {
+        return ownerService.getById(ownerId)
+                .map(owner -> ResponseEntity.ok(new OwnerListRecord(owner)))
+                .orElse(ResponseEntity.noContent().build());
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") Integer id) {
-        if (ownerService.delete(id)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<OwnerListRecord> delete(@PathVariable("id") Long ownerId) {
+        if (ownerService.existsById(ownerId)) {
+            ownerService.delete(ownerId);
+            return ResponseEntity.ok().build();
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/clientFirstName/{name}")
-    public ResponseEntity<List<OwnerListRecord>> getByFirstName(@PathVariable("name") String name) {
-        Optional<List<Owner>> ownersOptional = ownerService.getByFirstName(name);
-        if (ownersOptional.isPresent()) {
-            List<Owner> ownerList = ownersOptional.get();
-            List<OwnerListRecord> ownerRecordList = ownerList
+    public ResponseEntity<List<OwnerListRecord>> getByFirstName(@PathVariable("name") String ownerName) {
+        List<Owner> owners = ownerService.getByFirstName(ownerName);
+        if (!owners.isEmpty()) {
+            List<OwnerListRecord> ownerRecordList = owners
                     .stream()
                     .map(OwnerListRecord::new)
                     .toList();
-            return new ResponseEntity<>(ownerRecordList, HttpStatus.OK);
+            return ResponseEntity.ok(ownerRecordList);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.noContent().build();
         }
     }
 }

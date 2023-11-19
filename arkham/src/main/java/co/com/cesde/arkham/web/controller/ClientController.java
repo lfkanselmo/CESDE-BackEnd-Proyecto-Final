@@ -13,7 +13,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -24,75 +26,67 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping("/save")
-    private ResponseEntity save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord) {
+    private ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
+                                                  UriComponentsBuilder uriComponentsBuilder) {
 
-        if (clientService.getById(clientRegisterRecord.clientId()).isPresent()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else{
-            if(clientService.save(new Client(clientRegisterRecord)).isPresent()){
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-
-
+        Client saved = clientService.save(new Client(clientRegisterRecord));
+        URI url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
+        return ResponseEntity.created(url).body(new ClientListRecord(saved));
     }
 
+
     @PutMapping("/update")
-    public ResponseEntity update(@RequestBody @Valid ClientUpdateRecord clientUpdateRecord){
+    public ResponseEntity<ClientListRecord> update(@RequestBody @Valid ClientUpdateRecord clientUpdateRecord) {
         Optional<Client> clientOptional = clientService.getById(clientUpdateRecord.clientId());
 
-        if(clientOptional.isPresent()){
-           Client client = clientOptional.get();
-           if(clientUpdateRecord.clientFirstName() != null){
+        if (clientOptional.isPresent()) {
+            Client client = clientOptional.get();
+            if (clientUpdateRecord.clientFirstName() != null && !clientUpdateRecord.clientFirstName().isBlank()) {
                 client.setClientFirstName(clientUpdateRecord.clientFirstName());
-           }
+            }
 
-            if(clientUpdateRecord.clientLastName() != null){
+            if (clientUpdateRecord.clientLastName() != null && !clientUpdateRecord.clientLastName().isBlank()) {
                 client.setClientLastName(clientUpdateRecord.clientLastName());
             }
 
-            if(clientUpdateRecord.clientPhone() != null){
+            if (clientUpdateRecord.clientPhone() != null && !clientUpdateRecord.clientPhone().isBlank()) {
                 client.setClientPhone(clientUpdateRecord.clientPhone());
             }
 
-            if(clientUpdateRecord.clientEmail() != null){
+            if (clientUpdateRecord.clientEmail() != null && !clientUpdateRecord.clientEmail().isBlank()) {
                 client.setClientEmail(clientUpdateRecord.clientEmail());
             }
 
-            if(clientService.update(client).isPresent()){
-                return new ResponseEntity(HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            Client updated = clientService.update(client);
+            return ResponseEntity.ok(new ClientListRecord(updated));
 
-        }else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.notFound().build();
         }
 
     }
 
     @GetMapping
-    public ResponseEntity<Page<Client>> getAll(@PageableDefault(size = 10) Pageable pagination){
-        return clientService.getAll(pagination)
-                .map(clients -> new ResponseEntity<>(clients, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Page<ClientListRecord>> getAll(@PageableDefault() Pageable pagination) {
+        Page<Client> all = clientService.getAll(pagination);
+        Page<ClientListRecord> allPage = all.map(ClientListRecord::new);
+        return ResponseEntity.ok(allPage);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientListRecord> getById(@PathVariable("id") Integer id){
-        return clientService.getById(id)
-                .map(client -> new ResponseEntity<>(new ClientListRecord(client),HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<ClientListRecord> getById(@PathVariable("id") Long userId) {
+        return clientService.getById(userId)
+                .map(client -> new ResponseEntity<>(new ClientListRecord(client), HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") Integer id){
-        if(clientService.delete(id)){
-            return new ResponseEntity(HttpStatus.OK);
-        }else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public ResponseEntity<ClientListRecord> delete(@PathVariable("id") Long clientId) {
+        if (clientService.existsById(clientId)) {
+            clientService.delete(clientId);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

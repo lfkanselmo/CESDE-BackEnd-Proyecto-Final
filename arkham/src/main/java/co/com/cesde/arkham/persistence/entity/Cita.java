@@ -16,13 +16,13 @@ public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cita")
-    private Integer idCita;
+    private Long idCita;
     @Column(name = "id_inmueble")
-    private Integer idInmueble;
+    private Long idInmueble;
     @Column(name = "id_usuario")
-    private Integer idUsuario;
+    private Long idUsuario;
     @Column(name = "id_cliente")
-    private Integer idCliente;
+    private Long idCliente;
     @Temporal(TemporalType.TIME)
     @Column(name = "hora_inicio")
     private LocalTime horaInicio;

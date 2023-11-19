@@ -9,17 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PropertyRepository {
-    Optional<Property> save(Property property);
+    Property save(Property property);
 
-    void delete(Integer propertyId);
+    void delete(Long propertyId);
 
-    Optional<Property> getByPropertyId(Integer propertyId);
+    Optional<Property> getByPropertyId(Long propertyId);
 
-    Optional<List<Property>> getByDistrict(String propertyDistrict);
+    List<Property> getByDistrict(String propertyDistrict);
 
-    Optional<List<Property>> getByOwner(Integer ownerId);
+    List<Property> getByOwner(Long ownerId);
 
-    Optional<Page<Property>> getAll(Pageable pagination);
+    Page<Property> getAll(Pageable pagination);
 
-    Optional<List<Property>> getByFree();
+    List<Property> getByFree();
+
+    Boolean existsById(Long ownerId);
 }

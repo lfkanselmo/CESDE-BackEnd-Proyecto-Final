@@ -12,10 +12,10 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class Appointment {
-    private Integer appointmentId;
-    private Integer propertyId;
-    private Integer userId;
-    private Integer clientId;
+    private Long appointmentId;
+    private Long propertyId;
+    private Long userId;
+    private Long clientId;
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate appointmentDate;
@@ -26,6 +26,7 @@ public class Appointment {
     public Appointment(AppointmentRegisterRecord appointmentRegisterRecord) {
         this.userId = appointmentRegisterRecord.userId();
         this.clientId = appointmentRegisterRecord.clientId();
+        this.propertyId = appointmentRegisterRecord.propertyId();
         this.startTime = appointmentRegisterRecord.startTime();
         this.endTime = appointmentRegisterRecord.startTime().plusHours(1);
         this.appointmentDate = appointmentRegisterRecord.appointmentDate();

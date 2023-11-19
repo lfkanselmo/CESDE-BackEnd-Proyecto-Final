@@ -14,7 +14,7 @@ import java.util.List;
 public class Propietario {
     @Id
     @Column(name = "id_propietario")
-    private Integer idPropietario;
+    private Long idPropietario;
     @Column(name = "nombre")
     private String nombrePropietario;
     @Column(name = "apellido")
