@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.web.controller;
+package co.com.cesde.arkham.domain.controller;
 
 import co.com.cesde.arkham.domain.User;
 import co.com.cesde.arkham.domain.dto.user.UserListRecord;

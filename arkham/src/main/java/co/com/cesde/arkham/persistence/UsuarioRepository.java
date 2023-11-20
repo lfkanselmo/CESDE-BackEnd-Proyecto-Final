@@ -35,8 +35,8 @@ public class UsuarioRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> getByUser(String userEmail) {
-        Optional<Usuario> usuario = usuarioJpaRepository.findByUsuarioAndActivoTrue(userEmail);
+    public Optional<User> getByUsername(String userEmail) {
+        Optional<Usuario> usuario = usuarioJpaRepository.findByUsuario(userEmail);
         return usuario.map(usuarioOpcional -> mapper.toUser(usuarioOpcional));
     }
 
@@ -45,9 +45,5 @@ public class UsuarioRepository implements UserRepository {
         return usuarioJpaRepository.existsById(userId);
     }
 
-    @Override
-    public UserDetails findByUserEmail(String username) {
-        return null;
-    }
 
 }

@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public Optional<User> getByUser(String userEmail){
-        return userRepository.getByUser(userEmail);
+        return userRepository.getByUsername(userEmail);
     }
 
     @Transactional

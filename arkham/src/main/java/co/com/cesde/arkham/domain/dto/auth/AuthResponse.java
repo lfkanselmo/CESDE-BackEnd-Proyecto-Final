@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.infra.security.auth;
+package co.com.cesde.arkham.domain.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class LoginRequest {
-    String username;
-    String password;
+public class AuthResponse {
+    private String token;
 }

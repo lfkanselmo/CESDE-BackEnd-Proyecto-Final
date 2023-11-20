@@ -6,11 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UsuarioJpaRepository extends JpaRepository<Usuario,Long> {
-    Optional<Usuario> findByUsuarioAndActivoTrue(String usuario);
-
-    Optional<Usuario> getByIdUsuarioAndActivoTrue(Long id);
-
-    Boolean existsByUsuario(String usuario);
+    Optional<Usuario> findByUsuario(String usuario);
 
 
+    Optional<Usuario> getByIdUsuarioAndActivoTrue(Long userId);
 }
