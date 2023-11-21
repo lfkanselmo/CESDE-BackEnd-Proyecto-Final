@@ -40,20 +40,20 @@ public class OwnerController {
         Optional<Owner> ownerOptional = ownerService.getById(ownerUpdateRecord.ownerId());
         if (ownerOptional.isPresent()) {
             Owner owner = ownerOptional.get();
-            if (ownerUpdateRecord.ownerFirstName() != null && !ownerUpdateRecord.ownerFirstName().isBlank()) {
-                owner.setOwnerFirstName(ownerUpdateRecord.ownerFirstName());
+            if (ownerUpdateRecord.firstName() != null && !ownerUpdateRecord.firstName().isBlank()) {
+                owner.setOwnerFirstName(ownerUpdateRecord.firstName());
             }
 
-            if (ownerUpdateRecord.ownerLastName() != null && !ownerUpdateRecord.ownerLastName().isBlank()) {
-                owner.setOwnerLastName(ownerUpdateRecord.ownerLastName());
+            if (ownerUpdateRecord.lastName() != null && !ownerUpdateRecord.lastName().isBlank()) {
+                owner.setOwnerLastName(ownerUpdateRecord.lastName());
             }
 
-            if (ownerUpdateRecord.ownerPhone() != null && !ownerUpdateRecord.ownerPhone().isBlank()) {
-                owner.setOwnerPhone(ownerUpdateRecord.ownerPhone());
+            if (ownerUpdateRecord.phone() != null && !ownerUpdateRecord.phone().isBlank()) {
+                owner.setOwnerPhone(ownerUpdateRecord.phone());
             }
 
-            if (ownerUpdateRecord.ownerEmail() != null && !ownerUpdateRecord.ownerEmail().isBlank()) {
-                owner.setOwnerEmail(ownerUpdateRecord.ownerEmail());
+            if (ownerUpdateRecord.email() != null && !ownerUpdateRecord.email().isBlank()) {
+                owner.setOwnerEmail(ownerUpdateRecord.email());
             }
 
             Owner updated = ownerService.update(owner);

@@ -6,7 +6,7 @@ import co.com.cesde.arkham.domain.dto.auth.LoginRequest;
 import co.com.cesde.arkham.domain.dto.auth.RegisterRequest;
 import co.com.cesde.arkham.domain.repository.UserRepository;
 import co.com.cesde.arkham.infra.security.config.JwtService;
-import co.com.cesde.arkham.persistence.entity.Rol;
+import co.com.cesde.arkham.persistence.entity.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +29,7 @@ public class AuthServiceImpl implements AuthService{
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .phone(request.getPhone())
-                .rol(Rol.USUARIO.name())
+                .role(request.getRole())
                 .active(true)
                 .build();
 

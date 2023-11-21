@@ -4,11 +4,6 @@ use Arkham_Properties;
 
 /*
 PROPIETARIO
-id_propietario
-nombre_propietario
-apellido_propietario
-telefono_propietario
-email_propietario
 */
 CREATE TABLE PROPIETARIO(
 ID_PROPIETARIO BIGINT PRIMARY KEY NOT NULL,
@@ -20,21 +15,7 @@ ACTIVO BIT DEFAULT 1 NOT NULL
 );
 
 /*
-ADMINISTRADOR
-id_administrador
-nombre_administrador
-apellido_administrador
-telefono_administrador
-email_administrador
-*/
-
-/*
 CLIENTE
-id_cliente
-nombre_cliente
-apellido_cliente
-telefono_cliente
-email_cliente
 */
 CREATE TABLE CLIENTE(
 ID_CLIENTE BIGINT PRIMARY KEY NOT NULL,
@@ -47,16 +28,6 @@ ACTIVO BIT DEFAULT 1 NOT NULL
 
 /*
 INMUEBLE
-id_inmueble
-ubicacion
-direccion
-precio
-disponibilidad
-
-id_propietario
-id_oferta
-id_tipo_inmueble
-id_caracteristicas
 */
 CREATE TABLE INMUEBLE(
 ID_INMUEBLE BIGINT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
@@ -86,10 +57,6 @@ ON UPDATE CASCADE
 
 /*
 USUARIO
-id_usuario
-login
-contraseña
-rol
 */
 CREATE TABLE USUARIO(
 ID_USUARIO BIGINT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
@@ -105,12 +72,6 @@ ACTIVO BIT DEFAULT 1 NOT NULL
 
 /*
 CITA
-id_cita
-hora_inicio
-hora_final
-fecha_cita
-id_inmueble
-id_usuario
 */
 CREATE TABLE CITA(
 ID_CITA BIGINT PRIMARY KEY  AUTO_INCREMENT NOT NULL,
@@ -132,3 +93,20 @@ FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE(ID_CLIENTE)
 ON DELETE CASCADE
 ON UPDATE CASCADE
 );
+
+/*
+TOKEN
+*/
+
+CREATE TABLE TOKEN(
+ID_TOKEN BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+TOKEN NVARCHAR(300) NOT NULL,
+TIPO_TOKEN VARCHAR(50) NOT NULL,
+EXPIRADO BIT DEFAULT 1 NOT NULL,
+REVOCADO BIT DEFAULT 1 NOT NULL,
+ID_USUARIO BIGINT NOT NULL,
+FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+);
+

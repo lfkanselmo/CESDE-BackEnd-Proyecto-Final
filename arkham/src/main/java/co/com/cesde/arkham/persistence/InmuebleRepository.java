@@ -56,7 +56,7 @@ public class InmuebleRepository implements PropertyRepository {
     }
 
     @Override
-    public List<Property> getByFree() {
+    public List<Property> getByavailability() {
         List<Inmueble> inmuebles = inmuebleJpaRepository.findByDisponibilidadAndActivoTrue(true);
         return mapper.toProperties(inmuebles);
     }

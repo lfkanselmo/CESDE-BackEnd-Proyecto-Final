@@ -39,8 +39,8 @@ public class AppointmentController {
         Optional<Appointment> appointmentOptional = appointmentService.getById(appointmentUpdateRecord.appointmentId());
         if (appointmentOptional.isPresent()) {
             Appointment appointment = appointmentOptional.get();
-            if (appointmentUpdateRecord.appointmentDate() != null) {
-                appointment.setAppointmentDate(appointmentUpdateRecord.appointmentDate());
+            if (appointmentUpdateRecord.date() != null) {
+                appointment.setAppointmentDate(appointmentUpdateRecord.date());
             }
 
             if (appointmentUpdateRecord.startTime() != null) {

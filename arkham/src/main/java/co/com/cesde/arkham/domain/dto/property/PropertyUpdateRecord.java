@@ -7,7 +7,7 @@ public record PropertyUpdateRecord(
         @NotNull
         Long propertyId,
         Double price,
-        Boolean free,
+        Boolean availability,
         Long ownerId,
         String offer,
         String propertyType,
@@ -26,7 +26,7 @@ public record PropertyUpdateRecord(
         this(
                 property.getPropertyId(),
                 property.getPrice(),
-                property.getFree(),
+                property.getAvailability(),
                 property.getOwnerId(),
                 property.getOffer(),
                 property.getPropertyType(),

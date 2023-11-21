@@ -18,10 +18,10 @@ public class Client {
 
     public Client(ClientRegisterRecord clientRegisterRecord) {
         this.clientId = clientRegisterRecord.clientId();
-        this.clientFirstName = clientRegisterRecord.clientFirstName();
-        this.clientLastName = clientRegisterRecord.clientLastName();
-        this.clientPhone = clientRegisterRecord.clientPhone();
-        this.clientEmail = clientRegisterRecord.clientEmail();
+        this.clientFirstName = clientRegisterRecord.firstName();
+        this.clientLastName = clientRegisterRecord.lastName();
+        this.clientPhone = clientRegisterRecord.phone();
+        this.clientEmail = clientRegisterRecord.email();
         this.active = true;
     }
 }

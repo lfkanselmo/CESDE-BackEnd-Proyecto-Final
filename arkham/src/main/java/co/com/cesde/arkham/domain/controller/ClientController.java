@@ -41,20 +41,20 @@ public class ClientController {
 
         if (clientOptional.isPresent()) {
             Client client = clientOptional.get();
-            if (clientUpdateRecord.clientFirstName() != null && !clientUpdateRecord.clientFirstName().isBlank()) {
-                client.setClientFirstName(clientUpdateRecord.clientFirstName());
+            if (clientUpdateRecord.firstName() != null && !clientUpdateRecord.firstName().isBlank()) {
+                client.setClientFirstName(clientUpdateRecord.firstName());
             }
 
-            if (clientUpdateRecord.clientLastName() != null && !clientUpdateRecord.clientLastName().isBlank()) {
-                client.setClientLastName(clientUpdateRecord.clientLastName());
+            if (clientUpdateRecord.lastName() != null && !clientUpdateRecord.lastName().isBlank()) {
+                client.setClientLastName(clientUpdateRecord.lastName());
             }
 
-            if (clientUpdateRecord.clientPhone() != null && !clientUpdateRecord.clientPhone().isBlank()) {
-                client.setClientPhone(clientUpdateRecord.clientPhone());
+            if (clientUpdateRecord.phone() != null && !clientUpdateRecord.phone().isBlank()) {
+                client.setClientPhone(clientUpdateRecord.phone());
             }
 
-            if (clientUpdateRecord.clientEmail() != null && !clientUpdateRecord.clientEmail().isBlank()) {
-                client.setClientEmail(clientUpdateRecord.clientEmail());
+            if (clientUpdateRecord.email() != null && !clientUpdateRecord.email().isBlank()) {
+                client.setClientEmail(clientUpdateRecord.email());
             }
 
             Client updated = clientService.update(client);

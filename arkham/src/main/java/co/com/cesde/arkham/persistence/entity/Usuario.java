@@ -26,7 +26,8 @@ public class Usuario implements UserDetails{
     private String usuario;
     private String contrasenha;
     @Enumerated(value = EnumType.STRING)
-    private Rol rol;
+    @Column(name = "rol")
+    private Role role;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -34,7 +35,7 @@ public class Usuario implements UserDetails{
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

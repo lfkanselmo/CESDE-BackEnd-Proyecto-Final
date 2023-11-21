@@ -18,10 +18,10 @@ public class Owner {
 
     public Owner(OwnerRegisterRecord ownerRegisterRecord) {
         this.ownerId = ownerRegisterRecord.ownerId();
-        this.ownerFirstName = ownerRegisterRecord.ownerFirstName();
-        this.ownerLastName = ownerRegisterRecord.ownerLastName();
-        this.ownerPhone = ownerRegisterRecord.ownerPhone();
-        this.ownerEmail = ownerRegisterRecord.ownerEmail();
+        this.ownerFirstName = ownerRegisterRecord.firstName();
+        this.ownerLastName = ownerRegisterRecord.lastName();
+        this.ownerPhone = ownerRegisterRecord.phone();
+        this.ownerEmail = ownerRegisterRecord.email();
         this.active = true;
     }
 }

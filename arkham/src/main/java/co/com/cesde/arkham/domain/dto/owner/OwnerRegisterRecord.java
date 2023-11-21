@@ -9,13 +9,13 @@ public record OwnerRegisterRecord(
         @NotNull
         Long ownerId,
         @NotBlank
-        String ownerFirstName,
+        String firstName,
         @NotBlank
-        String ownerLastName,
+        String lastName,
         @NotBlank
         @Pattern(regexp = "\\d{7,11}")
-        String ownerPhone,
+        String phone,
         @NotBlank
         @Email
-        String ownerEmail) {
+        String email) {
 }

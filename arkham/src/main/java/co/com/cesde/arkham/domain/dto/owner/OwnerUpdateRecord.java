@@ -8,12 +8,12 @@ import jakarta.validation.constraints.Pattern;
 public record OwnerUpdateRecord(
         @NotNull
         Long ownerId,
-        String ownerFirstName,
-        String ownerLastName,
+        String firstName,
+        String lastName,
         @Pattern(regexp = "\\d{7,11}")
-        String ownerPhone,
+        String phone,
         @Email
-        String ownerEmail
+        String email
 ) {
     public OwnerUpdateRecord(Owner owner){
         this(owner.getOwnerId(),owner.getOwnerFirstName(), owner.getOwnerLastName(), owner.getOwnerPhone(), owner.getOwnerEmail());

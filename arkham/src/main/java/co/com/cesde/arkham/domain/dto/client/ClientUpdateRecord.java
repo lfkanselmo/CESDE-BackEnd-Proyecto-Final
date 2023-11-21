@@ -8,12 +8,12 @@ import jakarta.validation.constraints.Pattern;
 public record ClientUpdateRecord(
         @NotNull
         Long clientId,
-        String clientFirstName,
-        String clientLastName,
+        String firstName,
+        String lastName,
         @Pattern(regexp = "\\d{7,11}")
-        String clientPhone,
+        String phone,
         @Email
-        String clientEmail
+        String email
 ) {
 
     public ClientUpdateRecord(Client client) {

@@ -48,7 +48,7 @@ public class PropertyService {
     }
 
     List<Property> getByFree() {
-        return propertyRepository.getByFree();
+        return propertyRepository.getByavailability();
     }
 
     @Transactional

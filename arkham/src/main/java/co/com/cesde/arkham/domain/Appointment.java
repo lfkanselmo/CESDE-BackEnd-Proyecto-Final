@@ -29,6 +29,6 @@ public class Appointment {
         this.propertyId = appointmentRegisterRecord.propertyId();
         this.startTime = appointmentRegisterRecord.startTime();
         this.endTime = appointmentRegisterRecord.startTime().plusHours(1);
-        this.appointmentDate = appointmentRegisterRecord.appointmentDate();
+        this.appointmentDate = appointmentRegisterRecord.date();
     }
 }

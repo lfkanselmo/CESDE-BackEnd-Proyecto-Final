@@ -15,7 +15,7 @@ public record AppointmentUpdateRecord(
         @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
         LocalTime startTime,
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        LocalDate appointmentDate) {
+        LocalDate date) {
     public AppointmentUpdateRecord(Appointment appointment) {
         this(appointment.getAppointmentId(), appointment.getAppointmentId(), appointment.getStartTime(), appointment.getAppointmentDate());
     }

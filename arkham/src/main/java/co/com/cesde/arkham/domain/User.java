@@ -1,6 +1,5 @@
 package co.com.cesde.arkham.domain;
 
-import co.com.cesde.arkham.domain.dto.user.UserRegisterRecord;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,26 +19,15 @@ public class User implements UserDetails{
     private Long userId;
     private String userEmail;
     private String password;
-    private String rol;
+    private String role;
     private String firstName;
     private String lastName;
     private String phone;
     private Boolean active;
 
-    public User(UserRegisterRecord userRegisterRecord) {
-        this.userEmail = userRegisterRecord.user();
-        this.password = userRegisterRecord.password();
-        this.rol = userRegisterRecord.rol();
-        this.firstName = userRegisterRecord.firstName();
-        this.lastName = userRegisterRecord.lastName();
-        this.phone = userRegisterRecord.phone();
-        this.active = true;
-
-    }
-
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

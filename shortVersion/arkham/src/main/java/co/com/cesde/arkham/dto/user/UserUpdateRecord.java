@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.domain.dto.user;
+package co.com.cesde.arkham.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ public record UserUpdateRecord(
         @Email
         String userEmail,
         String password,
-        String rol,
+        String role,
         String firstName,
         String lastName,
         @Pattern(regexp = "\\d{7,11}")

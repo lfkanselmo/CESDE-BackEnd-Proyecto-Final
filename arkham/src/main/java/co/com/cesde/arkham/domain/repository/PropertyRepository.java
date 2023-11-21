@@ -21,7 +21,7 @@ public interface PropertyRepository {
 
     Page<Property> getAll(Pageable pagination);
 
-    List<Property> getByFree();
+    List<Property> getByavailability();
 
     Boolean existsById(Long ownerId);
 }

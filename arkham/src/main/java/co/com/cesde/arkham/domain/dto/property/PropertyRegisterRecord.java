@@ -7,7 +7,7 @@ public record PropertyRegisterRecord(
         @NotNull
         Double price,
         @NotNull
-        Boolean free,
+        Boolean availability,
         @NotNull
         Long ownerId,
         @NotBlank

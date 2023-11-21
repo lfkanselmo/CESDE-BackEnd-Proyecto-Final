@@ -5,7 +5,7 @@ import co.com.cesde.arkham.domain.dto.owner.OwnerListRecord;
 
 public record PropertyListRecord(Long id ,
                                  Double price,
-                                 Boolean free,
+                                 Boolean availability,
                                  String offer,
                                  String properyType,
                                  Integer rooms,
@@ -22,7 +22,7 @@ public record PropertyListRecord(Long id ,
     public PropertyListRecord(Property property) {
         this(property.getPropertyId(),
                 property.getPrice(),
-                property.getFree(),
+                property.getAvailability(),
                 property.getOffer(),
                 property.getPropertyType(),
                 property.getRooms(),

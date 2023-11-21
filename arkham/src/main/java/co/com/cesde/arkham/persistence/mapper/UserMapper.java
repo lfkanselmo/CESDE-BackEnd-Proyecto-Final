@@ -13,7 +13,7 @@ public interface UserMapper {
             @Mapping(source = "idUsuario", target = "userId"),
             @Mapping(source = "usuario", target = "userEmail"),
             @Mapping(source = "contrasenha", target = "password"),
-            @Mapping(source = "rol", target = "rol"),
+            @Mapping(source = "role", target = "role"),
             @Mapping(source = "nombre", target = "firstName"),
             @Mapping(source = "apellido", target = "lastName"),
             @Mapping(source = "telefono", target = "phone"),

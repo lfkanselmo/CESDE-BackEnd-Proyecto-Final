@@ -1,11 +1,10 @@
 package co.com.cesde.arkham.domain.dto.property;
 
 import co.com.cesde.arkham.domain.Property;
-import co.com.cesde.arkham.domain.dto.owner.OwnerListRecord;
 
 public record PropertyReturnRecord(Long id ,
                                    Double price,
-                                   Boolean free,
+                                   Boolean availability,
                                    String offer,
                                    String properyType,
                                    Integer rooms,
@@ -21,7 +20,7 @@ public record PropertyReturnRecord(Long id ,
     public PropertyReturnRecord(Property property) {
         this(property.getPropertyId(),
                 property.getPrice(),
-                property.getFree(),
+                property.getAvailability(),
                 property.getOffer(),
                 property.getPropertyType(),
                 property.getRooms(),

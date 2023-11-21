@@ -11,7 +11,7 @@ import java.time.LocalTime;
 public record AppointmentListRecord(Long appointmentId,
                                     LocalTime startTime,
                                     LocalTime endTime,
-                                    LocalDate appointmentDate,
+                                    LocalDate date,
                                     PropertyListRecord propertyListRecord,
                                     UserListRecord userListRecord,
                                     ClientListRecord clientListRecord) {

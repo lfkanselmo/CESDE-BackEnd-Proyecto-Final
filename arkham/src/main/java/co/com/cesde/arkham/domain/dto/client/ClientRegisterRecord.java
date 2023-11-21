@@ -10,13 +10,13 @@ public record ClientRegisterRecord(
         @NotNull
         Long clientId,
         @NotBlank
-        String clientFirstName,
+        String firstName,
         @NotBlank
-        String clientLastName,
+        String lastName,
         @NotBlank
         @Pattern(regexp = "\\d{7,11}")
-        String clientPhone,
+        String phone,
         @NotBlank
         @Email
-        String clientEmail) {
+        String email) {
 }

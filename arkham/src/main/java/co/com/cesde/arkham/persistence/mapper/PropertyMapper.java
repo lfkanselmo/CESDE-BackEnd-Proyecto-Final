@@ -14,7 +14,7 @@ public interface PropertyMapper {
     @Mappings({
             @Mapping(source = "idInmueble", target = "propertyId"),
             @Mapping(source = "precio", target = "price"),
-            @Mapping(source = "disponibilidad", target = "free"),
+            @Mapping(source = "disponibilidad", target = "availability"),
             @Mapping(source = "idPropietario", target = "ownerId"),
             @Mapping(source = "oferta", target = "offer"),
             @Mapping(source = "tipoInmueble", target = "propertyType"),

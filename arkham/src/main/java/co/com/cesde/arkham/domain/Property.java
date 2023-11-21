@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Property {
     private Long propertyId;
     private Double price;
-    private Boolean free;
+    private Boolean availability;
     private Long ownerId;
     private String offer;
     private String propertyType;
@@ -30,7 +30,7 @@ public class Property {
 
     public Property(PropertyRegisterRecord propertyRegisterRecord) {
         this.price = propertyRegisterRecord.price();
-        this.free = propertyRegisterRecord.free();
+        this.availability = propertyRegisterRecord.availability();
         this.ownerId = propertyRegisterRecord.ownerId();
         this.offer = propertyRegisterRecord.offer();
         this.propertyType = propertyRegisterRecord.propertyType();

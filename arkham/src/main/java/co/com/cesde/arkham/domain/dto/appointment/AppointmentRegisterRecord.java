@@ -20,5 +20,5 @@ public record AppointmentRegisterRecord(
         LocalTime startTime,
         @NotNull
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        LocalDate appointmentDate) {
+        LocalDate date) {
 }
