@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("/client")
@@ -27,8 +28,15 @@ public class ClientController {
     private ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
                                                   UriComponentsBuilder uriComponentsBuilder) {
 
-        Client saved = clientRepository.save(new Client(clientRegisterRecord));
-        URI url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
+        Client saved = null;
+        URI url = null;
+
+        if(!clientRepository.existsById(clientRegisterRecord.clientId())){
+            saved = clientRepository.save(new Client(clientRegisterRecord));
+            url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
+        }else{
+            // to-do
+        }
         return ResponseEntity.created(url).body(new ClientListRecord(saved));
     }
 

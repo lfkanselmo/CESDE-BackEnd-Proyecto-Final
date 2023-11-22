@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e2b1301c-5ed6-4063-b52a-2379af06fd46",
+		"_postman_id": "259326a7-3aec-4b12-9f31-f2f8398266a3",
 		"name": "Arkham API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31103742"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -59,7 +58,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTI2MiwiZXhwIjoxNzAwNjIwNzAyfQ.VKlKUf8pBfsGBEKseZkfHzOG-L3L1fJmvVofDRTGqME",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDY3MTYzNiwiZXhwIjoxNzAwNjczMDc2fQ.obFG5HOjdzk5G3iUYyt4ud-FwPhbCHXXst4ShghOI-A",
 									"type": "string"
 								}
 							]
@@ -261,7 +260,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTQzNiwiZXhwIjoxNzAwNjIwODc2fQ.b7TZrl75fcooOJQpoDCRTKRKoc4zaajnAAjDohElDlM",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDY3MTYzNiwiZXhwIjoxNzAwNjczMDc2fQ.obFG5HOjdzk5G3iUYyt4ud-FwPhbCHXXst4ShghOI-A",
 									"type": "string"
 								}
 							]
@@ -458,7 +457,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDUzNDQ0MSwiZXhwIjoxNzAwNTM1ODgxfQ.-WwQdm7kRzVmj9QB-OLCvGjfCDnJmBqMeIh_kSuvYkw",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDY3MjQ3MywiZXhwIjoxNzAwNjczOTEzfQ.CDv5PVjPtqQCV0Gfo-1Gka-EwKqLX92rc0kDnbBAhB8",
 									"type": "string"
 								}
 							]
@@ -466,12 +465,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/api/auth/logout",
+							"raw": "localhost:8090//api/auth/logout",
 							"host": [
 								"localhost"
 							],
 							"port": "8090",
 							"path": [
+								"",
 								"api",
 								"auth",
 								"logout"

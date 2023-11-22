@@ -4,7 +4,13 @@ import co.com.cesde.arkham.dto.appointment.AppointmentListRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentRegisterRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentUpdateRecord;
 import co.com.cesde.arkham.entity.Appointment;
+import co.com.cesde.arkham.entity.Client;
+import co.com.cesde.arkham.entity.Property;
+import co.com.cesde.arkham.entity.User;
 import co.com.cesde.arkham.repository.AppointmentRepository;
+import co.com.cesde.arkham.repository.ClientRepository;
+import co.com.cesde.arkham.repository.PropertyRepository;
+import co.com.cesde.arkham.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,13 +29,27 @@ import java.util.List;
 public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private PropertyRepository propertyRepository;
 
     @PostMapping("/save")
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
                                                       UriComponentsBuilder uriComponentsBuilder) {
         Appointment saved = appointmentRepository.save(new Appointment(appointmentRegisterRecord));
+
+        Property propertySaved = propertyRepository.getReferenceById(saved.getPropertyId());
+        Client clientSaved = clientRepository.getReferenceById(saved.getClientId());
+        User userSaved = userRepository.getReferenceById(saved.getUserId());
+        saved.setUser(userSaved);
+        saved.setProperty(propertySaved);
+        saved.setClient(clientSaved);
+
         URI url = uriComponentsBuilder.path("/appointment/{id}").buildAndExpand(saved.getAppointmentId()).toUri();
-        return ResponseEntity.created(url).body(new AppointmentListRecord(appointmentRepository.getReferenceById(saved.getAppointmentId())));
+        return ResponseEntity.created(url).body(new AppointmentListRecord(saved));
     }
 
     @PutMapping("/update")
