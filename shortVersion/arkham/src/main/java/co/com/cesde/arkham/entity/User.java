@@ -40,6 +40,9 @@ public class User implements UserDetails {
     private Boolean active;
 
     @OneToMany(mappedBy = "user")
+    private List<Appointment> appointments;
+
+    @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
     @Override

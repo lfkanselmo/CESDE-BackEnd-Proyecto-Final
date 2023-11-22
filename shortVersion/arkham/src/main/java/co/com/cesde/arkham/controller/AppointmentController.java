@@ -29,7 +29,7 @@ public class AppointmentController {
                                                       UriComponentsBuilder uriComponentsBuilder) {
         Appointment saved = appointmentRepository.save(new Appointment(appointmentRegisterRecord));
         URI url = uriComponentsBuilder.path("/appointment/{id}").buildAndExpand(saved.getAppointmentId()).toUri();
-        return ResponseEntity.created(url).body(new AppointmentListRecord(saved));
+        return ResponseEntity.created(url).body(new AppointmentListRecord(appointmentRepository.getReferenceById(saved.getAppointmentId())));
     }
 
     @PutMapping("/update")

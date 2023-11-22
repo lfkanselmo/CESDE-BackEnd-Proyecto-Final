@@ -16,7 +16,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/owner")
@@ -35,9 +34,9 @@ public class OwnerController {
 
     @PutMapping
     public ResponseEntity<OwnerListRecord> update(@RequestBody @Valid OwnerUpdateRecord ownerUpdateRecord) {
-        Owner owner = ownerRepository.getById(ownerUpdateRecord.ownerId());
-        if (owner != null) {
 
+        if (ownerRepository.existsById(ownerUpdateRecord.ownerId())) {
+            Owner owner = ownerRepository.getReferenceById(ownerUpdateRecord.ownerId());
             if (ownerUpdateRecord.firstName() != null && !ownerUpdateRecord.firstName().isBlank()) {
                 owner.setOwnerFirstName(ownerUpdateRecord.firstName());
             }

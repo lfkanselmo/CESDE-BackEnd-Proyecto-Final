@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -53,6 +55,9 @@ public class Property {
     @ManyToOne
     @JoinColumn(name = "id_propietario",insertable = false, updatable = false)
     private Owner owner;
+
+    @OneToMany(mappedBy = "property")
+    private List<Appointment> appointments;
 
     public Property(PropertyRegisterRecord propertyRegisterRecord) {
         this.price = propertyRegisterRecord.price();

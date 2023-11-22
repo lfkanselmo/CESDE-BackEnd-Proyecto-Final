@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -25,6 +27,9 @@ public class Client {
     private String clientEmail;
     @Column(name = "activo")
     private Boolean active;
+
+    @OneToMany(mappedBy = "client")
+    private List<Appointment> appointments;
 
     public Client(ClientRegisterRecord clientRegisterRecord) {
         this.clientId = clientRegisterRecord.clientId();

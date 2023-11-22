@@ -15,11 +15,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTI2MiwiZXhwIjoxNzAwNjIwNzAyfQ.VKlKUf8pBfsGBEKseZkfHzOG-L3L1fJmvVofDRTGqME",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"clientFirstName\": \"Nombre\",\r\n  \"clientLastName\": \"Apellido\",\r\n  \"clientPhone\": \"123456789\",\r\n  \"clientEmail\": \"correo@ejemplo.com\",\r\n  \"active\": true\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"firstName\": \"Nombre\",\r\n  \"lastName\": \"Apellido\",\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"correo@ejemplo.com\",\r\n  \"active\": true\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +59,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDUzMDA3NywiZXhwIjoxNzAwNTMxNTE3fQ.imj1li9CtKRqP6vUbzyFrinzOA9qsFHzGe4AA1ZzkaI",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTI2MiwiZXhwIjoxNzAwNjIwNzAyfQ.VKlKUf8pBfsGBEKseZkfHzOG-L3L1fJmvVofDRTGqME",
 									"type": "string"
 								}
 							]
@@ -87,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": 1152197943,\r\n    \"clientEmail\": \"anselmo@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"clientId\": 1152197943,\r\n    \"email\": \"anselmo@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -182,11 +192,21 @@
 				{
 					"name": "property save",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTQzNiwiZXhwIjoxNzAwNjIwODc2fQ.b7TZrl75fcooOJQpoDCRTKRKoc4zaajnAAjDohElDlM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"price\": 150000.00,\r\n  \"free\": true,\r\n  \"ownerId\": 1152197943,\r\n  \"offer\": \"ARRENDAMIENTO\",\r\n  \"propertyType\": \"APARTAMENTO\",\r\n  \"rooms\": 4,\r\n  \"bathrooms\": 2,\r\n  \"courtyard\": false,\r\n  \"level\": 3,\r\n  \"area\": 110.75,\r\n  \"naturalGas\": true,\r\n  \"laundryArea\": true,\r\n  \"address\": \"16 Apple Street\",\r\n  \"district\": \"Manrique\",\r\n  \"city\": \"Example City\"\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"price\": 150000.00,\r\n  \"availability\": true,\r\n  \"ownerId\": 1153697943,\r\n  \"offer\": \"ARRENDAMIENTO\",\r\n  \"propertyType\": \"APARTAMENTO\",\r\n  \"rooms\": 4,\r\n  \"bathrooms\": 2,\r\n  \"courtyard\": false,\r\n  \"level\": 3,\r\n  \"area\": 110.75,\r\n  \"naturalGas\": true,\r\n  \"laundryArea\": true,\r\n  \"address\": \"16 Apple Street\",\r\n  \"district\": \"Manrique\",\r\n  \"city\": \"Example City\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,11 +256,21 @@
 				{
 					"name": "owner save",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTQzNiwiZXhwIjoxNzAwNjIwODc2fQ.b7TZrl75fcooOJQpoDCRTKRKoc4zaajnAAjDohElDlM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ownerId\": 1152197943,\r\n    \"ownerFirstName\": \"Louis\",\r\n    \"ownerLastName\": \"Dixon\",\r\n    \"ownerPhone\": \"321233534\",\r\n    \"ownerEmail\": \"louis@example.com\",\r\n    \"active\": true\r\n  }",
+							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@example.com\",\r\n    \"active\": true\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -270,11 +300,21 @@
 				{
 					"name": "appointment save",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYyMjk4MCwiZXhwIjoxNzAwNjI0NDIwfQ.L7bNPmI5mLJpdY4ZR5X8m4kLXrYHJFPj5--WBPQa4QE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userId\": 1,\r\n  \"clientId\": 1,\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"10:00:00\",\r\n  \"appointmentDate\": \"2022-10-25\"\r\n}\r\n",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"clientId\": 1152197943,\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"10:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,7 +343,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"12:00:00\",\r\n  \"appointmentDate\": \"2022-10-25\"\r\n}",
+							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"12:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -405,6 +445,36 @@
 								"api",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDUzNDQ0MSwiZXhwIjoxNzAwNTM1ODgxfQ.-WwQdm7kRzVmj9QB-OLCvGjfCDnJmBqMeIh_kSuvYkw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"auth",
+								"logout"
 							]
 						}
 					},
