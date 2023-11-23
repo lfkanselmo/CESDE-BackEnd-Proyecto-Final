@@ -28,16 +28,11 @@ public class ClientController {
     @PostMapping("/save")
     private ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
                                                   UriComponentsBuilder uriComponentsBuilder) {
-
-        Client saved = null;
-        URI url = null;
-
-        if(!clientRepository.existsById(clientRegisterRecord.clientId())){
-            saved = clientRepository.save(new Client(clientRegisterRecord));
-            url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
-        }else{
+        if (clientRepository.existsById(clientRegisterRecord.clientId())) {
             throw new ValidationException("Client already exist");
         }
+        Client saved = clientRepository.save(new Client(clientRegisterRecord));
+        URI url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
         return ResponseEntity.created(url).body(new ClientListRecord(saved));
     }
 
