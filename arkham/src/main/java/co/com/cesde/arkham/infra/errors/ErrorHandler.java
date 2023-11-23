@@ -1,12 +1,14 @@
 package co.com.cesde.arkham.infra.errors;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestControllerAdvice
 public class ErrorHandler {
@@ -23,16 +25,9 @@ public class ErrorHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handlerArgumentException(IllegalArgumentException e)
-    {
-        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handlerRuntimeException(RuntimeException e)
-    {
-        return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_GATEWAY);
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity handleErrorValidation(Exception e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     private record ErrorDataRecord(String field, String error){
@@ -40,6 +35,4 @@ public class ErrorHandler {
             this(error.getField(), error.getDefaultMessage());
         }
     }
-
-
 }
