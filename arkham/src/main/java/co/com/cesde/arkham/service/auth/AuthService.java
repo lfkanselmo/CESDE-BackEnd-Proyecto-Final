@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.service;
+package co.com.cesde.arkham.service.auth;
 
 import co.com.cesde.arkham.controller.models.AuthResponse;
 import co.com.cesde.arkham.controller.models.LoginRequest;

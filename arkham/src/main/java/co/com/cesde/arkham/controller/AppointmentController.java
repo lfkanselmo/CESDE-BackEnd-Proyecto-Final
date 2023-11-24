@@ -11,8 +11,11 @@ import co.com.cesde.arkham.repository.AppointmentRepository;
 import co.com.cesde.arkham.repository.ClientRepository;
 import co.com.cesde.arkham.repository.PropertyRepository;
 import co.com.cesde.arkham.repository.UserRepository;
+import co.com.cesde.arkham.service.pdfexport.ExportService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,7 +24,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,6 +41,8 @@ public class AppointmentController {
     private ClientRepository clientRepository;
     @Autowired
     private PropertyRepository propertyRepository;
+    @Autowired
+    private ExportService exportService;
 
     @PostMapping("/save")
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
@@ -101,6 +109,19 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentListRecord>> getByProperty(@PathVariable("id") Long propertyId) {
         List<Appointment> appointments = appointmentRepository.getByPropertyId(propertyId);
         return getReturnsToListRecord(appointments);
+    }
+
+    @GetMapping("/export")
+    public ResponseEntity<Resource> exportAppointment(@RequestParam Long appoinmentId,
+                                                      HttpServletResponse response){
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:h:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        return exportService.exportAppointment(appoinmentId, response);
     }
 
 

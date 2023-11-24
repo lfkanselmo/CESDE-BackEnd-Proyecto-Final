@@ -3,7 +3,7 @@ package co.com.cesde.arkham.controller;
 import co.com.cesde.arkham.controller.models.AuthResponse;
 import co.com.cesde.arkham.controller.models.LoginRequest;
 import co.com.cesde.arkham.controller.models.RegisterRequest;
-import co.com.cesde.arkham.service.AuthService;
+import co.com.cesde.arkham.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
