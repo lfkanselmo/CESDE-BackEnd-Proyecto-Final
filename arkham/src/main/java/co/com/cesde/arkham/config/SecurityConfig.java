@@ -35,13 +35,14 @@ public class SecurityConfig {
                 .sessionManagement(sess ->
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).
-                logout(l ->
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                        .logout(l ->
                         l.addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler(
                                         (request, response, authentication) ->
                                                 SecurityContextHolder.clearContext()
-                                ));
+                                )
+                        );
 
         return httpSecurity.build();
     }

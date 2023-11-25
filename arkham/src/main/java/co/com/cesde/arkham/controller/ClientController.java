@@ -4,6 +4,7 @@ import co.com.cesde.arkham.dto.client.ClientListRecord;
 import co.com.cesde.arkham.dto.client.ClientRegisterRecord;
 import co.com.cesde.arkham.dto.client.ClientUpdateRecord;
 import co.com.cesde.arkham.entity.Client;
+import co.com.cesde.arkham.entity.Token;
 import co.com.cesde.arkham.repository.ClientRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
@@ -56,6 +57,7 @@ public class ClientController {
         if (clientUpdateRecord.email() != null && !clientUpdateRecord.email().isBlank()) {
             client.setClientEmail(clientUpdateRecord.email());
         }
+
 
         Client updated = clientRepository.save(client);
         return ResponseEntity.ok(new ClientListRecord(updated));
