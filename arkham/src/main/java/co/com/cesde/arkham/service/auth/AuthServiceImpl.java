@@ -9,6 +9,7 @@ import co.com.cesde.arkham.entity.Token;
 import co.com.cesde.arkham.entity.TokenType;
 import co.com.cesde.arkham.repository.TokenRepository;
 import co.com.cesde.arkham.repository.UserRepository;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import co.com.cesde.arkham.entity.User;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,20 +45,24 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .username(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .userFirstName(request.getFirstName())
-                .userLastName(request.getLastName())
-                .userPhone(request.getPhone())
-                .role(Role.valueOf(request.getRole()))
-                .active(true)
-                .build();
-        var savedUser = userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        saveUserToken(savedUser, jwtToken);
-        return AuthResponse.builder()
-                .token(jwtToken).build();
+        if(userRepository.findByUsername(request.getEmail()).isEmpty()) {
+            var user = User.builder()
+                    .username(request.getEmail())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .userFirstName(request.getFirstName())
+                    .userLastName(request.getLastName())
+                    .userPhone(request.getPhone())
+                    .role(Role.valueOf(request.getRole()))
+                    .active(true)
+                    .build();
+            var savedUser = userRepository.save(user);
+            var jwtToken = jwtService.generateToken(user);
+            saveUserToken(savedUser, jwtToken);
+            return AuthResponse.builder()
+                    .token(jwtToken).build();
+        }
+
+        throw new ValidationException("User already exists");
     }
 
     private void revokeAllUserTokens(User user){

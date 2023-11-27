@@ -22,6 +22,9 @@ repositories {
 }
 
 dependencies {
+	configurations.all {
+		exclude group: "commons-logging", module: "commons-logging"
+	}
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
