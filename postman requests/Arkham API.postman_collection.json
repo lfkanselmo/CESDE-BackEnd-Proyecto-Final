@@ -20,7 +20,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDYxOTI2MiwiZXhwIjoxNzAwNjIwNzAyfQ.VKlKUf8pBfsGBEKseZkfHzOG-L3L1fJmvVofDRTGqME",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE0NjQ1NSwiZXhwIjoxNzAxMjMyODU1fQ.IC-ZU2IObsOVlUF8oL1OUWJdtWDSZKOswW2dIJ-P1Ww",
 									"type": "string"
 								}
 							]
@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"firstName\": \"Nombre\",\r\n  \"lastName\": \"Apellido\",\r\n  \"phone\": \"123456789\",\r\n  \"email\": \"correo@ejemplo.com\",\r\n  \"active\": true\r\n}\r\n\r\n",
+							"raw": "\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -37,7 +37,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8090/api/client/1152197943",
+							"raw": "localhost:8090/api/client/1152197941",
 							"host": [
 								"localhost"
 							],
@@ -45,7 +45,7 @@
 							"path": [
 								"api",
 								"client",
-								"1152197943"
+								"1152197941"
 							]
 						}
 					},
@@ -59,7 +59,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzY5MCwiZXhwIjoxNzAwOTcwMDkwfQ.Lae7oM47UkL2Y9f9ITsyb0Aka8UtlF9uJf5EEqPg2Fw",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -68,7 +68,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": 1152197943,\r\n    \"firstName\": \"Anselmo\",\r\n    \"lastName\": \"Ortega\",\r\n    \"phone\": 3148510218,\r\n    \"email\": \"anselmo@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"clientId\": 1152197941,\r\n    \"firstName\": \"Luis\",\r\n    \"lastName\": \"Ortiz\",\r\n    \"phone\": 3148510219,\r\n    \"email\": \"luis@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,11 +93,21 @@
 				{
 					"name": "client update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": 1152197943,\r\n    \"email\": \"anselmo@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"clientId\": 1152197941,\r\n    \"phone\": 3148510217,\r\n    \"email\": \"luis.ortiz@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -122,21 +132,49 @@
 				{
 					"name": "client delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE0NjQ1NSwiZXhwIjoxNzAxMjMyODU1fQ.IC-ZU2IObsOVlUF8oL1OUWJdtWDSZKOswW2dIJ-P1Ww",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/cesde/arkham/api/client/delete/1152197943",
+							"raw": "localhost:8090/api/client/delete/1152197941",
 							"host": [
 								"localhost"
 							],
 							"port": "8090",
 							"path": [
-								"cesde",
-								"arkham",
 								"api",
 								"client",
 								"delete",
-								"1152197943"
+								"1152197941"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "client get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/client/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"client",
+								"all"
 							]
 						}
 					},
@@ -148,7 +186,7 @@
 			"name": "Property",
 			"item": [
 				{
-					"name": "property by owner id",
+					"name": "property get by owner id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -163,6 +201,67 @@
 								"property",
 								"owner",
 								"1152197943"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "property get by district",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/property/offer/venta",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"property",
+								"offer",
+								"venta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "property get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/property/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"property",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "property get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/property/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"property",
+								"all"
 							]
 						}
 					},
@@ -227,6 +326,54 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "property delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzY5MCwiZXhwIjoxNzAwOTcwMDkwfQ.Lae7oM47UkL2Y9f9ITsyb0Aka8UtlF9uJf5EEqPg2FQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/property/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"property",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "property update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"propertyId\": 1,\r\n  \"offer\": \"VENTA\",\r\n  \"propertyType\": \"APARTAMENTO\",\r\n  \"rooms\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -264,6 +411,67 @@
 					"response": []
 				},
 				{
+					"name": "owner get by first name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzQ4MiwiZXhwIjoxNzAwOTY5ODgyfQ.VTMvuT35n5yQKmoEkS6oC3nFV2vLGqMvSJ9NBDxrars",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/owner/ownerFirstName/felipe",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"owner",
+								"ownerFirstName",
+								"felipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "owner get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzQ4MiwiZXhwIjoxNzAwOTY5ODgyfQ.VTMvuT35n5yQKmoEkS6oC3nFV2vLGqMvSJ9NBDxrars",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/owner/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"owner",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "owner save",
 					"request": {
 						"auth": {
@@ -280,7 +488,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@example.com\",\r\n    \"active\": true\r\n  }",
+							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@example.com\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,6 +505,76 @@
 								"api",
 								"owner",
 								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "owner save Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzI4MiwiZXhwIjoxNzAwOTY5NjgyfQ.Y5Nw3diWtqaepbld2FxE2YD86LXYnD-j2Ij09ZDAWiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/owner/delete/1125654878",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"owner",
+								"delete",
+								"1125654878"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "owner update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzI4MiwiZXhwIjoxNzAwOTY5NjgyfQ.Y5Nw3diWtqaepbld2FxE2YD86LXYnD-j2Ij09ZDAWiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@example.com\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api/owner/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"owner",
+								"update"
 							]
 						}
 					},
@@ -341,6 +619,37 @@
 								"api",
 								"appointment",
 								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointment delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzY5MCwiZXhwIjoxNzAwOTcwMDkwfQ.Lae7oM47UkL2Y9f9ITsyb0Aka8UtlF9uJf5EEqPg2FQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/appointment/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"delete",
+								"1"
 							]
 						}
 					},
@@ -392,6 +701,68 @@
 								"api",
 								"appointment",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointment get by property id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/appointment/property/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"property",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointment get by client id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/appointment/client/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointment get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/appointment/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"all"
 							]
 						}
 					},

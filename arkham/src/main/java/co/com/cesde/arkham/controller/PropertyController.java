@@ -9,6 +9,7 @@ import co.com.cesde.arkham.entity.Property;
 import co.com.cesde.arkham.entity.PropertyType;
 import co.com.cesde.arkham.repository.PropertyRepository;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/property")
@@ -27,93 +29,106 @@ public class PropertyController {
     private PropertyRepository propertyRepository;
 
     @PostMapping("/save")
-    public ResponseEntity<PropertyReturnRecord> save(@RequestBody @Valid PropertyRegisterRecord propertyRegisterRecord,
-                                                   UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<PropertyReturnRecord> save(
+            @RequestBody
+            @Valid
+            PropertyRegisterRecord propertyRegisterRecord,
+            UriComponentsBuilder uriComponentsBuilder) {
+
+        Optional<Property> property = propertyRepository.findByAddress(propertyRegisterRecord.address());
+
+        if(property.isEmpty()){
+            throw new ValidationException("Ya se encuentra registrado un inmueble con esta dirección");
+        }
+
         Property saved = propertyRepository.save(new Property(propertyRegisterRecord));
         URI url = uriComponentsBuilder.path("/property/{id}").buildAndExpand(saved.getPropertyId()).toUri();
         return ResponseEntity.created(url).body(new PropertyReturnRecord(saved));
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<PropertyListRecord> update(PropertyUpdateRecord propertyUpdateRecord) {
         Property property = propertyRepository.getReferenceById(propertyUpdateRecord.propertyId());
 
+            if (property != null){
+                if (propertyUpdateRecord.price() != null) {
+                    property.setPrice(propertyUpdateRecord.price());
+                }
 
-            if (propertyUpdateRecord.price() != null) {
-                property.setPrice(propertyUpdateRecord.price());
+                if (propertyUpdateRecord.availability() != null) {
+                    property.setAvailability(propertyUpdateRecord.availability());
+                }
+
+                if (propertyUpdateRecord.ownerId() != null) {
+                    property.setOwnerId(propertyUpdateRecord.ownerId());
+                }
+
+                if (propertyUpdateRecord.offer() != null &&
+                        !propertyUpdateRecord.offer().isBlank()) {
+                    property.setOffer(Offer.valueOf(propertyUpdateRecord.offer()));
+                }
+
+                if (propertyUpdateRecord.propertyType() != null &&
+                        !propertyUpdateRecord.propertyType().isBlank()) {
+                    property.setPropertyType(PropertyType.valueOf(propertyUpdateRecord.propertyType()));
+                }
+
+                if (propertyUpdateRecord.rooms() != null &&
+                        propertyUpdateRecord.rooms() > 0) {
+                    property.setRooms(propertyUpdateRecord.rooms());
+                }
+
+                if (propertyUpdateRecord.bathrooms() != null &&
+                        propertyUpdateRecord.bathrooms() > 0) {
+                    property.setBathrooms(propertyUpdateRecord.bathrooms());
+                }
+
+                if (propertyUpdateRecord.courtyard() != null) {
+                    property.setCourtyard(propertyUpdateRecord.courtyard());
+                }
+
+                if (propertyUpdateRecord.level() != null &&
+                        propertyUpdateRecord.level() > 0) {
+                    property.setLevel(propertyUpdateRecord.level());
+                }
+
+                if (propertyUpdateRecord.area() != null &&
+                        propertyUpdateRecord.area() > 0) {
+                    property.setArea(propertyUpdateRecord.area());
+                }
+
+                if (propertyUpdateRecord.naturalGas() != null) {
+                    property.setNaturalGas(propertyUpdateRecord.naturalGas());
+                }
+
+                if (propertyUpdateRecord.laundryArea() != null) {
+                    property.setLaundryArea(propertyUpdateRecord.laundryArea());
+                }
+
+                if (propertyUpdateRecord.address() != null &&
+                        !propertyUpdateRecord.address().isBlank()) {
+                    property.setAddress(propertyUpdateRecord.address());
+                }
+
+                if (propertyUpdateRecord.district() != null &&
+                        !propertyUpdateRecord.district().isBlank()) {
+                    property.setDistrict(propertyUpdateRecord.district());
+                }
+
+                if (propertyUpdateRecord.city() != null &&
+                        !propertyUpdateRecord.city().isBlank()) {
+                    property.setCity(propertyUpdateRecord.city());
+                }
+
+                Property updated = propertyRepository.save(property);
+
+                return ResponseEntity.ok(new PropertyListRecord(updated));
             }
 
-            if (propertyUpdateRecord.availability() != null) {
-                property.setAvailability(propertyUpdateRecord.availability());
-            }
-
-            if (propertyUpdateRecord.ownerId() != null) {
-                property.setOwnerId(propertyUpdateRecord.ownerId());
-            }
-
-            if (propertyUpdateRecord.offer() != null &&
-                    !propertyUpdateRecord.offer().isBlank()) {
-                property.setOffer(Offer.valueOf(propertyUpdateRecord.offer()));
-            }
-
-            if (propertyUpdateRecord.propertyType() != null &&
-                    !propertyUpdateRecord.propertyType().isBlank()) {
-                property.setPropertyType(PropertyType.valueOf(propertyUpdateRecord.propertyType()));
-            }
-
-            if (propertyUpdateRecord.rooms() != null &&
-                    propertyUpdateRecord.rooms() > 0) {
-                property.setRooms(propertyUpdateRecord.rooms());
-            }
-
-            if (propertyUpdateRecord.bathrooms() != null &&
-                    propertyUpdateRecord.bathrooms() > 0) {
-                property.setBathrooms(propertyUpdateRecord.bathrooms());
-            }
-
-            if (propertyUpdateRecord.courtyard() != null) {
-                property.setCourtyard(propertyUpdateRecord.courtyard());
-            }
-
-            if (propertyUpdateRecord.level() != null &&
-                    propertyUpdateRecord.level() > 0) {
-                property.setLevel(propertyUpdateRecord.level());
-            }
-
-            if (propertyUpdateRecord.area() != null &&
-                    propertyUpdateRecord.area() > 0) {
-                property.setArea(propertyUpdateRecord.area());
-            }
-
-            if (propertyUpdateRecord.naturalGas() != null) {
-                property.setNaturalGas(propertyUpdateRecord.naturalGas());
-            }
-
-            if (propertyUpdateRecord.laundryArea() != null) {
-                property.setLaundryArea(propertyUpdateRecord.laundryArea());
-            }
-
-            if (propertyUpdateRecord.address() != null &&
-                    !propertyUpdateRecord.address().isBlank()) {
-                property.setAddress(propertyUpdateRecord.address());
-            }
-
-            if (propertyUpdateRecord.district() != null &&
-                    !propertyUpdateRecord.district().isBlank()) {
-                property.setDistrict(propertyUpdateRecord.district());
-            }
-
-            if (propertyUpdateRecord.city() != null &&
-                    !propertyUpdateRecord.city().isBlank()) {
-                property.setCity(propertyUpdateRecord.city());
-            }
-
-            Property updated = propertyRepository.save(property);
-
-            return ResponseEntity.ok(new PropertyListRecord(updated));
+            throw new ValidationException("No existe la propiedad a modificar");
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Page<PropertyListRecord>> getAll(@PageableDefault() Pageable pagination) {
         Page<Property> all = propertyRepository.findAll(pagination);
         Page<PropertyListRecord> allPage = all.map(PropertyListRecord::new);
@@ -128,8 +143,9 @@ public class PropertyController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<PropertyListRecord> delete(@PathVariable("id") Long propertyId) {
-        if (propertyRepository.existsById(propertyId)) {
-            propertyRepository.deleteById(propertyId);
+        Property property = propertyRepository.getReferenceById(propertyId);
+        if (property != null && property.getActive()) {
+            propertyRepository.deleteProperty(propertyId);
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -144,7 +160,7 @@ public class PropertyController {
 
     @GetMapping("/offer/{offer}")
     public ResponseEntity<List<PropertyListRecord>> getByOffer(@PathVariable("offer") String offer) {
-        List<Property> properties = propertyRepository.getByOffer(offer);
+        List<Property> properties = propertyRepository.getByOffer(offer.toUpperCase());
         return getReturnsToListRecord(properties);
     }
 

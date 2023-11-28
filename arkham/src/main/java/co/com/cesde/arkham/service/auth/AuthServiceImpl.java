@@ -1,9 +1,9 @@
 package co.com.cesde.arkham.service.auth;
 
 import co.com.cesde.arkham.config.JwtService;
-import co.com.cesde.arkham.controller.models.AuthResponse;
-import co.com.cesde.arkham.controller.models.LoginRequest;
-import co.com.cesde.arkham.controller.models.RegisterRequest;
+import co.com.cesde.arkham.dto.auth.AuthResponse;
+import co.com.cesde.arkham.dto.auth.LoginRequest;
+import co.com.cesde.arkham.dto.auth.RegisterRequest;
 import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.Token;
 import co.com.cesde.arkham.entity.TokenType;

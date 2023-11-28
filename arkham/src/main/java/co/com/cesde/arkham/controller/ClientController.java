@@ -29,8 +29,14 @@ public class ClientController {
     @PostMapping("/save")
     private ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
                                                   UriComponentsBuilder uriComponentsBuilder) {
+
         if (clientRepository.existsById(clientRegisterRecord.clientId())) {
-            throw new ValidationException("Client already exist");
+
+            Client client = clientRepository.getReferenceById(clientRegisterRecord.clientId());
+
+            if(client.getActive()){
+                throw new ValidationException("El cliente ya existe");
+            }
         }
         Client saved = clientRepository.save(new Client(clientRegisterRecord));
         URI url = uriComponentsBuilder.path("/client/{id}").buildAndExpand(saved.getClientId()).toUri();
@@ -41,30 +47,33 @@ public class ClientController {
     @PutMapping("/update")
     public ResponseEntity<ClientListRecord> update(@RequestBody @Valid ClientUpdateRecord clientUpdateRecord) {
         Client client = clientRepository.getReferenceById(clientUpdateRecord.clientId());
+        if(client != null && client.getActive()){
+            if (clientUpdateRecord.firstName() != null && !clientUpdateRecord.firstName().isBlank()) {
+                client.setClientFirstName(clientUpdateRecord.firstName());
+            }
 
-        if (clientUpdateRecord.firstName() != null && !clientUpdateRecord.firstName().isBlank()) {
-            client.setClientFirstName(clientUpdateRecord.firstName());
+            if (clientUpdateRecord.lastName() != null && !clientUpdateRecord.lastName().isBlank()) {
+                client.setClientLastName(clientUpdateRecord.lastName());
+            }
+
+            if (clientUpdateRecord.phone() != null && !clientUpdateRecord.phone().isBlank()) {
+                client.setClientPhone(clientUpdateRecord.phone());
+            }
+
+            if (clientUpdateRecord.email() != null && !clientUpdateRecord.email().isBlank()) {
+                client.setClientEmail(clientUpdateRecord.email());
+            }
+
+
+            Client updated = clientRepository.save(client);
+            return ResponseEntity.ok(new ClientListRecord(updated));
         }
 
-        if (clientUpdateRecord.lastName() != null && !clientUpdateRecord.lastName().isBlank()) {
-            client.setClientLastName(clientUpdateRecord.lastName());
-        }
-
-        if (clientUpdateRecord.phone() != null && !clientUpdateRecord.phone().isBlank()) {
-            client.setClientPhone(clientUpdateRecord.phone());
-        }
-
-        if (clientUpdateRecord.email() != null && !clientUpdateRecord.email().isBlank()) {
-            client.setClientEmail(clientUpdateRecord.email());
-        }
-
-
-        Client updated = clientRepository.save(client);
-        return ResponseEntity.ok(new ClientListRecord(updated));
+        throw new ValidationException("No se encuentran los datos del cliente que desea actualizar");
 
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Page<ClientListRecord>> getAll(@PageableDefault() Pageable pagination) {
         Page<Client> all = clientRepository.findAll(pagination);
         Page<ClientListRecord> allPage = all.map(ClientListRecord::new);
@@ -78,8 +87,10 @@ public class ClientController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ClientListRecord> delete(@PathVariable("id") Long clientId) {
-        if (clientRepository.existsById(clientId)) {
-            clientRepository.deleteById(clientId);
+        Client client = clientRepository.getReferenceById(clientId);
+        if (client != null && client.getActive()) {
+            client.setActive(false);
+            clientRepository.save(client);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -87,3 +98,4 @@ public class ClientController {
     }
 
 }
+

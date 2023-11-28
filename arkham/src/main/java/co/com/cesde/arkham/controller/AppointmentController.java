@@ -14,6 +14,7 @@ import co.com.cesde.arkham.repository.UserRepository;
 import co.com.cesde.arkham.service.pdfexport.ExportService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,16 @@ public class AppointmentController {
     @PostMapping("/save")
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
                                                       UriComponentsBuilder uriComponentsBuilder) {
+        Appointment appointment = appointmentRepository
+                .getAppointmentByDateAndStartTime(
+                        appointmentRegisterRecord.date(),
+                        appointmentRegisterRecord.startTime()
+                );
+
+        if(appointment != null){
+            throw new ValidationException("Ya existe una cita a esta hora en esta fecha");
+        }
+
         Appointment saved = appointmentRepository.save(new Appointment(appointmentRegisterRecord));
 
         Property propertySaved = propertyRepository.getReferenceById(saved.getPropertyId());
@@ -63,21 +74,25 @@ public class AppointmentController {
     @PutMapping("/update")
     public ResponseEntity<AppointmentListRecord> update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
         Appointment appointment = appointmentRepository.getReferenceById(appointmentUpdateRecord.appointmentId());
-        if (appointmentUpdateRecord.date() != null) {
-            appointment.setDate(appointmentUpdateRecord.date());
+        if(appointment != null){
+            if (appointmentUpdateRecord.date() != null) {
+                appointment.setDate(appointmentUpdateRecord.date());
+            }
+
+            if (appointmentUpdateRecord.startTime() != null) {
+                appointment.setStartTime(appointmentUpdateRecord.startTime());
+                appointment.setEndTime(appointmentUpdateRecord.startTime().plusHours(1));
+            }
+
+            Appointment updated = appointmentRepository.save(appointment);
+
+            return ResponseEntity.ok(new AppointmentListRecord(updated));
         }
 
-        if (appointmentUpdateRecord.startTime() != null) {
-            appointment.setStartTime(appointmentUpdateRecord.startTime());
-            appointment.setEndTime(appointmentUpdateRecord.startTime().plusHours(1));
-        }
-
-        Appointment updated = appointmentRepository.save(appointment);
-
-        return ResponseEntity.ok(new AppointmentListRecord(updated));
+        throw new ValidationException("No existe la cita que intenta modificar");
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Page<AppointmentListRecord>> getAll(@PageableDefault() Pageable pagination) {
         Page<Appointment> all = appointmentRepository.findAll(pagination);
         Page<AppointmentListRecord> allPage = all.map(AppointmentListRecord::new);
@@ -89,7 +104,7 @@ public class AppointmentController {
         return ResponseEntity.ok(new AppointmentListRecord(appointmentRepository.getReferenceById(appointmentId)));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<AppointmentListRecord> delete(@PathVariable("id") Long id) {
         if (appointmentRepository.existsById(id)) {
             appointmentRepository.deleteById(id);
@@ -99,7 +114,7 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping("/date")
+    @GetMapping("/date/{date}")
     public ResponseEntity<List<AppointmentListRecord>> getByDate(@PathVariable("date") LocalDate date) {
         List<Appointment> appointments = appointmentRepository.getByDate(date);
         return getReturnsToListRecord(appointments);
@@ -111,9 +126,19 @@ public class AppointmentController {
         return getReturnsToListRecord(appointments);
     }
 
+    @GetMapping("/client/{id}")
+    public ResponseEntity<List<AppointmentListRecord>> getByClientId(@PathVariable("id") Long clientId){
+        LocalDate today = LocalDate.now();
+        List<Appointment> appointments = appointmentRepository.getAppointmentByClientIdAndDate(clientId,today);
+        return getReturnsToListRecord(appointments);
+    }
+
     @GetMapping("/export")
-    public ResponseEntity<Resource> exportAppointment(@RequestParam Long appoinmentId,
-                                                      HttpServletResponse response){
+    public ResponseEntity<Resource> exportAppointment(
+            @RequestParam
+            Long appoinmentId,
+            HttpServletResponse response){
+
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:h:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());

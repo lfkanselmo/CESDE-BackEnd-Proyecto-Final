@@ -6,6 +6,7 @@ import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.User;
 import co.com.cesde.arkham.repository.UserRepository;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,28 +25,32 @@ public class UserController {
     public ResponseEntity<UserListRecord> update(UserUpdateRecord userUpdateRecord) {
         User user = userRepository.getReferenceById(userUpdateRecord.userId());
 
-        if (userUpdateRecord.role() != null &&
-                !userUpdateRecord.role().isBlank()) {
-            user.setRole(Role.valueOf(userUpdateRecord.role()));
+        if(user != null){
+            if (userUpdateRecord.role() != null &&
+                    !userUpdateRecord.role().isBlank()) {
+                user.setRole(Role.valueOf(userUpdateRecord.role()));
+            }
+
+            if (userUpdateRecord.firstName() != null &&
+                    !userUpdateRecord.firstName().isBlank()) {
+                user.setUserFirstName(userUpdateRecord.firstName());
+            }
+
+            if (userUpdateRecord.lastName() != null &&
+                    !userUpdateRecord.lastName().isBlank()) {
+                user.setUserLastName(userUpdateRecord.lastName());
+            }
+
+            if (userUpdateRecord.phone() != null &&
+                    !userUpdateRecord.phone().isBlank()) {
+                user.setUserPhone(userUpdateRecord.phone());
+            }
+
+            User userUpdated = userRepository.save(user);
+            return ResponseEntity.ok(new UserListRecord(userUpdated));
         }
 
-        if (userUpdateRecord.firstName() != null &&
-                !userUpdateRecord.firstName().isBlank()) {
-            user.setUserFirstName(userUpdateRecord.firstName());
-        }
-
-        if (userUpdateRecord.lastName() != null &&
-                !userUpdateRecord.lastName().isBlank()) {
-            user.setUserLastName(userUpdateRecord.lastName());
-        }
-
-        if (userUpdateRecord.phone() != null &&
-                !userUpdateRecord.phone().isBlank()) {
-            user.setUserPhone(userUpdateRecord.phone());
-        }
-
-        User userUpdated = userRepository.save(user);
-        return ResponseEntity.ok(new UserListRecord(userUpdated));
+        throw new ValidationException("No existe el usuario");
 
     }
 
@@ -55,7 +60,7 @@ public class UserController {
             userRepository.deleteById(userId);
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

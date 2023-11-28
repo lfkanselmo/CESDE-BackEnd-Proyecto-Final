@@ -49,9 +49,18 @@ public class SecurityConfig {
 
     private RequestMatcher publicEndPoints() {
         return new OrRequestMatcher(
-                new AntPathRequestMatcher("/auth/register"),
-                new AntPathRequestMatcher("/auth/login"),
-                new AntPathRequestMatcher("/appointment/export")
+                new AntPathRequestMatcher("/auth/register/**"),
+                new AntPathRequestMatcher("/auth/login/**"),
+                new AntPathRequestMatcher("/appointment/export/**"),
+                new AntPathRequestMatcher("/property/all/**"),
+                new AntPathRequestMatcher("/property/location/**"),
+                new AntPathRequestMatcher("/property/offer/**"),
+                new AntPathRequestMatcher("/appointment/save/**"),
+                new AntPathRequestMatcher("/appointment/update/**"),
+                new AntPathRequestMatcher("/appointment/client/**"),
+                new AntPathRequestMatcher("/client/save/**"),
+                new AntPathRequestMatcher("/client/update/**"),
+                new AntPathRequestMatcher("/client/all/**")
         );
     }
 }

@@ -2,6 +2,7 @@ package co.com.cesde.arkham.dto.appointment;
 
 import co.com.cesde.arkham.entity.Appointment;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public record AppointmentUpdateRecord(
         @NotNull
         Long appointmentId,
 
+        @NotNull
         Long clientId,
         @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
         LocalTime startTime,

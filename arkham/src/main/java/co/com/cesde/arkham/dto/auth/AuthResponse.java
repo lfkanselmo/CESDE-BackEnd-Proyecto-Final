@@ -1,4 +1,4 @@
-package co.com.cesde.arkham.controller.models;
+package co.com.cesde.arkham.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
