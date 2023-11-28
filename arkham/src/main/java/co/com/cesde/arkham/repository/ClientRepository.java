@@ -9,11 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query(
-            """
-            update Client c set c.active = false
-            where c.clientId = :clientId
-            """
-    )
-    void deleteClient(Long clientId);
+
 }

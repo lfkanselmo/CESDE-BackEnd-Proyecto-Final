@@ -17,6 +17,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -45,7 +47,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse register(RegisterRequest request) {
-        if(userRepository.findByUsername(request.getEmail()).isEmpty()) {
+        Optional<User> userOptional = userRepository.findByUsername(request.getEmail());
+        if(userOptional.isEmpty()) {
             var user = User.builder()
                     .username(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
@@ -60,9 +63,25 @@ public class AuthServiceImpl implements AuthService {
             saveUserToken(savedUser, jwtToken);
             return AuthResponse.builder()
                     .token(jwtToken).build();
+        }else {
+            User user = userOptional.get();
+            if (user.getActive() == false){
+                user.setActive(true);
+                user.setPassword(passwordEncoder.encode(request.getPassword()));
+                user.setUserFirstName(request.getFirstName());
+                user.setUserLastName(request.getLastName());
+                user.setUserPhone(request.getPhone());
+                user.setRole(Role.valueOf(request.getRole()));
+
+                var savedUser = userRepository.save(user);
+                var jwtToken = jwtService.generateToken(user);
+                saveUserToken(savedUser, jwtToken);
+                return AuthResponse.builder()
+                        .token(jwtToken).build();
+            }
         }
 
-        throw new ValidationException("User already exists");
+        throw new ValidationException("Este email ya se encuetra registrado");
     }
 
     private void revokeAllUserTokens(User user){

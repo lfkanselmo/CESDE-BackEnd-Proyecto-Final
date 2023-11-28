@@ -48,6 +48,7 @@ public class AppointmentController {
     @PostMapping("/save")
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
                                                       UriComponentsBuilder uriComponentsBuilder) {
+
         Appointment appointment = appointmentRepository
                 .getAppointmentByDateAndStartTime(
                         appointmentRegisterRecord.date(),

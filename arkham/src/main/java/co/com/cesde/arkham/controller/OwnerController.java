@@ -28,8 +28,13 @@ public class OwnerController {
     public ResponseEntity<OwnerListRecord> save(@RequestBody @Valid OwnerRegisterRecord ownerRegisterRecord,
                                                 UriComponentsBuilder uriComponentsBuilder) {
         if (ownerRepository.existsById(ownerRegisterRecord.ownerId())) {
-            throw new ValidationException("El propietario ya existe");
+            Owner owner = ownerRepository.getReferenceById(ownerRegisterRecord.ownerId());
+
+            if(owner.getActive()) {
+                throw new ValidationException("El propietario ya existe");
+            }
         }
+
         Owner saved = ownerRepository.save(new Owner(ownerRegisterRecord));
         URI url = uriComponentsBuilder.path("/owner/{id}").buildAndExpand(saved.getOwnerId()).toUri();
         return ResponseEntity.created(url).body(new OwnerListRecord(saved));
@@ -64,7 +69,7 @@ public class OwnerController {
         throw new ValidationException("No se encuentran los datos del propietario que desea actualizar");
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<Page<OwnerListRecord>> getAll(@PageableDefault() Pageable pagination) {
         Page<Owner> all = ownerRepository.findAll(pagination);
         Page<OwnerListRecord> allPage = all.map(OwnerListRecord::new);
@@ -73,14 +78,21 @@ public class OwnerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OwnerListRecord> getById(@PathVariable("id") Long ownerId) {
-        return ResponseEntity.ok(new OwnerListRecord(ownerRepository.getReferenceById(ownerId)));
+        Owner owner = ownerRepository.getReferenceById(ownerId);
+        if(owner == null || !owner.getActive()){
+            return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok(new OwnerListRecord(owner));
+        }
+
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<OwnerListRecord> delete(@PathVariable("id") Long ownerId) {
         Owner owner = ownerRepository.getReferenceById(ownerId);
         if (owner != null && owner.getActive()) {
-            ownerRepository.deleteOwner(ownerId);
+            owner.setActive(false);
+            ownerRepository.save(owner);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -97,7 +109,7 @@ public class OwnerController {
                     .toList();
             return ResponseEntity.ok(ownerRecordList);
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

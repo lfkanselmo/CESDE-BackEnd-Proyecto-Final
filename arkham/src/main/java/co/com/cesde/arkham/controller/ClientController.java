@@ -82,7 +82,12 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientListRecord> getById(@PathVariable("id") Long userId) {
-        return ResponseEntity.ok(new ClientListRecord(clientRepository.getReferenceById(userId)));
+        Client client = clientRepository.getReferenceById(userId);
+        if(client == null || !client.getActive()) {
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(new ClientListRecord(client));
+        }
     }
 
     @DeleteMapping("/delete/{id}")

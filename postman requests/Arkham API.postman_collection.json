@@ -20,7 +20,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE0NjQ1NSwiZXhwIjoxNzAxMjMyODU1fQ.IC-ZU2IObsOVlUF8oL1OUWJdtWDSZKOswW2dIJ-P1Ww",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4Njg5MCwiZXhwIjoxNzAxMjczMjkwfQ.0bpnBmk7LOEOIq8WbaWJwSpRebotVSQQJMFiJiQq_4Y",
 									"type": "string"
 								}
 							]
@@ -29,7 +29,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n\r\n",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,7 +68,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": 1152197941,\r\n    \"firstName\": \"Luis\",\r\n    \"lastName\": \"Ortiz\",\r\n    \"phone\": 3148510219,\r\n    \"email\": \"luis@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"clientId\": 1152197941,\r\n    \"firstName\": \"Luis\",\r\n    \"lastName\": \"Ortiz\",\r\n    \"phone\": 3148510219,\r\n    \"email\": \"luis.o@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,7 +137,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE0NjQ1NSwiZXhwIjoxNzAxMjMyODU1fQ.IC-ZU2IObsOVlUF8oL1OUWJdtWDSZKOswW2dIJ-P1Ww",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4Njg5MCwiZXhwIjoxNzAxMjczMjkwfQ.0bpnBmk7LOEOIq8WbaWJwSpRebotVSQQJMFiJiQq_4Y",
 									"type": "string"
 								}
 							]
@@ -188,10 +188,20 @@
 				{
 					"name": "property get by owner id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MDUwMiwiZXhwIjoxNzAxMjc2OTAyfQ.h1Cqf3BimB2io5zHk5bOb0odI50gM9CoXS_iByl-VF0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/api/property/owner/1152197943",
+							"raw": "localhost:8090/api/property/owner/1153697943",
 							"host": [
 								"localhost"
 							],
@@ -200,15 +210,25 @@
 								"api",
 								"property",
 								"owner",
-								"1152197943"
+								"1153697943"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "property get by district",
+					"name": "property get by offer",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MjAzMSwiZXhwIjoxNzAxMjc4NDMxfQ.B0uFEGqMhET4wl-F_TIUbHPBGq1ajVaeJZTXDVfyXJg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -268,7 +288,7 @@
 					"response": []
 				},
 				{
-					"name": "property by district name",
+					"name": "property by district",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -296,7 +316,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzY5MCwiZXhwIjoxNzAwOTcwMDkwfQ.Lae7oM47UkL2Y9f9ITsyb0Aka8UtlF9uJf5EEqPg2FQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MDUwMiwiZXhwIjoxNzAxMjc2OTAyfQ.h1Cqf3BimB2io5zHk5bOb0odI50gM9CoXS_iByl-VF0",
 									"type": "string"
 								}
 							]
@@ -388,7 +408,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzQ4MiwiZXhwIjoxNzAwOTY5ODgyfQ.VTMvuT35n5yQKmoEkS6oC3nFV2vLGqMvSJ9NBDxrars",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
 									"type": "string"
 								}
 							]
@@ -418,7 +438,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzQ4MiwiZXhwIjoxNzAwOTY5ODgyfQ.VTMvuT35n5yQKmoEkS6oC3nFV2vLGqMvSJ9NBDxrars",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
 									"type": "string"
 								}
 							]
@@ -426,7 +446,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/api/owner/ownerFirstName/felipe",
+							"raw": "localhost:8090/api/owner/ownerFirstName/louis",
 							"host": [
 								"localhost"
 							],
@@ -435,7 +455,7 @@
 								"api",
 								"owner",
 								"ownerFirstName",
-								"felipe"
+								"louis"
 							]
 						}
 					},
@@ -449,7 +469,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzQ4MiwiZXhwIjoxNzAwOTY5ODgyfQ.VTMvuT35n5yQKmoEkS6oC3nFV2vLGqMvSJ9NBDxrars",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MDUwMiwiZXhwIjoxNzAxMjc2OTAyfQ.h1Cqf3BimB2io5zHk5bOb0odI50gM9CoXS_iByl-VF0",
 									"type": "string"
 								}
 							]
@@ -479,7 +499,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzI4MiwiZXhwIjoxNzAwOTY5NjgyfQ.Y5Nw3diWtqaepbld2FxE2YD86LXYnD-j2Ij09ZDAWiY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
 									"type": "string"
 								}
 							]
@@ -511,14 +531,14 @@
 					"response": []
 				},
 				{
-					"name": "owner save Copy",
+					"name": "owner delete",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzI4MiwiZXhwIjoxNzAwOTY5NjgyfQ.Y5Nw3diWtqaepbld2FxE2YD86LXYnD-j2Ij09ZDAWiY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
 									"type": "string"
 								}
 							]
@@ -526,7 +546,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/api/owner/delete/1125654878",
+							"raw": "localhost:8090/api/owner/delete/1153697943",
 							"host": [
 								"localhost"
 							],
@@ -535,7 +555,7 @@
 								"api",
 								"owner",
 								"delete",
-								"1125654878"
+								"1153697943"
 							]
 						}
 					},
@@ -549,7 +569,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzI4MiwiZXhwIjoxNzAwOTY5NjgyfQ.Y5Nw3diWtqaepbld2FxE2YD86LXYnD-j2Ij09ZDAWiY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
 									"type": "string"
 								}
 							]
@@ -558,7 +578,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@example.com\"\r\n  }",
+							"raw": "{\r\n    \"ownerId\": 1153697943,\r\n    \"firstName\": \"Louis\",\r\n    \"lastName\": \"Dixon\",\r\n    \"phone\": \"321233534\",\r\n    \"email\": \"louis@mail.com\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"

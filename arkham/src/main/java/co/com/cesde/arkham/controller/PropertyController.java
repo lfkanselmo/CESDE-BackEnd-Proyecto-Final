@@ -37,7 +37,7 @@ public class PropertyController {
 
         Optional<Property> property = propertyRepository.findByAddress(propertyRegisterRecord.address());
 
-        if(property.isEmpty()){
+        if(!property.isEmpty() && property.get().getActive()){
             throw new ValidationException("Ya se encuentra registrado un inmueble con esta dirección");
         }
 
@@ -50,7 +50,7 @@ public class PropertyController {
     public ResponseEntity<PropertyListRecord> update(PropertyUpdateRecord propertyUpdateRecord) {
         Property property = propertyRepository.getReferenceById(propertyUpdateRecord.propertyId());
 
-            if (property != null){
+            if (property != null && property.getActive()){
                 if (propertyUpdateRecord.price() != null) {
                     property.setPrice(propertyUpdateRecord.price());
                 }
@@ -125,7 +125,7 @@ public class PropertyController {
                 return ResponseEntity.ok(new PropertyListRecord(updated));
             }
 
-            throw new ValidationException("No existe la propiedad a modificar");
+            throw new ValidationException("No existe el inmueble a modificar");
     }
 
     @GetMapping("/all")
@@ -138,7 +138,11 @@ public class PropertyController {
     @GetMapping("/{id}")
     public ResponseEntity<PropertyListRecord> getById(@PathVariable("id") Long propertyId) {
         Property property = propertyRepository.getReferenceById(propertyId);
-        return ResponseEntity.ok(new PropertyListRecord(property));
+        if(property.getActive()) {
+            return ResponseEntity.ok(new PropertyListRecord(property));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/delete/{id}")
@@ -146,7 +150,7 @@ public class PropertyController {
         Property property = propertyRepository.getReferenceById(propertyId);
         if (property != null && property.getActive()) {
             propertyRepository.deleteProperty(propertyId);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }

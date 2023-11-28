@@ -13,11 +13,4 @@ import java.util.List;
 public interface OwnerRepository extends JpaRepository<Owner,Long> {
     List<Owner> getByOwnerFirstName(String ownerName);
 
-    @Query(
-            """
-            update Owner o set o.active = false
-            where o.ownerId = :ownerId
-            """
-    )
-    void deleteOwner(Long ownerId);
 }

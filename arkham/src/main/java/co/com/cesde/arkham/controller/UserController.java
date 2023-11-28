@@ -56,8 +56,9 @@ public class UserController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<UserListRecord> delete(Long userId) {
-        if (userRepository.existsById(userId)) {
-            userRepository.deleteById(userId);
+        User user = userRepository.getReferenceById(userId);
+        if (user != null && user.getActive()) {
+            user.setActive(false);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
