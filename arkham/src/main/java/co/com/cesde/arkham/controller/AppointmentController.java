@@ -55,7 +55,7 @@ public class AppointmentController {
                         appointmentRegisterRecord.startTime()
                 );
 
-        if(appointment != null){
+        if (appointment != null) {
             throw new ValidationException("Ya existe una cita a esta hora en esta fecha");
         }
 
@@ -75,22 +75,28 @@ public class AppointmentController {
     @PutMapping("/update")
     public ResponseEntity<AppointmentListRecord> update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
         Appointment appointment = appointmentRepository.getReferenceById(appointmentUpdateRecord.appointmentId());
-        if(appointment != null){
-            if (appointmentUpdateRecord.date() != null) {
-                appointment.setDate(appointmentUpdateRecord.date());
+        if (appointment != null) {
+            Appointment appointmentByDateAndStartTime = appointmentRepository.getAppointmentByDateAndStartTime(appointmentUpdateRecord.date(), appointmentUpdateRecord.startTime());
+            if (appointmentByDateAndStartTime == null) {
+                if (appointmentUpdateRecord.date() != null) {
+                    appointment.setDate(appointmentUpdateRecord.date());
+                }
+
+                if (appointmentUpdateRecord.startTime() != null) {
+                    appointment.setStartTime(appointmentUpdateRecord.startTime());
+                    appointment.setEndTime(appointmentUpdateRecord.startTime().plusHours(1));
+                }
+
+                Appointment updated = appointmentRepository.save(appointment);
+
+                return ResponseEntity.ok(new AppointmentListRecord(updated));
+            } else {
+                throw new ValidationException("Esta hora y fecha no están disponibles");
             }
+        }else {
 
-            if (appointmentUpdateRecord.startTime() != null) {
-                appointment.setStartTime(appointmentUpdateRecord.startTime());
-                appointment.setEndTime(appointmentUpdateRecord.startTime().plusHours(1));
-            }
-
-            Appointment updated = appointmentRepository.save(appointment);
-
-            return ResponseEntity.ok(new AppointmentListRecord(updated));
+            throw new ValidationException("No existe la cita que intenta modificar");
         }
-
-        throw new ValidationException("No existe la cita que intenta modificar");
     }
 
     @GetMapping("/all")
@@ -128,9 +134,9 @@ public class AppointmentController {
     }
 
     @GetMapping("/client/{id}")
-    public ResponseEntity<List<AppointmentListRecord>> getByClientId(@PathVariable("id") Long clientId){
+    public ResponseEntity<List<AppointmentListRecord>> getByClientId(@PathVariable("id") Long clientId) {
         LocalDate today = LocalDate.now();
-        List<Appointment> appointments = appointmentRepository.getAppointmentByClientIdAndDate(clientId,today);
+        List<Appointment> appointments = appointmentRepository.getAppointmentByClientIdAndDate(clientId, today);
         return getReturnsToListRecord(appointments);
     }
 
@@ -138,7 +144,7 @@ public class AppointmentController {
     public ResponseEntity<Resource> exportAppointment(
             @RequestParam
             Long appoinmentId,
-            HttpServletResponse response){
+            HttpServletResponse response) {
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:h:mm:ss");
