@@ -124,6 +124,11 @@ public class PropertyController {
                     property.setCity(propertyUpdateRecord.city());
                 }
 
+                if(propertyUpdateRecord.image() != null &&
+                !propertyUpdateRecord.image().isBlank()){
+                    property.setImage(propertyUpdateRecord.image());
+                }
+
                 Property updated = propertyRepository.save(property);
 
                 return ResponseEntity.ok(new PropertyListRecord(updated));

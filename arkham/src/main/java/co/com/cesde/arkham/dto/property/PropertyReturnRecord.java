@@ -2,7 +2,7 @@ package co.com.cesde.arkham.dto.property;
 
 import co.com.cesde.arkham.entity.Property;
 
-public record PropertyReturnRecord(Long id ,
+public record PropertyReturnRecord(Long id,
                                    Double price,
                                    Boolean availability,
                                    String offer,
@@ -16,7 +16,8 @@ public record PropertyReturnRecord(Long id ,
                                    Boolean laundryArea,
                                    String address,
                                    String district,
-                                   String city) {
+                                   String city,
+                                   String image) {
     public PropertyReturnRecord(Property property) {
         this(property.getPropertyId(),
                 property.getPrice(),
@@ -32,6 +33,7 @@ public record PropertyReturnRecord(Long id ,
                 property.getLaundryArea(),
                 property.getAddress(),
                 property.getDistrict(),
-                property.getCity());
+                property.getCity(),
+                property.getImage());
     }
 }

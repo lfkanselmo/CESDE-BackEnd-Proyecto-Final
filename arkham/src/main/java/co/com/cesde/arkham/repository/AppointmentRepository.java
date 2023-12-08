@@ -31,4 +31,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             """
     )
     Appointment getAppointmentByDateAndStartTime(LocalDate date, LocalTime time);
+
+    Appointment findAppointmentByDateAndStartTimeAndUserId(LocalDate date, LocalTime localTime, Long userId);
 }

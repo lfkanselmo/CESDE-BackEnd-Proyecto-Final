@@ -49,6 +49,8 @@ public class Property {
     private String district;
     @Column(name = "ciudad")
     private String city;
+    @Column(name = "imagen")
+    private String image;
     @Column(name = "activo")
     private Boolean active;
 
@@ -75,6 +77,7 @@ public class Property {
         this.address = propertyRegisterRecord.address();
         this.district = propertyRegisterRecord.district();
         this.city = propertyRegisterRecord.city();
+        this.image = propertyRegisterRecord.image();
         this.active = true;
     }
 }

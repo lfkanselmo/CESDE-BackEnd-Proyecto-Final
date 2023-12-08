@@ -20,26 +20,8 @@ public record PropertyUpdateRecord(
         Boolean laundryArea,
         String address,
         String district,
-        String city
+        String city,
+        String image
 ) {
-    public PropertyUpdateRecord(Property property){
-        this(
-                property.getPropertyId(),
-                property.getPrice(),
-                property.getAvailability(),
-                property.getOwnerId(),
-                property.getOffer().name(),
-                property.getPropertyType().name(),
-                property.getRooms(),
-                property.getBathrooms(),
-                property.getCourtyard(),
-                property.getLevel(),
-                property.getArea(),
-                property.getNaturalGas(),
-                property.getLaundryArea(),
-                property.getAddress(),
-                property.getDistrict(),
-                property.getCity()
-        );
-    }
+
 }

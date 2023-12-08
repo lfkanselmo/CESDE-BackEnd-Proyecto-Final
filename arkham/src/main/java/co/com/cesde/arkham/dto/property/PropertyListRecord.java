@@ -17,7 +17,8 @@ public record PropertyListRecord(Long id ,
                                  Boolean laundryArea,
                                  String address,
                                  String district,
-                                 String city) {
+                                 String city,
+                                 String image) {
     public PropertyListRecord(Property property) {
         this(property.getPropertyId(),
                 property.getPrice(),
@@ -33,6 +34,7 @@ public record PropertyListRecord(Long id ,
                 property.getLaundryArea(),
                 property.getAddress(),
                 property.getDistrict(),
-                property.getCity());
+                property.getCity(),
+                property.getImage());
     }
 }

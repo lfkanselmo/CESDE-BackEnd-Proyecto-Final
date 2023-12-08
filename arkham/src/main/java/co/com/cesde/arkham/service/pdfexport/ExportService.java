@@ -99,7 +99,7 @@ public class ExportService {
                 e.printStackTrace();
             }
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
 
         return null;

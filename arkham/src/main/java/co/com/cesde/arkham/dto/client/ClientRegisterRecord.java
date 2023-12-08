@@ -9,14 +9,14 @@ import jakarta.validation.constraints.Pattern;
 public record ClientRegisterRecord(
         @NotNull
         Long clientId,
-        @NotBlank
+
         String firstName,
-        @NotBlank
+
         String lastName,
-        @NotBlank
+
         @Pattern(regexp = "\\d{7,11}")
         String phone,
-        @NotBlank
+
         @Email
         String email) {
 }

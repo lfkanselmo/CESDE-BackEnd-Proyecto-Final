@@ -30,7 +30,6 @@ public class ClientController {
     @Transactional
     public ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
                                                   UriComponentsBuilder uriComponentsBuilder) {
-        System.out.println(clientRepository);
 
         if (clientRepository.existsById(clientRegisterRecord.clientId())) {
 

@@ -1,19 +1,21 @@
 package co.com.cesde.arkham.controller;
 
 import co.com.cesde.arkham.dto.user.UserListRecord;
+import co.com.cesde.arkham.dto.user.UserSearchRecord;
 import co.com.cesde.arkham.dto.user.UserUpdateRecord;
+import co.com.cesde.arkham.entity.Appointment;
 import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.User;
+import co.com.cesde.arkham.repository.AppointmentRepository;
 import co.com.cesde.arkham.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth/user")
@@ -21,6 +23,8 @@ import java.net.URI;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
 
     @PutMapping("/update")
@@ -28,7 +32,7 @@ public class UserController {
     public ResponseEntity<UserListRecord> update(UserUpdateRecord userUpdateRecord) {
         User user = userRepository.getReferenceById(userUpdateRecord.userId());
 
-        if(user != null){
+        if (user != null) {
             if (userUpdateRecord.role() != null &&
                     !userUpdateRecord.role().isBlank()) {
                 user.setRole(Role.valueOf(userUpdateRecord.role()));
@@ -67,5 +71,27 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserListRecord>> getAll(){
+        List<User> all = userRepository.findAll();
+        List<UserListRecord> list = all.stream().map(UserListRecord::new).toList();
+        return ResponseEntity.ok(list);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<UserListRecord>> search(@RequestBody UserSearchRecord userSearchRecord) {
+        List<User> allUser = userRepository.findAll();
+        List<User> usersFounded = new ArrayList<User>();
+        if(!allUser.isEmpty()){
+            for (User user : allUser) {
+                Appointment appointment = appointmentRepository.findAppointmentByDateAndStartTimeAndUserId(userSearchRecord.date(), userSearchRecord.startTime(), user.getUserId());
+            }
+            List<UserListRecord> list = usersFounded.stream().map(UserListRecord::new).toList();
+            return ResponseEntity.ok(list);
+        }
+
+        throw new ValidationException("No hay administrador disponible para esta fecha y hora");
     }
 }

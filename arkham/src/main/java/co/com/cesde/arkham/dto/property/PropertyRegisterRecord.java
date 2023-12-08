@@ -33,5 +33,7 @@ public record PropertyRegisterRecord(
         @NotBlank
         String district,
         @NotBlank
-        String city) {
+        String city,
+        @NotBlank
+        String image) {
 }

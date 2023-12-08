@@ -42,14 +42,14 @@ public class SecurityConfig {
                         sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                        .logout(l ->
+                .logout(l ->
                         l.addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler(
                                         (request, response, authentication) ->
                                                 SecurityContextHolder.clearContext()
                                 ).permitAll()
-                        ).cors(httpSecurityCors ->{
-                            httpSecurityCors.configurationSource(corsConfigurationSource());
+                ).cors(httpSecurityCors -> {
+                    httpSecurityCors.configurationSource(corsConfigurationSource());
                 });
 
         return httpSecurity.build();
@@ -81,9 +81,11 @@ public class SecurityConfig {
                 new AntPathRequestMatcher("/appointment/update/**"),
                 new AntPathRequestMatcher("/appointment/date/**"),
                 new AntPathRequestMatcher("/appointment/client/**"),
+                new AntPathRequestMatcher("/client/**"),
                 new AntPathRequestMatcher("/client/save/**"),
                 new AntPathRequestMatcher("/client/update/**"),
-                new AntPathRequestMatcher("/client/all/**")
+                new AntPathRequestMatcher("/client/all/**"),
+                new AntPathRequestMatcher("/auth/user/all/**")
         );
     }
 }
