@@ -8,6 +8,7 @@ import co.com.cesde.arkham.entity.Offer;
 import co.com.cesde.arkham.entity.Property;
 import co.com.cesde.arkham.entity.PropertyType;
 import co.com.cesde.arkham.repository.PropertyRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/property")
+@CrossOrigin(origins = "*")
 public class PropertyController {
     @Autowired
     private PropertyRepository propertyRepository;
 
     @PostMapping("/save")
+    @Transactional
     public ResponseEntity<PropertyReturnRecord> save(
             @RequestBody
             @Valid
@@ -47,7 +50,8 @@ public class PropertyController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<PropertyListRecord> update(PropertyUpdateRecord propertyUpdateRecord) {
+    @Transactional
+    public ResponseEntity<PropertyListRecord> update(@RequestBody PropertyUpdateRecord propertyUpdateRecord) {
         Property property = propertyRepository.getReferenceById(propertyUpdateRecord.propertyId());
 
             if (property != null && property.getActive()){
@@ -146,6 +150,7 @@ public class PropertyController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<PropertyListRecord> delete(@PathVariable("id") Long propertyId) {
         Property property = propertyRepository.getReferenceById(propertyId);
         if (property != null && property.getActive()) {
@@ -164,7 +169,7 @@ public class PropertyController {
 
     @GetMapping("/offer/{offer}")
     public ResponseEntity<List<PropertyListRecord>> getByOffer(@PathVariable("offer") String offer) {
-        List<Property> properties = propertyRepository.getByOffer(offer.toUpperCase());
+        List<Property> properties = propertyRepository.getByOffer(Offer.valueOf(offer.toUpperCase()));
         return getReturnsToListRecord(properties);
     }
 
@@ -184,7 +189,7 @@ public class PropertyController {
 
             return ResponseEntity.ok(listPropertyRecord);
         } else {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }
     }
 

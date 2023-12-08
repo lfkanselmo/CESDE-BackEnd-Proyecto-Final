@@ -1,5 +1,6 @@
 package co.com.cesde.arkham.infra.errors;
 
+import co.com.cesde.arkham.infra.exception.NotFoundValidation;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,13 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity handleErrorValidation(Exception e){
+    public ResponseEntity handleErrorValidation(ValidationException e){
         return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundValidation.class)
+    public ResponseEntity handlerNotFoundValidation(NotFoundValidation e){
+        return ResponseEntity.notFound().build();
     }
 
     private record ErrorDataRecord(String field, String error){

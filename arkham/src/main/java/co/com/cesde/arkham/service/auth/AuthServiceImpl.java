@@ -7,6 +7,7 @@ import co.com.cesde.arkham.dto.auth.RegisterRequest;
 import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.Token;
 import co.com.cesde.arkham.entity.TokenType;
+import co.com.cesde.arkham.infra.exception.NotFoundValidation;
 import co.com.cesde.arkham.repository.TokenRepository;
 import co.com.cesde.arkham.repository.UserRepository;
 import jakarta.validation.ValidationException;
@@ -37,7 +38,9 @@ public class AuthServiceImpl implements AuthService {
                 request.getPassword())
         );
 
-        var user = userRepository.findByUsername(request.getEmail()).orElseThrow();
+        var user = userRepository.findByUsername(request.getEmail())
+                .orElseThrow(() -> new ValidationException("No existe usuario registrado con el email " + request.getEmail()));
+
         var jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user,jwtToken);

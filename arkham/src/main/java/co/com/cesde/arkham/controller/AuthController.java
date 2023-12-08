@@ -1,31 +1,35 @@
 package co.com.cesde.arkham.controller;
 
+import co.com.cesde.arkham.config.LogoutService;
 import co.com.cesde.arkham.dto.auth.AuthResponse;
 import co.com.cesde.arkham.dto.auth.LoginRequest;
 import co.com.cesde.arkham.dto.auth.RegisterRequest;
 import co.com.cesde.arkham.service.auth.AuthService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private LogoutService logoutService;
 
     @PostMapping("/login")
+    @Transactional
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
+    @Transactional
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authService.register(request));
     }

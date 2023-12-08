@@ -1,7 +1,9 @@
 package co.com.cesde.arkham.repository;
 
 
+import co.com.cesde.arkham.entity.Offer;
 import co.com.cesde.arkham.entity.Property;
+import co.com.cesde.arkham.entity.PropertyType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     List<Property> getByOwnerId(Long ownerId);
 
-    List<Property> getByOffer(String offer);
+    List<Property> getByOffer(Offer offer);
 
     Optional<Property> findByAddress(String address);
 

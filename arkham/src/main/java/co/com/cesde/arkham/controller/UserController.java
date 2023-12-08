@@ -5,6 +5,7 @@ import co.com.cesde.arkham.dto.user.UserUpdateRecord;
 import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.User;
 import co.com.cesde.arkham.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/auth/user")
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
 
-    @PutMapping
+    @PutMapping("/update")
+    @Transactional
     public ResponseEntity<UserListRecord> update(UserUpdateRecord userUpdateRecord) {
         User user = userRepository.getReferenceById(userUpdateRecord.userId());
 
@@ -55,6 +58,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<UserListRecord> delete(Long userId) {
         User user = userRepository.getReferenceById(userId);
         if (user != null && user.getActive()) {

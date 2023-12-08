@@ -5,6 +5,7 @@ import co.com.cesde.arkham.dto.owner.OwnerRegisterRecord;
 import co.com.cesde.arkham.dto.owner.OwnerUpdateRecord;
 import co.com.cesde.arkham.entity.Owner;
 import co.com.cesde.arkham.repository.OwnerRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/owner")
+@CrossOrigin(origins = "*")
 public class OwnerController {
     @Autowired
     private OwnerRepository ownerRepository;
 
     @PostMapping("/save")
+    @Transactional
     public ResponseEntity<OwnerListRecord> save(@RequestBody @Valid OwnerRegisterRecord ownerRegisterRecord,
                                                 UriComponentsBuilder uriComponentsBuilder) {
         if (ownerRepository.existsById(ownerRegisterRecord.ownerId())) {
@@ -42,6 +45,7 @@ public class OwnerController {
 
 
     @PutMapping("/update")
+    @Transactional
     public ResponseEntity<OwnerListRecord> update(@RequestBody @Valid OwnerUpdateRecord ownerUpdateRecord) {
         Owner owner = ownerRepository.getReferenceById(ownerUpdateRecord.ownerId());
 
@@ -88,6 +92,7 @@ public class OwnerController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<OwnerListRecord> delete(@PathVariable("id") Long ownerId) {
         Owner owner = ownerRepository.getReferenceById(ownerId);
         if (owner != null && owner.getActive()) {

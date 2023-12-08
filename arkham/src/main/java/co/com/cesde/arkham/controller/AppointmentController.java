@@ -1,5 +1,6 @@
 package co.com.cesde.arkham.controller;
 
+import co.com.cesde.arkham.dto.appointment.AppointmentDateTimeRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentListRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentRegisterRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentUpdateRecord;
@@ -13,6 +14,7 @@ import co.com.cesde.arkham.repository.PropertyRepository;
 import co.com.cesde.arkham.repository.UserRepository;
 import co.com.cesde.arkham.service.pdfexport.ExportService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/appointment")
+@CrossOrigin(origins = "*")
 public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -46,6 +49,7 @@ public class AppointmentController {
     private ExportService exportService;
 
     @PostMapping("/save")
+    @Transactional
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
                                                       UriComponentsBuilder uriComponentsBuilder) {
 
@@ -73,6 +77,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/update")
+    @Transactional
     public ResponseEntity<AppointmentListRecord> update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
         Appointment appointment = appointmentRepository.getReferenceById(appointmentUpdateRecord.appointmentId());
         if (appointment != null) {
@@ -112,6 +117,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("delete/{id}")
+    @Transactional
     public ResponseEntity<AppointmentListRecord> delete(@PathVariable("id") Long id) {
         if (appointmentRepository.existsById(id)) {
             appointmentRepository.deleteById(id);
@@ -121,8 +127,9 @@ public class AppointmentController {
         }
     }
 
-    @GetMapping("/date/{date}")
-    public ResponseEntity<List<AppointmentListRecord>> getByDate(@PathVariable("date") LocalDate date) {
+    @PostMapping("/date")
+    public ResponseEntity<List<AppointmentListRecord>> getByDate(@RequestBody @Valid AppointmentDateTimeRecord appointmentDate) {
+        LocalDate date = LocalDate.parse(appointmentDate.date());
         List<Appointment> appointments = appointmentRepository.getByDate(date);
         return getReturnsToListRecord(appointments);
     }
@@ -165,7 +172,7 @@ public class AppointmentController {
                     .toList();
             return ResponseEntity.ok(appointmentRecordList);
         } else {
-            return ResponseEntity.noContent().build();
+            throw new ValidationException("No encontrado");
         }
     }
 }

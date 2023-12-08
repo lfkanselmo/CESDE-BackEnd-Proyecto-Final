@@ -1,5 +1,6 @@
 package co.com.cesde.arkham.entity;
 
+import co.com.cesde.arkham.dto.appointment.AppointmentDateTimeRecord;
 import co.com.cesde.arkham.dto.appointment.AppointmentRegisterRecord;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,7 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Client client;
+
 
     public Appointment(AppointmentRegisterRecord appointmentRegisterRecord) {
         this.userId = appointmentRegisterRecord.userId();

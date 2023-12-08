@@ -4,8 +4,8 @@ import co.com.cesde.arkham.dto.client.ClientListRecord;
 import co.com.cesde.arkham.dto.client.ClientRegisterRecord;
 import co.com.cesde.arkham.dto.client.ClientUpdateRecord;
 import co.com.cesde.arkham.entity.Client;
-import co.com.cesde.arkham.entity.Token;
 import co.com.cesde.arkham.repository.ClientRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +17,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @RestController
 @RequestMapping("/client")
+@CrossOrigin(origins = "*")
 public class ClientController {
-
     @Autowired
     private ClientRepository clientRepository;
 
+
     @PostMapping("/save")
-    private ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
+    @Transactional
+    public ResponseEntity<ClientListRecord> save(@RequestBody @Valid ClientRegisterRecord clientRegisterRecord,
                                                   UriComponentsBuilder uriComponentsBuilder) {
+        System.out.println(clientRepository);
 
         if (clientRepository.existsById(clientRegisterRecord.clientId())) {
 
@@ -45,6 +47,7 @@ public class ClientController {
 
 
     @PutMapping("/update")
+    @Transactional
     public ResponseEntity<ClientListRecord> update(@RequestBody @Valid ClientUpdateRecord clientUpdateRecord) {
         Client client = clientRepository.getReferenceById(clientUpdateRecord.clientId());
         if(client != null && client.getActive()){
@@ -91,6 +94,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public ResponseEntity<ClientListRecord> delete(@PathVariable("id") Long clientId) {
         Client client = clientRepository.getReferenceById(clientId);
         if (client != null && client.getActive()) {

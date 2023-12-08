@@ -3,7 +3,6 @@ package co.com.cesde.arkham.repository;
 
 import co.com.cesde.arkham.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
