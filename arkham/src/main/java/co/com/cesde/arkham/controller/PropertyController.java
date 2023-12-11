@@ -40,11 +40,19 @@ public class PropertyController {
 
         Optional<Property> property = propertyRepository.findByAddress(propertyRegisterRecord.address());
 
-        if(!property.isEmpty() && property.get().getActive()){
+        if(!property.isEmpty() && property.get().getAvailability()){
             throw new ValidationException("Ya se encuentra registrado un inmueble con esta dirección");
         }
 
-        Property saved = propertyRepository.save(new Property(propertyRegisterRecord));
+        Property saved;
+        if(property.isPresent() && !property.get().getAvailability()){
+            Property propertyFounded = property.get();
+            propertyFounded.setAvailability(true);
+            saved = propertyRepository.save(propertyFounded);
+            return ResponseEntity.ok(new PropertyReturnRecord(saved));
+        }else {
+            saved = propertyRepository.save(new Property(propertyRegisterRecord));
+        }
         URI url = uriComponentsBuilder.path("/property/{id}").buildAndExpand(saved.getPropertyId()).toUri();
         return ResponseEntity.created(url).body(new PropertyReturnRecord(saved));
     }
@@ -54,7 +62,7 @@ public class PropertyController {
     public ResponseEntity<PropertyListRecord> update(@RequestBody PropertyUpdateRecord propertyUpdateRecord) {
         Property property = propertyRepository.getReferenceById(propertyUpdateRecord.propertyId());
 
-            if (property != null && property.getActive()){
+            if (property != null && property.getAvailability()){
                 if (propertyUpdateRecord.price() != null) {
                     property.setPrice(propertyUpdateRecord.price());
                 }
@@ -147,7 +155,7 @@ public class PropertyController {
     @GetMapping("/{id}")
     public ResponseEntity<PropertyListRecord> getById(@PathVariable("id") Long propertyId) {
         Property property = propertyRepository.getReferenceById(propertyId);
-        if(property.getActive()) {
+        if(property.getAvailability()) {
             return ResponseEntity.ok(new PropertyListRecord(property));
         }else{
             return ResponseEntity.notFound().build();
@@ -158,7 +166,7 @@ public class PropertyController {
     @Transactional
     public ResponseEntity<PropertyListRecord> delete(@PathVariable("id") Long propertyId) {
         Property property = propertyRepository.getReferenceById(propertyId);
-        if (property != null && property.getActive()) {
+        if (property != null && property.getAvailability()) {
             propertyRepository.deleteProperty(propertyId);
             return ResponseEntity.ok().build();
         } else {

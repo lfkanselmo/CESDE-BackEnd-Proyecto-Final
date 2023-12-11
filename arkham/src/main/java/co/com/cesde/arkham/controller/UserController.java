@@ -6,6 +6,7 @@ import co.com.cesde.arkham.dto.user.UserUpdateRecord;
 import co.com.cesde.arkham.entity.Appointment;
 import co.com.cesde.arkham.entity.Role;
 import co.com.cesde.arkham.entity.User;
+import co.com.cesde.arkham.infra.exception.NotFoundValidation;
 import co.com.cesde.arkham.repository.AppointmentRepository;
 import co.com.cesde.arkham.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -59,6 +60,24 @@ public class UserController {
 
         throw new ValidationException("No existe el usuario");
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserListRecord> getById(@PathVariable("id") Long userId) throws NotFoundValidation {
+        User user = userRepository.getReferenceById(userId);
+        if(user == null){
+            System.out.printf("No existe usuario con id: " + userId);
+            throw new NotFoundValidation("No existe usuario con id: " + userId);
+        }
+
+        return ResponseEntity.ok(new UserListRecord(user));
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserListRecord> getByEmail(@PathVariable("email") String email) throws NotFoundValidation {
+        User user = userRepository.findByUsername(email)
+                .orElseThrow(() -> new NotFoundValidation("Usuario con email " + email + " no encontrado"));
+        return ResponseEntity.ok(new UserListRecord(user));
     }
 
     @DeleteMapping("/delete/{id}")

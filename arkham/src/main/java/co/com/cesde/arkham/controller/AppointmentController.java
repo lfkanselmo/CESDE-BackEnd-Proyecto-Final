@@ -1,9 +1,6 @@
 package co.com.cesde.arkham.controller;
 
-import co.com.cesde.arkham.dto.appointment.AppointmentDateTimeRecord;
-import co.com.cesde.arkham.dto.appointment.AppointmentListRecord;
-import co.com.cesde.arkham.dto.appointment.AppointmentRegisterRecord;
-import co.com.cesde.arkham.dto.appointment.AppointmentUpdateRecord;
+import co.com.cesde.arkham.dto.appointment.*;
 import co.com.cesde.arkham.entity.Appointment;
 import co.com.cesde.arkham.entity.Client;
 import co.com.cesde.arkham.entity.Property;
@@ -53,14 +50,37 @@ public class AppointmentController {
     public ResponseEntity<AppointmentListRecord> save(@RequestBody @Valid AppointmentRegisterRecord appointmentRegisterRecord,
                                                       UriComponentsBuilder uriComponentsBuilder) {
 
-        Appointment appointment = appointmentRepository
-                .getAppointmentByDateAndStartTime(
+        Appointment appointment1 =  appointmentRepository.getByDateAndStartTimeAndClientId(
+                appointmentRegisterRecord.date(),
+                appointmentRegisterRecord.startTime(),
+                appointmentRegisterRecord.clientId()
+        );
+
+        if(appointment1 != null){
+            throw new ValidationException("El cliente con documento " + appointmentRegisterRecord.clientId() +
+                    " ya cuenta con una cita para esta fecha y hora especifica");
+        }
+
+        Appointment appointment2 = appointmentRepository
+                .getAppointmentByDateAndStartTimeAndUserId(
                         appointmentRegisterRecord.date(),
-                        appointmentRegisterRecord.startTime()
+                        appointmentRegisterRecord.startTime(),
+                        appointmentRegisterRecord.userId()
                 );
 
-        if (appointment != null) {
+        if (appointment2 != null) {
             throw new ValidationException("Ya existe una cita a esta hora en esta fecha");
+        }
+
+        Appointment appointment3 = appointmentRepository.getByDateAndStartTimeAndPropertyId(
+                appointmentRegisterRecord.date(),
+                appointmentRegisterRecord.startTime(),
+                appointmentRegisterRecord.propertyId()
+        );
+
+        if(appointment3 != null){
+            throw new ValidationException("El inmueble con ID " + appointmentRegisterRecord.propertyId() +
+                    " no está disponible para una cita a esta hora en esta fecha especifica");
         }
 
         Appointment saved = appointmentRepository.save(new Appointment(appointmentRegisterRecord));
@@ -79,6 +99,39 @@ public class AppointmentController {
     @PutMapping("/update")
     @Transactional
     public ResponseEntity<AppointmentListRecord> update(@RequestBody @Valid AppointmentUpdateRecord appointmentUpdateRecord) {
+        Appointment appointment1 =  appointmentRepository.getByDateAndStartTimeAndClientId(
+                appointmentUpdateRecord.date(),
+                appointmentUpdateRecord.startTime(),
+                appointmentUpdateRecord.clientId()
+        );
+
+        if(appointment1 != null){
+            throw new ValidationException("El cliente con documento " + appointmentUpdateRecord.clientId() +
+                    " ya cuenta con una cita para esta fecha y hora especifica");
+        }
+
+        Appointment appointment2 = appointmentRepository
+                .getAppointmentByDateAndStartTimeAndUserId(
+                        appointmentUpdateRecord.date(),
+                        appointmentUpdateRecord.startTime(),
+                        appointmentUpdateRecord.userId()
+                );
+
+        if (appointment2 != null) {
+            throw new ValidationException("Ya existe una cita a esta hora en esta fecha");
+        }
+
+        Appointment appointment3 = appointmentRepository.getByDateAndStartTimeAndPropertyId(
+                appointmentUpdateRecord.date(),
+                appointmentUpdateRecord.startTime(),
+                appointmentUpdateRecord.propertyId()
+        );
+
+        if(appointment3 != null){
+            throw new ValidationException("El inmueble con ID " + appointmentUpdateRecord.propertyId() +
+                    " no está disponible para una cita a esta hora en esta fecha especifica");
+        }
+
         Appointment appointment = appointmentRepository.getReferenceById(appointmentUpdateRecord.appointmentId());
         if (appointment != null) {
             Appointment appointmentByDateAndStartTime = appointmentRepository.getAppointmentByDateAndStartTime(appointmentUpdateRecord.date(), appointmentUpdateRecord.startTime());
@@ -114,6 +167,17 @@ public class AppointmentController {
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentListRecord> getById(@PathVariable("id") Long appointmentId) {
         return ResponseEntity.ok(new AppointmentListRecord(appointmentRepository.getReferenceById(appointmentId)));
+    }
+
+    @PostMapping("/dateusername")
+    public ResponseEntity<List<AppointmentListRecord>> getByDateAndUsername(
+            @RequestBody AppointmentDateUsernameRecord appointmentDateUsernameRecord){
+        LocalDate date = LocalDate.parse(appointmentDateUsernameRecord.date());
+        List<Appointment> appointments = appointmentRepository.findAppointmentByDateAndUsername(
+                date,
+                appointmentDateUsernameRecord.userEmail());
+
+        return getReturnsToListRecord(appointments);
     }
 
     @DeleteMapping("delete/{id}")
@@ -173,7 +237,7 @@ public class AppointmentController {
                     .toList();
             return ResponseEntity.ok(appointmentRecordList);
         } else {
-            throw new ValidationException("No encontrado");
+            throw new ValidationException("No se encontraron citas");
         }
     }
 }

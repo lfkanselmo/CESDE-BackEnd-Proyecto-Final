@@ -3,7 +3,7 @@ package co.com.cesde.arkham.dto.property;
 import co.com.cesde.arkham.dto.owner.OwnerListRecord;
 import co.com.cesde.arkham.entity.Property;
 
-public record PropertyListRecord(Long id ,
+public record PropertyListRecord(Long propertyId ,
                                  Double price,
                                  Boolean availability,
                                  String offer,

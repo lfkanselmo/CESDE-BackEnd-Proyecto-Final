@@ -28,8 +28,6 @@ public class Client {
     @Column(name = "activo")
     private Boolean active;
 
-    @OneToMany(mappedBy = "client")
-    private List<Appointment> appointments;
 
     public Client(ClientRegisterRecord clientRegisterRecord) {
         this.clientId = clientRegisterRecord.clientId();

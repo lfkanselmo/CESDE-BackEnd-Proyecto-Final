@@ -2,7 +2,7 @@ package co.com.cesde.arkham.dto.client;
 
 import co.com.cesde.arkham.entity.Client;
 
-public record ClientListRecord(Long id,
+public record ClientListRecord(Long clientId,
                                String firstName,
                                String lastName,
                                String phone,

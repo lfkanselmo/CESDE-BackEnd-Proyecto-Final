@@ -27,8 +27,7 @@ public class Owner {
     private String ownerEmail;
     @Column(name = "activo")
     private Boolean active;
-    @OneToMany(mappedBy = "owner")
-    private List<Property> properties;
+
 
     public Owner(OwnerRegisterRecord ownerRegisterRecord) {
         this.ownerId = ownerRegisterRecord.ownerId();

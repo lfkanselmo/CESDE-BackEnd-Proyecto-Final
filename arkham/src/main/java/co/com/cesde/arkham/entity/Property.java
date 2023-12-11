@@ -51,15 +51,10 @@ public class Property {
     private String city;
     @Column(name = "imagen")
     private String image;
-    @Column(name = "activo")
-    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "id_propietario",insertable = false, updatable = false)
     private Owner owner;
-
-    @OneToMany(mappedBy = "property")
-    private List<Appointment> appointments;
 
     public Property(PropertyRegisterRecord propertyRegisterRecord) {
         this.price = propertyRegisterRecord.price();
@@ -78,7 +73,6 @@ public class Property {
         this.district = propertyRegisterRecord.district();
         this.city = propertyRegisterRecord.city();
         this.image = propertyRegisterRecord.image();
-        this.active = true;
     }
 }
 

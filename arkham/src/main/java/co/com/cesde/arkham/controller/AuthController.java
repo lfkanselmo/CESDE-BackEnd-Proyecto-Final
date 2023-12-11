@@ -6,6 +6,7 @@ import co.com.cesde.arkham.dto.auth.LoginRequest;
 import co.com.cesde.arkham.dto.auth.RegisterRequest;
 import co.com.cesde.arkham.service.auth.AuthService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,13 @@ public class AuthController {
 
     @PostMapping("/login")
     @Transactional
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest request){
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping("/register")
     @Transactional
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(authService.register(request));
     }
 

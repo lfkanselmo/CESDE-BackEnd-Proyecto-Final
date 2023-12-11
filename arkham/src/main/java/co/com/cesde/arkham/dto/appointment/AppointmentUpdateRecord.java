@@ -11,14 +11,16 @@ import java.time.LocalTime;
 public record AppointmentUpdateRecord(
         @NotNull
         Long appointmentId,
-
+        @NotNull
+        Long userId,
         @NotNull
         Long clientId,
+        @NotNull
+        Long propertyId,
+        @NotNull
         @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
         LocalTime startTime,
+        @NotNull
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         LocalDate date) {
-    public AppointmentUpdateRecord(Appointment appointment) {
-        this(appointment.getAppointmentId(), appointment.getAppointmentId(), appointment.getStartTime(), appointment.getDate());
-    }
 }

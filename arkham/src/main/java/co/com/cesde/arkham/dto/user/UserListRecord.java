@@ -7,9 +7,10 @@ public record UserListRecord(
         String email,
         String firstName,
         String lastName,
-        String phone) {
+        String phone,
+        String type) {
 
     public UserListRecord(User user){
-        this(user.getUserId(), user.getUsername(), user.getUserFirstName(),user.getUserLastName(), user.getUserPhone());
+        this(user.getUserId(), user.getUsername(), user.getUserFirstName(),user.getUserLastName(), user.getUserPhone(), user.getRole().toString());
     }
 }

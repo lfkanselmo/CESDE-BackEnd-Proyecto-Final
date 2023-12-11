@@ -14,6 +14,11 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @RestControllerAdvice
 public class ErrorHandler {
 
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity integrityConstraintViolation(SQLIntegrityConstraintViolationException e){
+        return ResponseEntity.badRequest().body("Verifique los datos. Entrada duplicada");
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity handleError404(){
         return ResponseEntity.notFound().build();

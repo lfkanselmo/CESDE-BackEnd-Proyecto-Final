@@ -25,7 +25,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query(
             """
-            update Property p set p.active = false
+            update Property p set p.availability = false
             where p.propertyId = :propertyId
             """
     )

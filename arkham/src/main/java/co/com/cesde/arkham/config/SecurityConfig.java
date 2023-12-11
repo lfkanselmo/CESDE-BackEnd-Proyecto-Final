@@ -71,21 +71,25 @@ public class SecurityConfig {
     private RequestMatcher publicEndPoints() {
         return new OrRequestMatcher(
                 new AntPathRequestMatcher("/auth/register/**"),
-                new AntPathRequestMatcher("/auth/login"),
+                new AntPathRequestMatcher("/auth/login/**"),
                 new AntPathRequestMatcher("/token/**"),
                 new AntPathRequestMatcher("/appointment/export/**"),
                 new AntPathRequestMatcher("/property/all/**"),
                 new AntPathRequestMatcher("/property/location/**"),
                 new AntPathRequestMatcher("/property/offer/**"),
                 new AntPathRequestMatcher("/appointment/save/**"),
+                new AntPathRequestMatcher("/appointment/**"),
                 new AntPathRequestMatcher("/appointment/update/**"),
                 new AntPathRequestMatcher("/appointment/date/**"),
+                new AntPathRequestMatcher("/appointment/dateusername/**"),
                 new AntPathRequestMatcher("/appointment/client/**"),
+                new AntPathRequestMatcher("/appointment/delete/**"),
                 new AntPathRequestMatcher("/client/**"),
                 new AntPathRequestMatcher("/client/save/**"),
                 new AntPathRequestMatcher("/client/update/**"),
                 new AntPathRequestMatcher("/client/all/**"),
-                new AntPathRequestMatcher("/auth/user/all/**")
+                new AntPathRequestMatcher("/auth/user/all/**"),
+                new AntPathRequestMatcher("/auth/user/email/**")
         );
     }
 }
