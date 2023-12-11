@@ -59,7 +59,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTk5MTgwMiwiZXhwIjoxNzAyMDc4MjAyfQ.g_ryhrMFQk92xlNzrLXMwN5ntfQQbd0oXzvQHmV_rOg",
 									"type": "string"
 								}
 							]
@@ -219,16 +219,6 @@
 				{
 					"name": "property get by offer",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MjAzMSwiZXhwIjoxNzAxMjc4NDMxfQ.B0uFEGqMhET4wl-F_TIUbHPBGq1ajVaeJZTXDVfyXJg",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -250,10 +240,20 @@
 				{
 					"name": "property get by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTg4MjA3NywiZXhwIjoxNzAxOTY4NDc3fQ.GhPsK1egOQceI9Wz-N2-4pPNCWYoQyCRTXrlPqGAdqM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8090/api/property/1",
+							"raw": "localhost:8090/api/property/2",
 							"host": [
 								"localhost"
 							],
@@ -261,7 +261,7 @@
 							"path": [
 								"api",
 								"property",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -316,7 +316,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE5MDUwMiwiZXhwIjoxNzAxMjc2OTAyfQ.h1Cqf3BimB2io5zHk5bOb0odI50gM9CoXS_iByl-VF0",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMjA3NzY5NCwiZXhwIjoxNzAyMTY0MDk0fQ.j01SVWvdJs3DSMojl_IBrOgu5L1OOEENZKcJBAO7CT8",
 									"type": "string"
 								}
 							]
@@ -325,7 +325,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"price\": 150000.00,\r\n  \"availability\": true,\r\n  \"ownerId\": 1153697943,\r\n  \"offer\": \"ARRENDAMIENTO\",\r\n  \"propertyType\": \"APARTAMENTO\",\r\n  \"rooms\": 4,\r\n  \"bathrooms\": 2,\r\n  \"courtyard\": false,\r\n  \"level\": 3,\r\n  \"area\": 110.75,\r\n  \"naturalGas\": true,\r\n  \"laundryArea\": true,\r\n  \"address\": \"16 Apple Street\",\r\n  \"district\": \"Manrique\",\r\n  \"city\": \"Example City\"\r\n}\r\n\r\n",
+							"raw": "{\r\n  \"price\": 150000.00,\r\n  \"availability\": true,\r\n  \"ownerId\": 1153697943,\r\n  \"offer\": \"ARRENDAMIENTO\",\r\n  \"propertyType\": \"APARTAMENTO\",\r\n  \"rooms\": 3,\r\n  \"bathrooms\": 2,\r\n  \"courtyard\": false,\r\n  \"level\": 1,\r\n  \"area\": 200,\r\n  \"naturalGas\": true,\r\n  \"laundryArea\": true,\r\n  \"address\": \"43 Cherry Street\",\r\n  \"district\": \"Poblado\",\r\n  \"city\": \"Example City\",\r\n  \"image\": \"https://images.adsttc.com/media/images/5d34/e507/284d/d109/5600/0240/newsletter/_FI.jpg?1563747560\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -499,7 +499,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTE4OTUwMSwiZXhwIjoxNzAxMjc1OTAxfQ.UuGfJpxK1i5ub3UMVxQj2s2OIYdlU1qrsiFvRmqTvtE",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMjA3NzY5NCwiZXhwIjoxNzAyMTY0MDk0fQ.j01SVWvdJs3DSMojl_IBrOgu5L1OOEENZKcJBAO7CT8",
 									"type": "string"
 								}
 							]
@@ -608,21 +608,11 @@
 				{
 					"name": "appointment save",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMDg4MzY5MCwiZXhwIjoxNzAwOTcwMDkwfQ.Lae7oM47UkL2Y9f9ITsyb0Aka8UtlF9uJf5EEqPg2FQ",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userId\": 1,\r\n  \"clientId\": 1152197943,\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"10:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}\r\n",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"clientId\": 1152197941,\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"14:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -678,11 +668,21 @@
 				{
 					"name": "appointment update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startTime\": \"12:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}",
+							"raw": "{\r\n  \"appointmentId\": 6,\r\n  \"clientId\": 1152197941,\r\n  \"startTime\": \"11:00:00\",\r\n  \"date\": \"2022-10-25\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -690,14 +690,12 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8090/cesde/arkham/api/appointment/update",
+							"raw": "localhost:8090/api/appointment/update",
 							"host": [
 								"localhost"
 							],
 							"port": "8090",
 							"path": [
-								"cesde",
-								"arkham",
 								"api",
 								"appointment",
 								"update"
@@ -823,6 +821,65 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "appointment get by date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2023-12-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/appointment/date",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"date"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  by date and username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2023-12-12\",\r\n    \"userEmail\": \"lfkanselmo@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api/appointment/dateusername",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"appointment",
+								"dateusername"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -836,7 +893,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"lfkanselmo@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"firstName\": \"Anselmo\",\r\n    \"lastName\": \"Ortega\",\r\n    \"phone\": \"3148510218\",\r\n    \"role\": \"ADMINISTRADOR\"\r\n}",
+							"raw": "{\r\n    \"email\": \"armando.c@gmail.com\",\r\n    \"password\": \"arkham123\",\r\n    \"firstName\": \"Armando\",\r\n    \"lastName\": \"Casas\",\r\n    \"phone\": \"3141234567\",\r\n    \"role\": \"ADMINISTRADOR\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -865,7 +922,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"lfkanselmo@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"armando.c@gmail.com\",\r\n    \"password\": \"arkham123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -895,7 +952,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMTA1MDE1NiwiZXhwIjoxNzAxMTM2NTU2fQ.HTXlDDbtaJPeeXWYtc9Mine-CeD8KfpNCWrRoxVp0PU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQGdtYWlsLmNvbSIsImlhdCI6MTcwMTk2NzE0MywiZXhwIjoxNzAyMDUzNTQzfQ._1AAX1pJeSddJQGYpvCR2MII7SW4c-gYWrXYVBUXDK8",
 									"type": "string"
 								}
 							]
@@ -912,6 +969,98 @@
 							"path": [
 								"api",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "check token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQGdtYWlsLmNvbSIsImlhdCI6MTcwMTk1MjI1NSwiZXhwIjoxNzAyMDM4NjU1fQ.yojLBimTwmnSTCxcR5MspalpoggBK3gZfM3Pkhsr8QI\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/api/token/check",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"token",
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "user get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/auth/user/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user get by username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZmthbnNlbG1vQGdtYWlsLmNvbSIsImlhdCI6MTcwMjE3NTczNCwiZXhwIjoxNzAyMjYyMTM0fQ.GzDPAeG90HlF_f2XoooZ2cEvra7iFPTRpFQ7K96hrjQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/api/auth/user/email/lfkanselmo@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"email",
+								"lfkanselmo@gmail.com"
 							]
 						}
 					},
