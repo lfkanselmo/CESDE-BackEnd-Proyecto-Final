@@ -216,7 +216,6 @@ public class AppointmentController {
             @RequestParam
             Long appoinmentId,
             HttpServletResponse response) {
-        System.out.println(appoinmentId);
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd:h:mm:ss");

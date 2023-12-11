@@ -1,0 +1,8 @@
+{
+    "email": "armando.c@gmail.com",
+    "password": "arkham123",
+    "firstName": "Armando",
+    "lastName": "Casas",
+    "phone": "3215698563",
+    "role": "ADMINISTRADOR"
+}
